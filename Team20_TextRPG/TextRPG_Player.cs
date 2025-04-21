@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Team20_TextRPG
 {
-    class TextRPG_Player
+    partial class TextRPG_Player
     {
         public int Level { get; }
         public string Name { get; }
@@ -39,6 +39,10 @@ namespace Team20_TextRPG
             Def = def;
             Hp = hp;
             Gold = gold;
+        }
+
+        public TextRPG_Player()
+        {
         }
 
         public void DisplayCharacterInfo()
