@@ -39,6 +39,10 @@ namespace Team20_TextRPG
         static void PlayerInput(int input)
         {
             StatusScene status = new StatusScene();
+            battleProgress battleProgress = new battleProgress();
+
+            TextRPG_Player player = new TextRPG_Player(1, "이세계 용사", "이세계 전사", 10, 5, 100, 1000);
+
 
             switch (input)
             {
@@ -49,12 +53,13 @@ namespace Team20_TextRPG
 
                 case 1:
                     Console.Clear();
-                    status.DisplayStatus();
+                    status.DisplayStatus(player);
                     break;
 
                 case 2:
                     Console.Clear();
                     // 전투 시작
+                    battleProgress.StartBattle(player);
                     break;
 
                 default:

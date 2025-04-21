@@ -10,27 +10,31 @@ namespace Team20_TextRPG
     {
         public int Level { get; protected set; }
         public string Name { get; protected set; }
+        public string Job { get; protected set; }
         public int Atk { get; protected set; }
         public int Def { get; protected set; }
         public int Hp { get; protected set; }
         public int MaxHp { get; protected set; }
         public int Gold { get; protected set; }
         public int DataId { get; protected set; }
+        public bool IsDead { get; protected set; }
 
         public TextRPG_Creature()
         {
 
         }
 
-        public TextRPG_Creature(int level, string name, int attack, int defense, int maxHp, int gold)
+        public TextRPG_Creature(int level, string name, string job, int attack, int defense, int maxHp, int gold)
         {
             Level = level;
             Name = name;
+            Job = job;
             Atk = attack;
             Def = defense;
             Hp = maxHp;
             MaxHp = maxHp;
             Gold = gold;
+            IsDead = false;
         }
 
         public void OnDamaged(TextRPG_Creature attacker)
@@ -43,8 +47,14 @@ namespace Team20_TextRPG
 
             if (Hp < 0) // 체력이 0 이하일 경우 체력이 0이 됨
             {
+                IsDead = true;
                 Hp = 0;
             }
+        }
+
+        public int GetAttackDamage()
+        {
+            return Atk;
         }
     }
 }

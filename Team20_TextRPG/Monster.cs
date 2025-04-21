@@ -10,9 +10,9 @@ namespace Team20_TextRPG
     {
         private static Dictionary<int, Monster> monsterDic = new Dictionary<int, Monster>()
         {
-            { 1, new Monster(1, 2, "미니언", 1, 1, 15, 1) },
-            { 2, new Monster(2, 3, "공허충", 2, 2, 10, 2) },
-            { 3, new Monster(3, 5, "대포미니언", 3, 3, 25, 3) }
+            { 1, new Monster(1, 2, "미니언","몬스터" ,1, 1, 15, 1) },
+            { 2, new Monster(2, 3, "공허충", "몬스터",2, 2, 10, 2) },
+            { 3, new Monster(3, 5, "대포미니언", "몬스터", 3, 3, 25, 3) }
         };
 
         private static Random rand = new Random();
@@ -26,12 +26,12 @@ namespace Team20_TextRPG
         }
     }
 
-    partial class Monster : Creature
+    partial class Monster : TextRPG_Creature
     {
         public int DataId;
 
-        public Monster(int dataId, int level, string name, int attack, int defense, int maxHp, int gold)
-        : base(level, name, attack, defense, maxHp, gold)
+        public Monster(int dataId, int level, string name, string job, int attack, int defense, int maxHp, int gold)
+        : base(level, name, job, attack, defense, maxHp, gold)
         {
             dataId = dataId;
         }
