@@ -25,21 +25,36 @@ namespace Team20_TextRPG
             // 사용자에게 입력을 받아 TryParse로 정수형인지 확인하고
             // 판단 결과는 isSuccess에, 정수값은 input에 담는다.
 
-            while(true)
+            int input = TextRPG_SceneManager.CheckInput(0, 2);
+            SwitchScene(input);
+
+        }
+
+        public static void SwitchScene(int input)
+        {
+            TextRPG_StatusScene status = new TextRPG_StatusScene();
+            TextRPG_BattleProgress battleProgress = new TextRPG_BattleProgress();
+
+            TextRPG_Player player = new TextRPG_Player(1, "이세계 용사", "이세계 전사", 10, 5, 100, 100, 1000);
+
+            switch (input)
             {
-                bool isSuccess = int.TryParse(Console.ReadLine(), out int input);
+                case 0:
+                    Console.Clear();
+                    Console.WriteLine("게임을 종료합니다.");
+                    break;
 
-                if (isSuccess)
-                {
-                    TextRPG_SceneManager.SwitchScene(input);
-                }
+                case 1:
+                    Console.Clear();
+                    status.DisplayStatus(player);
+                    break;
 
-                else
-                {
-                    Console.WriteLine("잘못된 입력입니다.");
-                }
+                case 2:
+                    Console.Clear();
+                    // 전투 시작
+                    battleProgress.StartBattle(player);
+                    break;
             }
-            
         }
     }
 }

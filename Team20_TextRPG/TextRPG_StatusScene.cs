@@ -23,6 +23,12 @@ namespace Team20_TextRPG
             Console.WriteLine();
 
             Console.WriteLine("원하시는 행동을 입력해 주세요.");
+
+            int input = TextRPG_SceneManager.CheckInput(0, 0);
+            if (input == 0)
+            {
+                TextRPG_StartScene.DisplayStartScene();
+            }
         }
     }
 }
