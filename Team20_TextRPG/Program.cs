@@ -36,8 +36,8 @@ namespace Team20_TextRPG
             Console.WriteLine();
             Console.WriteLine("1. 상태 보기");
             Console.WriteLine("2. 전투 시작");
-            //Console.WriteLine("2. 인벤토리");
-            //Console.WriteLine("3. 상점");
+            Console.WriteLine("2. 인벤토리");
+            Console.WriteLine("3. 상점");
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 입력해주세요.");
 
@@ -51,12 +51,11 @@ namespace Team20_TextRPG
                     break;
 
                 case 2:
-                    DisplayBattleUI();
-                    //DisplayInventoryUI();
+                    DisplayInventoryUI();
                     break;
 
                 case 3:
-                    //DisplayShopUI();
+                    DisplayShopUI();
                     break;
             }
         }
@@ -255,16 +254,6 @@ namespace Team20_TextRPG
                     DisplayBuyUI();
                     break;
             }
-        }
-
-        static void DisplayBattleUI()
-        {
-            Console.Clear();
-            Console.WriteLine("Battle!!\n");
-
-            //몬스터 랜덤 소환
-            Manager.SpawnMonsters();
-            Manager.ShowMonsters();
         }
 
         static int CheckInput(int min, int max)
