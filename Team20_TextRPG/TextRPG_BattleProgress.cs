@@ -14,6 +14,10 @@ namespace Team20_TextRPG
     {
         private List<TextRPG_Monster> monsters = new List<TextRPG_Monster>();
 
+        int playerBeforeHP = 0;
+
+        int enemyBeforeHP = 0;
+
         #region 몬스터 스폰
         public void SpawnMonsters()
         {
@@ -33,6 +37,8 @@ namespace Team20_TextRPG
         {
             SpawnMonsters();
 
+            playerBeforeHP = player.Hp;
+
             while (!IsBattleOver(player))
             {
                 DrawBattleUI(player);
@@ -41,8 +47,7 @@ namespace Team20_TextRPG
                 EnemyPhase(player);
             }
 
-            TextRPG_BattleResult.BattleResult(player, monsters);
-            //ShowResult();
+            TextRPG_BattleResult.BattleResult(player, monsters, playerBeforeHP);
         }
         #endregion
 
@@ -57,20 +62,20 @@ namespace Team20_TextRPG
             if (targetIndex == 0) return;
 
             TextRPG_Monster target = monsters[targetIndex - 1];
-            int damage = player.GetAttackDamage();
-            int beforeHP = target.Hp;
+            //int damage = player.GetAttackDamage();
+            enemyBeforeHP = target.Hp;
 
             target.OnDamaged(player);
 
             Console.Clear();
             Console.WriteLine("Battle!!\n");
             Console.WriteLine($"{player.Name} 의 공격!");
-            Console.WriteLine($"Lv.{target.Level} {target.Name} 을(를) 맞췄습니다. [데미지 : {damage}]\n");
+            Console.WriteLine($"Lv.{target.Level} {target.Name} 을(를) 맞췄습니다. [데미지 : {player.Atk}]\n");
 
             if (target.IsDead)
-                Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {beforeHP} -> Dead");
+                Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {enemyBeforeHP} -> Dead");
             else
-                Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {beforeHP} -> {target.Hp}");
+                Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {enemyBeforeHP} -> {target.Hp}");
 
             Console.WriteLine("\n0. 다음");
             WaitForZeroInput();
@@ -86,7 +91,8 @@ namespace Team20_TextRPG
                 if (monster.IsDead) continue;
 
                 int damage = monster.GetAttackDamage();
-                int beforeHP = player.Hp;
+                //int beforeHP = player.Hp;
+                //enemyBeforeHP = monster.Hp;
 
                 player.OnDamaged(monster);
 
@@ -96,7 +102,7 @@ namespace Team20_TextRPG
                 Console.WriteLine($"{player.Name} 을(를) 맞췄습니다. [데미지 : {damage}]\n");
 
                 Console.WriteLine($"Lv.{player.Level} {player.Name}");
-                Console.WriteLine($"HP {beforeHP} -> {player.Hp}");
+                Console.WriteLine($"HP {playerBeforeHP} -> {player.Hp}");
 
                 if (player.IsDead) break;
 
@@ -124,7 +130,7 @@ namespace Team20_TextRPG
             Console.ResetColor();
             Console.WriteLine("\n[내정보]");
             Console.WriteLine($"Lv.{player.Level}  {player.Name} ({player.Job})");
-            Console.WriteLine($"HP {player.Hp}/{player.MaxHp}");
+            Console.WriteLine($"HP {player.Hp} / {player.MaxHp}");
         }
         #endregion
 
@@ -163,20 +169,5 @@ namespace Team20_TextRPG
             return player.IsDead || monsters.All(m => m.IsDead);
         }
         #endregion
-
-
-        //void ShowResult()
-        //{
-        //    Console.Clear();
-        //    Console.WriteLine("Battle!!\n");
-        //    if (player.IsDead)
-        //    {
-        //        Console.WriteLine("You Lose...");
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("Victory!!");
-        //    }
-        //}
     }
 }

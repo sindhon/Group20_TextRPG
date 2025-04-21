@@ -35,7 +35,7 @@ namespace Team20_TextRPG
             TextRPG_StatusScene status = new TextRPG_StatusScene();
             TextRPG_BattleProgress battleProgress = new TextRPG_BattleProgress();
 
-            TextRPG_Player player = new TextRPG_Player(1, "이세계 용사", "이세계 전사", 10, 5, 100, 100, 1000);
+            //TextRPG_Player player = new TextRPG_Player(1, "이세계 용사", "이세계 전사", 100, 5, 100, 100, 1000);
 
             switch (input)
             {
@@ -46,13 +46,13 @@ namespace Team20_TextRPG
 
                 case 1:
                     Console.Clear();
-                    status.DisplayStatus(player);
+                    status.DisplayStatus(TextRPG_Manager.Instance.playerInstance);
                     break;
 
                 case 2:
                     Console.Clear();
                     // 전투 시작
-                    battleProgress.StartBattle(player);
+                    battleProgress.StartBattle(TextRPG_Manager.Instance.playerInstance);
                     break;
             }
         }

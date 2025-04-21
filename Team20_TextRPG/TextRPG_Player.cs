@@ -8,14 +8,6 @@ namespace Team20_TextRPG
 {
     partial class TextRPG_Player : TextRPG_Creature
     {
-        //public int Level { get; }
-        //public string Name { get; }
-        //public string Job { get; }
-        //public int Atk { get; }
-        //public int Def { get; }
-        //public int Hp { get; }
-        //public int Gold { get; private set; }
-
         public int ExtraAtk { get; private set; }
         public int ExtraDef { get; private set; }
 
@@ -44,6 +36,14 @@ namespace Team20_TextRPG
 
         public TextRPG_Player()
         {
+            Level = 0;
+            Name = string.Empty;
+            Job = string.Empty;
+            Atk = 0;
+            Def = 0;
+            Hp = 0;
+            MaxHp = 100;
+            Gold = 0;
         }
 
         public void DisplayCharacterInfo()
