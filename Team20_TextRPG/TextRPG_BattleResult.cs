@@ -17,20 +17,28 @@ namespace Team20_TextRPG
             //  전투 진행 구현에 따라 클리어 실패 조건이 변경될 수 있습니다.
             if(player.Hp <= 0 && enemy.Count > 0)
             {
-                Console.WriteLine("클리어 실패...");
-                Console.WriteLine("전투가 종료됩니다");
+                Console.WriteLine("You Lose");
 
                 //  이후, 추가 기능 구현 시 기획단에서 패널티를 적용할지 결정 후에 반영하여 만들어두겠습니다!
+                Console.WriteLine($"{player.Level} | {player.Name}");
+                Console.WriteLine($"{player.Hp} → {player.Hp}");
+                Console.WriteLine();
+                Console.WriteLine("0. 다음");
             }
 
             //  클리어 처리: 플레이어의 체력이 0보다 크고, 적들 리스트 내 적들이 모두 죽었을 경우
             //  전투 진행 구현에 따라 클리어 조건이 변경될 수 있습니다.
             else if ( player.Hp > 0 && enemy.Count() <= 0)
             {
-                Console.WriteLine("전투 클리어!!");
-                Console.WriteLine("전투가 종료됩니다");
+                Console.WriteLine("Victory!!!");
+                Console.WriteLine();
+                Console.WriteLine("던전에서 몬스터 3마리를 잡았습니다");
 
                 //  이후, 보상 관련 내용 추가 예정 → 작업 완료 시 반영하여 만들어두겠습니다!
+                Console.WriteLine($"{player.Level} | {player.Name}");
+                Console.WriteLine($"{player.Hp} → {player.Hp}");
+                Console.WriteLine();
+                Console.WriteLine("0. 다음");
             }
         }
     }
