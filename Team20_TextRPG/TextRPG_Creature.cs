@@ -10,30 +10,41 @@ namespace Team20_TextRPG
     {
         public int Level { get; protected set; }
         public string Name { get; protected set; }
-        public string Job { get; protected set; }
         public int Atk { get; protected set; }
         public int Def { get; protected set; }
         public int Hp { get; protected set; }
+        public int MaxHp { get; protected set; }
         public int Gold { get; protected set; }
         public int DataId { get; protected set; }
+
+        public TextRPG_Creature()
+        {
+
+        }
+
+        public TextRPG_Creature(int level, string name, int attack, int defense, int maxHp, int gold)
+        {
+            Level = level;
+            Name = name;
+            Atk = attack;
+            Def = defense;
+            Hp = maxHp;
+            MaxHp = maxHp;
+            Gold = gold;
+        }
 
         public void OnDamaged(TextRPG_Creature attacker)
         {
             Random rand = new Random();
-            int diff = (int)Math.Ceiling((double)attacker.Atk / 10);
-            int totalDamage = rand.Next(attacker.Atk - diff, attacker.Atk + diff + 1);
+            int diff = (int)Math.Ceiling((double)attacker.Atk / 10); // 공격력 오차
+            int totalDamage = rand.Next(attacker.Atk - diff, attacker.Atk + diff + 1); // 최종 데이지
 
-            Hp -= totalDamage;
+            Hp -= totalDamage; // 체력 감소
 
-            if (Hp < 0)
+            if (Hp < 0) // 체력이 0 이하일 경우 체력이 0이 됨
             {
                 Hp = 0;
             }
-        }
-
-        public void SetInfo(int dataId)
-        {
-
         }
     }
 }
