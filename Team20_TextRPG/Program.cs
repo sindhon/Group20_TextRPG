@@ -4,6 +4,25 @@ namespace Team20_TextRPG
 {
     class Program
     {
+        // 구현 완료
+        // 화면 만들기 - 메인화면
+        // 화면 만들기 - 상태보기
+        // 화면 만들기 - 인벤토리
+        // 화면 만들기 - 상점
+        // 화면 만들기 - 상점 [구매] 
+        // 화면 만들기 - 인벤토리 [장착관리]
+
+        // 기능1 [All] - 선택한 화면으로 이동하기
+        // 기능2 [Stat] - 캐릭터의 정보  표시 (변경되는 정보를 확인) - 레벨 / 이름 / 직업 / 공격력 / 방어력 / 체력 / Gold
+        // 기능2_1 [Stat] - 장비 반영에 따른 정보 - 공격력/방어력
+        // 기능3 [Inventory] - 보유 아이템 표시 (인벤토리)
+        // 기능4 [Inventory] - 장비 장착
+        // 기능5 [Shop] - 상점 리스트
+        // 기능6 [Shop] - 구매 기능
+
+
+        // =====================
+
         private static TextRPG_Player player;
         private static TextRPG_Item[] itemDb;
 
