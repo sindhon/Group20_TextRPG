@@ -19,8 +19,8 @@ namespace Team20_TextRPG
 
         public static TextRPG_Monster SpawnRandomMonster()
         {
-            int index = rand.Next(monsterDic.Count);
-            int randomKey = monsterDic.Keys.ElementAt(index);
+            List<int> keys = monsterDic.Keys.ToList();
+            int randomKey = keys[rand.Next(keys.Count)];
 
             return monsterDic[randomKey].Clone();
         }
@@ -33,7 +33,7 @@ namespace Team20_TextRPG
         public TextRPG_Monster(int dataId, int level, string name, string job, int attack, int defense, int maxHp, int gold)
         : base(level, name, job, attack, defense, maxHp, gold)
         {
-            dataId = dataId;
+            this.DataId = dataId;
         }
 
         public TextRPG_Monster Clone()
