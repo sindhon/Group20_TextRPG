@@ -22,7 +22,7 @@ namespace Team20_TextRPG
             int index = rand.Next(monsterDic.Count);
             int randomKey = monsterDic.Keys.ElementAt(index);
 
-            return monsterDic[randomKey];
+            return monsterDic[randomKey].Clone();
         }
     }
 
@@ -34,6 +34,11 @@ namespace Team20_TextRPG
         : base(level, name, job, attack, defense, maxHp, gold)
         {
             dataId = dataId;
+        }
+
+        public Monster Clone()
+        {
+            return new Monster(DataId, Level, Name, Job, Atk, Def, MaxHp, Gold);
         }
     }
 }
