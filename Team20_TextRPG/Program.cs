@@ -32,10 +32,7 @@ namespace Team20_TextRPG
 
         static void Main(string[] args)
         {
-            //SetData();
-            //DisplayMainUI();
-
-            StartScene.DisplayStartScene();
+            TextRPG_StartScene.DisplayStartScene();
         }
 
         //static void SetData()

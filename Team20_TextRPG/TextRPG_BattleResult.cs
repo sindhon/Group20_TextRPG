@@ -8,7 +8,7 @@ namespace Team20_TextRPG
 {
     partial class TextRPG_BattleResult
     {
-        public static void BattleResult(TextRPG_Player player, List<Monster> enemy)      //  가데이터로 설정 → 해당 작업이 완료되면 교체할 예정
+        public static void BattleResult(TextRPG_Player player, List<TextRPG_Monster> enemy)      //  가데이터로 설정 → 해당 작업이 완료되면 교체할 예정
         {
             Console.Clear();
             Console.WriteLine("========== [전투 결과] ==========");

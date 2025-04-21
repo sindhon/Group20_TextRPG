@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Team20_TextRPG
 {
-    partial class StatusScene
+    partial class TextRPG_StatusScene
     {
 
         public void DisplayStatus(TextRPG_Player player)
         {
+            Console.Clear();
             Console.WriteLine("상태 보기");
             Console.WriteLine("캐릭터의 정보가 표시됩니다.");
             Console.WriteLine();

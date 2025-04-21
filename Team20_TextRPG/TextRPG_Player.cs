@@ -30,7 +30,7 @@ namespace Team20_TextRPG
             }
         }
 
-        public TextRPG_Player(int level, string name, string job, int atk, int def, int hp, int gold)
+        public TextRPG_Player(int level, string name, string job, int atk, int def, int hp, int maxHP,int gold)
         {
             Level = level;
             Name = name;
@@ -38,6 +38,7 @@ namespace Team20_TextRPG
             Atk = atk;
             Def = def;
             Hp = hp;
+            MaxHp = maxHP;
             Gold = gold;
         }
 
@@ -51,7 +52,7 @@ namespace Team20_TextRPG
             Console.WriteLine($"{Name} {{ {Job} }}");
             Console.WriteLine(ExtraAtk == 0 ? $"공격력 : {Atk}" : $"공격력 : {Atk + ExtraAtk} (+{ExtraAtk})");
             Console.WriteLine(ExtraDef == 0 ? $"방어력 : {Def}" : $"방어력 : {Def + ExtraDef} (+{ExtraDef})");
-            Console.WriteLine($"체력 : {Hp}");
+            Console.WriteLine($"체력 : {Hp} / 최대 체력: {MaxHp}");
             Console.WriteLine($"Gold : {Gold} G");
         }
 

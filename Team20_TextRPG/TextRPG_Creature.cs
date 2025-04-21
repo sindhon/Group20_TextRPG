@@ -45,7 +45,7 @@ namespace Team20_TextRPG
 
             Hp -= totalDamage; // 체력 감소
 
-            if (Hp < 0) // 체력이 0 이하일 경우 체력이 0이 됨
+            if (Hp <= 0) // 체력이 0 이하일 경우 체력이 0이 됨
             {
                 IsDead = true;
                 Hp = 0;

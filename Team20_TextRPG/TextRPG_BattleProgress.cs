@@ -10,10 +10,9 @@ using Team20_TextRPG;
 
 namespace Team20_TextRPG
 {
-    partial class battleProgress
+    partial class TextRPG_BattleProgress
     {
-        private List<Monster> monsters = new List<Monster>();
-        //private TextRPG_Player player;
+        private List<TextRPG_Monster> monsters = new List<TextRPG_Monster>();
 
         #region 몬스터 스폰
         public void SpawnMonsters()
@@ -23,7 +22,7 @@ namespace Team20_TextRPG
 
             for (int i = 0; i < count; i++)
             {
-                Monster monster = MonsterSpawner.SpawnRandomMonster();
+                TextRPG_Monster monster = TextRPG_MonsterSpawner.SpawnRandomMonster();
                 monsters.Add(monster);
             }
         }
@@ -57,7 +56,7 @@ namespace Team20_TextRPG
             int targetIndex = ReadValidTargetInput();
             if (targetIndex == 0) return;
 
-            Monster target = monsters[targetIndex - 1];
+            TextRPG_Monster target = monsters[targetIndex - 1];
             int damage = player.GetAttackDamage();
             int beforeHP = target.Hp;
 
