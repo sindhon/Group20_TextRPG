@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Team20_TextRPG.ItemSystem;
 
 // 내꺼
 namespace Team20_TextRPG
@@ -189,9 +190,16 @@ namespace Team20_TextRPG
         }
 
         //Quest Clear 보상
-        public void AddItem(ItemSystem.Item item)
+        public void AddItem(string itemID, int quantity)
         {
-            Inventory.Add(item);
+            for (int i = 0; i < quantity; i++)
+            {
+                var item = ItemFactory.Create(itemID);
+                if (item != null)
+                    Inventory.Add(item);
+                else
+                    Console.WriteLine($"[오류] ID가 {itemID}인 아이템이 존재하지 않습니다.");
+            }
         }
 
         public void Heal(int amount)
@@ -219,5 +227,7 @@ namespace Team20_TextRPG
             Inventory.Add(ItemFactory.Create("potion001"));
         }
         #endregion
+
+
     }
 }
