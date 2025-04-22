@@ -12,7 +12,8 @@ namespace Team20_TextRPG
         {
             { 1, new TextRPG_Monster(1, 2, "미니언","몬스터" ,1, 1, 15, 1) },
             { 2, new TextRPG_Monster(2, 3, "공허충", "몬스터",2, 2, 10, 2) },
-            { 3, new TextRPG_Monster(3, 5, "대포미니언", "몬스터", 3, 3, 25, 3) }
+            { 3, new TextRPG_Monster(3, 5, "대포미니언", "몬스터", 3, 3, 25, 3) },
+            { 4, new TextRPG_Monster(4, 7, "슈퍼미니언", "몬스터", 5, 5, 35, 5) }
         };
 
         private static Random rand = new Random();

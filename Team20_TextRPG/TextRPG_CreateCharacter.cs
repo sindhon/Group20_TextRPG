@@ -69,7 +69,7 @@ namespace Team20_TextRPG
         public static TextRPG_Player CreateCharacter()
         {
             string name = SetName();
-            Job selectJob = ChooseJob(name, jobs);
+            Job selectJob = ChooseJob(jobs);
             return SetPlayer(name, selectJob);
         }
 
@@ -86,7 +86,7 @@ namespace Team20_TextRPG
                 Console.Clear();
                 Console.WriteLine($"입력하신 이름은 {name}입니다.");
                 Console.WriteLine();
-
+              
                 Console.WriteLine("1. 맞습니다.");
                 Console.WriteLine("2. 아닙니다.");
                 Console.WriteLine();
@@ -115,7 +115,7 @@ namespace Team20_TextRPG
             return new TextRPG_Player(1, name, job.jobName, job.jobAtk, job.jobDef, job.jobmaxHP, job.jobmaxHP, 1000);
         }
         
-        public static Job ChooseJob(string name, Job[] jobs)
+        public static Job ChooseJob(Job[] jobs)
         {
             Console.WriteLine("직업을 선택해 주세요.");
             Console.WriteLine();
