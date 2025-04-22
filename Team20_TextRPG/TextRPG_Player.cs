@@ -106,29 +106,10 @@ namespace Team20_TextRPG
         #region 아이템 장비
         public void EquipItem(ItemSystem.Item item)
         {
-            // 이미 장착되어 있으면 해제
-            if (EquippedItems.Contains(item))
-            {
-                EquippedItems.Remove(item);
-                EquippedItemIds.Remove(item.Id);
-
-                if (item is ItemSystem.Weapon weapon)
-                {
-                    EquippedWeapon = null;
-                    ExtraAtk -= weapon.Atk;
-                }
-                else if (item is ItemSystem.Armor armor)
-                {
-                    EquippedArmor = null;
-                    ExtraDef -= armor.Def;
-                }
-                Console.WriteLine($"{item.Name}을(를) 장착 해제했습니다.");
-                return;
-            }
-
             // 타입별 장비 교체
             if (item is ItemSystem.Weapon newWeapon)
             {
+                //무기 장비 로직
                 if (EquippedWeapon is ItemSystem.Weapon oldWeapon)
                 {
                     EquippedItems.Remove(EquippedWeapon);
@@ -138,6 +119,9 @@ namespace Team20_TextRPG
                 }
                 EquippedWeapon = newWeapon;
                 ExtraAtk += newWeapon.Atk;
+                EquippedItems.Add(newWeapon);
+                EquippedItemIds.Add(newWeapon.Id);
+                Console.WriteLine($"{newWeapon.Name}을(를) 장착했습니다.");
             }
             else if (item is ItemSystem.Armor newArmor)
             {
@@ -150,10 +134,14 @@ namespace Team20_TextRPG
                 }
                 EquippedArmor = newArmor;
                 ExtraDef += newArmor.Def;
+                EquippedItems.Add(item);
+                EquippedItemIds.Add(item.Id);
+                Console.WriteLine($"{item.Name}을(를) 장착했습니다.");
             }
-            EquippedItems.Add(item);
-            EquippedItemIds.Add(item.Id);
-            Console.WriteLine($"{item.Name}을(를) 장착했습니다.");
+            else
+            {
+                Console.WriteLine($"{item.Name}은(는) 장비할 수 없습니다.");
+            }
 
             //아이템 장착 퀘스트 진행
             TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.EquipEquipment, 1);
@@ -228,6 +216,11 @@ namespace Team20_TextRPG
         }
         #endregion
 
-
+        #region 아이템 삭제
+        public void RemoveItem(ItemSystem.Item item)
+        {
+            Inventory.Remove(item);
+        }
+        #endregion
     }
 }
