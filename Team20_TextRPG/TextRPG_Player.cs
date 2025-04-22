@@ -111,13 +111,17 @@ namespace Team20_TextRPG
                 Def += 1;
             }
 
-            else if (Level == 4 && Exp >= 100)
+        public void LevelUP()
+        {
+            if ((Level == 1 && Exp >= 10) || (Level == 2 && Exp >= 35) || (Level == 3 && Exp >= 65) || (Level == 4 && Exp >= 100))
             {
                 Level += 1;
 
                 Atk += (int)0.5;
                 Def += 1;
+                MaxHp += 50;
             }
+           
         }
 
         public void EquipItem(TextRPG_Item item)

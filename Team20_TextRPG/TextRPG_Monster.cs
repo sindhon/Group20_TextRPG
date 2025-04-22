@@ -35,7 +35,6 @@ namespace Team20_TextRPG
         {
             this.DataId = dataId;
 
-            //  경험치: 몬스터 레벨 비례 증가 적용 / ex) 2레벨 몬스터 = 2 * 경험치
             Exp = level;
         }
 

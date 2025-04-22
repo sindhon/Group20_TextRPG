@@ -55,7 +55,6 @@ namespace Team20_TextRPG
                 IsDead = true;
                 Hp = 0;
 
-                //  몬스터가 죽었을 경우, 공격자(플레이어)에게 자신이 가지고 있던 경험치를 지급한다.
                 attacker.Exp += Exp;
             }
 
