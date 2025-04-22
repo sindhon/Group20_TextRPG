@@ -15,6 +15,7 @@ namespace Team20_TextRPG
         public int Def { get; protected set; }
         public int Hp { get; protected set; }
         public int MaxHp { get; protected set; }
+        public int Exp { get; protected set; }
         public int Gold { get; protected set; }
         public int Exp { get; protected set; }
         public int DataId { get; protected set; }

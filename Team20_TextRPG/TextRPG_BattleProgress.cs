@@ -17,6 +17,7 @@ namespace Team20_TextRPG
         int playerBeforeHP = 0;
         int playerBeforeLevel = 0;
         int playerBeforeExp = 0;
+
         int enemyBeforeHP = 0;
 
         //TextRPG_Player beforePlayer = new TextRPG_Player();
@@ -42,6 +43,7 @@ namespace Team20_TextRPG
 
             playerBeforeLevel = player.Level;
             playerBeforeHP = player.Hp;
+            playerBeforeLevel = player.Level;
             playerBeforeExp = player.Exp;
 
             while (!IsBattleOver(player))
@@ -52,7 +54,7 @@ namespace Team20_TextRPG
                 EnemyPhase(player);
             }
 
-            TextRPG_BattleResult.BattleResult(player, monsters, playerBeforeLevel, playerBeforeHP, playerBeforeExp);
+            TextRPG_BattleResult.BattleResult(player, monsters, playerBeforeHP, playerBeforeLevel, playerBeforeExp);
         }
         #endregion
 
