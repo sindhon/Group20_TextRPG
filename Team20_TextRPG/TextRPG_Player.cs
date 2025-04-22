@@ -36,6 +36,9 @@ namespace Team20_TextRPG
         private ItemSystem.Item EquippedWeapon = null;
         private ItemSystem.Item EquippedArmor = null;
 
+        private Dictionary<string, int> potionStack = new Dictionary<string, int>();
+
+
         #region 인벤토리 카운트
         public int InventoryCount
         {
@@ -101,9 +104,15 @@ namespace Team20_TextRPG
 
             for (int i = 0; i < Inventory.Count; i++)
             {
+                var item = Inventory[i];
                 string equipTag = EquippedItems.Contains(Inventory[i]) ? "[E] " : "";
                 string indexText = viewMode == InventoryDisplayMode.WithIndex ? $"{i + 1}. " : "";
-                Console.WriteLine($"{indexText}{equipTag}{Inventory[i].GetDisplayString(mode)}");
+
+                string stackTag = item.IsStackable && potionStack.ContainsKey(item.Name)
+                    ? $" x{potionStack[item.Name]}"
+                    : "";
+
+                Console.WriteLine($"{indexText}{equipTag}{Inventory[i].GetDisplayString(mode)}{stackTag}");
             }
         }
         #endregion
@@ -127,6 +136,7 @@ namespace Team20_TextRPG
                 EquippedItems.Add(newWeapon);
                 EquippedItemIds.Add(newWeapon.Id);
                 Console.WriteLine($"{newWeapon.Name}을(를) 장착했습니다.");
+                TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.EquipEquipment, 1);
             }
             else if (item is ItemSystem.Armor newArmor)
             {
@@ -142,14 +152,12 @@ namespace Team20_TextRPG
                 EquippedItems.Add(item);
                 EquippedItemIds.Add(item.Id);
                 Console.WriteLine($"{item.Name}을(를) 장착했습니다.");
+                TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.EquipEquipment, 1);
             }
             else
             {
                 Console.WriteLine($"{item.Name}은(는) 장비할 수 없습니다.");
             }
-
-            //아이템 장착 퀘스트 진행
-            TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.EquipEquipment, 1);
         }
         #endregion
 
@@ -195,16 +203,46 @@ namespace Team20_TextRPG
         }
 
         //Quest Clear 보상
-        public void AddItem(string itemID, int quantity)
+        public override void AddItem(string itemID, int quantity) 
         {
             for (int i = 0; i < quantity; i++)
             {
                 var item = ItemFactory.Create(itemID);
-                if (item != null)
-                    Inventory.Add(item);
-                else
+                if (item == null)
+                {
                     Console.WriteLine($"[오류] ID가 {itemID}인 아이템이 존재하지 않습니다.");
+                    continue;
+                }
+
+                if (item.IsStackable)
+                {
+                    var existing = Inventory.FirstOrDefault(x => x.Name == item.Name);
+                    if (existing == null)
+                    {
+                        Inventory.Add(item);
+                        SetPotionCount(item.Name, 1);
+                    }
+                    else
+                    {
+                        IncreasePotionCount(existing.Name, 1);
+                    }
+                }
+                else
+                {
+                    Inventory.Add(item);
+                }
             }
+        }
+
+        private void SetPotionCount(string name, int count)
+        {
+            potionStack[name] = count;
+        }
+
+        private void IncreasePotionCount(string name, int amount)
+        {
+            if (!potionStack.ContainsKey(name)) potionStack[name] = 0;
+            potionStack[name] += amount;
         }
 
         public void Heal(int amount)
@@ -232,16 +270,31 @@ namespace Team20_TextRPG
         #region 시작 아이템 이후 삭제 해도 됌
         public void InitDefaultItems()
         {
-            Inventory.Add(ItemFactory.Create("sword001"));
-            Inventory.Add(ItemFactory.Create("armor001"));
-            Inventory.Add(ItemFactory.Create("potion001"));
+            AddItem("sword001", 1);
+            AddItem("armor001", 1);
+            AddItem("potion001", 3);
         }
         #endregion
 
         #region 아이템 삭제
         public void RemoveItem(ItemSystem.Item item)
         {
-            Inventory.Remove(item);
+            if (item.IsStackable)
+            {
+                if (potionStack.ContainsKey(item.Name))
+                {
+                    potionStack[item.Name]--;
+                    if (potionStack[item.Name] <= 0)
+                    {
+                        potionStack.Remove(item.Name);
+                        Inventory.Remove(item);
+                    }
+                }
+            }
+            else
+            {
+                Inventory.Remove(item);
+            }
         }
         #endregion
     }

@@ -54,7 +54,6 @@ namespace Team20_TextRPG
                 IsDead = true;
                 Hp = 0;
 
-                
                 attacker.AddExp(Exp);
             }
 
@@ -95,5 +94,6 @@ namespace Team20_TextRPG
         }
 
         public virtual void AddExp(int exp) { }
+        public virtual void AddItem(string itemID, int quantity) { }
     }
 }

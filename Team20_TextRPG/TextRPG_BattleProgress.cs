@@ -10,6 +10,8 @@ using Team20_TextRPG;
 
 namespace Team20_TextRPG
 {
+    
+
     partial class TextRPG_BattleProgress
     {
         private List<TextRPG_Monster> monsters = new List<TextRPG_Monster>();
@@ -52,7 +54,7 @@ namespace Team20_TextRPG
                 EnemyPhase(player);
             }
 
-            TextRPG_BattleResult.BattleResult(player, playerBeforeHP, playerBeforeLevel, playerBeforeExp);
+            TextRPG_BattleResult.BattleResult(player, monsters, playerBeforeHP, playerBeforeLevel, playerBeforeExp);
         }
         #endregion
 
