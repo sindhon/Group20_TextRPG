@@ -54,7 +54,8 @@ namespace Team20_TextRPG
                 IsDead = true;
                 Hp = 0;
 
-                attacker.Exp += Exp;
+                
+                attacker.AddExp(Exp);
             }
 
             return totalDamage; // 텍스트에 들어갈 입힌 데미지
@@ -92,5 +93,7 @@ namespace Team20_TextRPG
         {
             return Atk;
         }
+
+        public virtual void AddExp(int exp) { }
     }
 }

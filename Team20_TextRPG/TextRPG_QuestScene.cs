@@ -8,6 +8,7 @@ namespace Team20_TextRPG
 {
     partial class TextRPG_QuestScene
     {
+        
         public void DisplayQuestScene()
         {
             Console.Clear();
@@ -19,7 +20,7 @@ namespace Team20_TextRPG
             SwitchQuestScene(input);
         }
 
-        public static void SwitchQuestScene(int input)
+        public void SwitchQuestScene(int input)
         {
             if (input == 0)
             {
@@ -34,53 +35,49 @@ namespace Team20_TextRPG
             Console.Clear();
             TextRPG_Manager.Instance.QuestManager.DisplayQuestInfo(selectedQuest);
 
-            DisplayOptionsByStatus(selectedQuest.Status);
+            DisplayOptionsByStatus(selectedQuest.State);
 
             Console.WriteLine("\n원하시는 행동을 입력해 주세요.");
-            int userInput = TextRPG_SceneManager.CheckInput(0, GetMaxOptionByStatus(selectedQuest.Status));
+            int userInput = TextRPG_SceneManager.CheckInput(0, GetMaxOptionByStatus(selectedQuest.State));
 
             HandleOptionByStatus(selectedQuest, userInput);
         }
 
-        static void DisplayOptionsByStatus(QuestStatus status)
+        static void DisplayOptionsByStatus(QuestState status)
         {
             switch(status)
             {
-                case QuestStatus.Inactive:
+                case QuestState.Inactive:
                     Console.WriteLine("\n1. 수락하기");
                     Console.WriteLine("2. 거절하기");
                     Console.WriteLine("0. 돌아가기");
                     break;
-                case QuestStatus.Active:
-                    Console.WriteLine("\n1. 완료하기"); //임시 나중에 지우기
-                    Console.WriteLine("0. 돌아가기");
-                    break;
-                case QuestStatus.Rewarded:
+                case QuestState.Active:
+                case QuestState.Rewarded:
                     Console.WriteLine("\n0. 돌아가기");
                     break;
-                case QuestStatus.Completed:
+                case QuestState.Completed:
                     Console.WriteLine("\n1. 보상 받기");
                     Console.WriteLine("0. 돌아가기");
                     break;
             }
         }
 
-        static int GetMaxOptionByStatus(QuestStatus status)
+        static int GetMaxOptionByStatus(QuestState status)
         {
             return status switch
             {
-                QuestStatus.Inactive => 2,
-                QuestStatus.Completed => 1,
-                QuestStatus.Active => 1,
+                QuestState.Inactive => 2,
+                QuestState.Completed => 1,
                 _ => 0,
             };
         }
 
-        static void HandleOptionByStatus(QuestData quest, int input)
+        void HandleOptionByStatus(QuestData quest, int input)
         {
-            switch (quest.Status)
+            switch (quest.State)
             {
-                case QuestStatus.Inactive:
+                case QuestState.Inactive:
                     if (input == 1)
                     {
                         TextRPG_Manager.Instance.QuestManager.AcceptQuest(quest);
@@ -91,22 +88,15 @@ namespace Team20_TextRPG
                         //퀘스트 거절 머 하지? 돌아가기 할가...
                     }
                     break;
-                case QuestStatus.Completed:
+                case QuestState.Completed:
                     if (input == 1)
                     {
                         TextRPG_Manager.Instance.QuestManager.ClaimReward(quest);
                     }
                     break;
-                case QuestStatus.Active:
-                    if (input == 1)
-                    {
-                        TextRPG_Manager.Instance.QuestManager.CompleteQuest(quest);
-                        Console.WriteLine("퀘스트 완료 (임시)");
-                    }
-                    break;
             }
 
-            //DisplayQuestScene();
+            DisplayQuestScene();
         }
     }
 }
