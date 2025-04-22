@@ -93,6 +93,7 @@ namespace Team20_TextRPG
             while (true)
             {
                 DrawBattleUI(player);
+                Console.WriteLine();
 
                 for (int i = 0; i < player.Skills.Count; i++)
                 {
@@ -101,7 +102,7 @@ namespace Team20_TextRPG
                     Console.WriteLine($"{skill.Description}");
                 }
 
-                Console.WriteLine("0. 취소");
+                Console.WriteLine("\n0. 취소");
                 Console.WriteLine("\n원하시는 행동을 입력해주세요.");
                 int input = TextRPG_SceneManager.CheckInput(0, player.Skills.Count);
 
@@ -173,7 +174,7 @@ namespace Team20_TextRPG
         }
         #endregion
 
-        #region 플레이어 턴 (대상 선택)
+        #region 플레이어 턴 (스킬 대상 선택)
         void PlayerSkillTurn(TextRPG_Player player, TextRPG_Skill skill)
         {
             DrawBattleUI(player);
@@ -192,6 +193,7 @@ namespace Team20_TextRPG
             int playerBeforeMp = player.Mp;
 
             int damage = player.Atk * skill.Power / 100;
+            player.UseSkill(skill); // 마나 소비
 
             int PlayerDamage = target.OnDamaged(player, damage);
 

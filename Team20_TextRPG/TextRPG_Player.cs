@@ -174,6 +174,11 @@ namespace Team20_TextRPG
 
         }
 
+        public void UseSkill(TextRPG_Skill skill)
+        {
+            Mp -= skill.MPCost;
+        }
+
         public bool IsEquipped(ItemSystem.Item item)
         {
             return EquippedItems.Contains(item);
