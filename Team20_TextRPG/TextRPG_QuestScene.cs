@@ -8,6 +8,7 @@ namespace Team20_TextRPG
 {
     partial class TextRPG_QuestScene
     {
+        
         public void DisplayQuestScene()
         {
             Console.Clear();

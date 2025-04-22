@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace Team20_TextRPG
 {
-    partial class Reward
+    public enum QuestId
     {
-        public string Name { get; set; }
-        public int Quantity { get; set; }
-
-        public Reward(string name, int quantity)
-        {
-            Name = name;
-            Quantity = quantity;
-        }
+        KillMinion = 1,
+        EquipEquipment,
+        KillMonster,
     }
 
     public enum QuestState
@@ -26,79 +23,40 @@ namespace Team20_TextRPG
         Rewarded,   //보상 지급 완료
     }
 
-    partial class QuestDatabase
+    [System.Serializable]
+    public partial class Reward
     {
-        public static Dictionary<int, QuestData> questDic = new Dictionary<int, QuestData>()
+        public string Name { get; set; }
+        public int Quantity { get; set; }
+
+        public Reward(string name, int quantity)
         {
-            { 1, new QuestData(
-                questId: 1,
-                title: "마을을 위협하는 미니언 처치",
-                description: "이봐! 마을 근처에 미니언들이 너무 많아졌다고 생각하지 않나?\n마을 주민들의 안전을 위해서라도 저것들 수를 좀 줄여야 한다고!\n모험가인 자네가 좀 처치해 주게!",
-                objective: "미니언 5마리 처치",
-                requiredProgress: 5,
-                rewards: new List<Reward>
-                {
-                    new Reward("쓸만한 방패", 1),
-                    new Reward("Gold", 5)
-                })
-            },
-            { 2, new QuestData(
-                questId: 2,
-                title: "장비를 장착해 보자",
-                description: "좋은 장비는 생명과도 같다네.\n전투에 나서기 전에 장비를 착용하는 법부터 익히게!\n가장 먼저 자네에게 맞는 무기나 방어구를 하나 장착해 보게나.",
-                objective: "장비 1개 장착하기",
-                requiredProgress: 1,
-                rewards: new List<Reward>
-                {
-                    new Reward("체력 물약", 3),
-                    new Reward("Exp", 30)
-                })
-            },
-            { 3, new QuestData(
-                questId: 3,
-                title: "더욱 더 강해지기",
-                description: "힘을 원하나? 그럼 싸워야지!\n몬스터를 처치하고 경험을 쌓아 이전보다 강해진 자신을 느껴보게.\n자네의 힘이 시험받을 시간이야!",
-                objective: "몬스터 10마리 처치",
-                requiredProgress: 10,
-                rewards: new List<Reward>
-                {
-                    new Reward("강철 장갑", 1),
-                    new Reward("Gold", 5),
-                    new Reward("Exp", 50)
-                })
-            }
-        };
+            Name = name;
+            Quantity = quantity;
+        }
+
+        // Unity용 역직렬화 대비 기본 생성자
+        public Reward() { }
     }
 
-    partial class QuestData
+    [System.Serializable]
+    public class QuestData
     {
-        public int QuestID;             //퀘스트 아이디
-        public string QuestTitle;       //퀘스트 제목
-        public string QuestDescription; //퀘스트 설명
-        public string QuestObjective;   //퀘스트 목표
-        public int CurrentProgress;     //현재 달성도
-        public int RequiredProgress;    //목표 달성에 필요한 수치
-        public List<Reward> Rewards;    //보상 리스트
+        public int id;
+        public string title;
+        public string description;
+        public string objective;
+        public int MissionTargetvalue;
+        public int MissionProgressValue;
         public QuestState State;
-
-        public QuestData(int questId, string title, string description, string objective, int requiredProgress, List<Reward> rewards)
-        {
-            QuestID = questId;
-            QuestTitle = title;
-            QuestDescription = description;
-            QuestObjective = objective;
-            CurrentProgress = 0;
-            RequiredProgress = requiredProgress;
-            Rewards = rewards;
-            State = QuestState.Inactive;
-        }
+        public List<Reward> Rewards;
 
         public void DisplayQuestDataInfo()
         {
             Console.WriteLine("Quest!!\n");
-            Console.WriteLine($"{QuestTitle}\n");
-            Console.WriteLine($"{QuestDescription}\n");
-            Console.WriteLine($"- {QuestObjective} ({CurrentProgress}/{RequiredProgress})\n");
+            Console.WriteLine($"{title}\n");
+            Console.WriteLine($"{description}\n");
+            Console.WriteLine($"- {objective} ({MissionProgressValue}/{MissionTargetvalue})\n");
             Console.WriteLine($"-보상-");
             foreach (Reward reward in Rewards)
             {
@@ -112,20 +70,58 @@ namespace Team20_TextRPG
         //퀘스트 리스트
         public List<QuestData> Quests { get; set; }
 
-        
+       
         public TextRPG_QuestManager()
         {
             Quests = new List<QuestData>();
+            LoadQuests("Data/Quests.json");
+        }
+       
 
-            //QuestDatabase의 퀘스트를 Quests에 추가
-            foreach (QuestData quest in QuestDatabase.questDic.Values)
+        public void LoadQuests(string filePath)
+        {
+            if (!File.Exists(filePath))
             {
-                if (quest.State == QuestState.Inactive)
-                {
-                    Quests.Add(quest);
-                }
+                Console.WriteLine("퀘스트 파일을 찾을 수 없습니다.");
+                return;
+            }
+
+            string json = File.ReadAllText(filePath);
+            Quests = JsonConvert.DeserializeObject<List<QuestData>>(json);
+
+            Console.WriteLine($"총 {Quests.Count}개의 퀘스트를 불러왔습니다.");
+        }
+
+        //모든 퀘스트들을 출력하는 메서드
+        public void DisplayQuests()
+        {
+            foreach (var quest in Quests)
+            {
+                string stateStr = GetStateStr(quest.State);
+                Console.WriteLine($"{quest.id}. {quest.title} ({stateStr})");
             }
         }
+
+        //퀘스트 진행 상태를 문자열로 나타내는 메서드
+        string GetStateStr(QuestState state)
+        {
+            return state switch
+            {
+                QuestState.Inactive => "수락 가능",
+                QuestState.Active => "진행 중",
+                QuestState.Completed => "보상 받기 가능",
+                QuestState.Rewarded => "완료",
+                _ => "",
+            };
+        }
+
+        //퀘스트 정보를 출력하는 메서드
+        public void DisplayQuestInfo(QuestData quest)
+        {
+            quest.DisplayQuestDataInfo();
+        }
+
+
 
         #region Quest Accept, Complete, Reward Method
         //퀘스트 수락 메서드
@@ -134,7 +130,7 @@ namespace Team20_TextRPG
             if (quest.State == QuestState.Inactive)
             {
                 quest.State = QuestState.Active;
-                Console.WriteLine($"퀘스트 '{quest.QuestTitle}'을(를) 수락했습니다.");
+                Console.WriteLine($"퀘스트 '{quest.title}'을(를) 수락했습니다.");
             }
             else
             {
@@ -146,10 +142,10 @@ namespace Team20_TextRPG
         public void CompleteQuest(QuestData quest)
         {
             //퀘스트가 완료 상태로 변경
-            if (quest.State == QuestState.Active /*&& quest.CurrentProgress >= quest.RequiredProgress*/)
+            if (quest.State == QuestState.Active && quest.MissionProgressValue >= quest.MissionTargetvalue)
             {
                 quest.State = QuestState.Completed;
-                Console.WriteLine($"퀘스트 '{quest.QuestTitle}'을(를) 완료했습니다.");
+                Console.WriteLine($"퀘스트 '{quest.title}'을(를) 완료했습니다.");
             }
             else
             {
@@ -193,37 +189,6 @@ namespace Team20_TextRPG
                     //TextRPG_Manager.Instance.Inventory.AddItem(reward.Name, reward.Quantity);
                     break;
             }
-        }
-        #endregion
-
-        #region Display Quest
-        //모든 퀘스트들을 출력하는 메서드
-        public void DisplayQuests()
-        {
-            foreach(var quest in Quests)
-            {
-                string stateStr = GetStateStr(quest.State);
-                Console.WriteLine($"{quest.QuestID}. {quest.QuestTitle} ({stateStr})");
-            }
-        }
-
-        //퀘스트 정보를 출력하는 메서드
-        public void DisplayQuestInfo(QuestData quest)
-        {
-            quest.DisplayQuestDataInfo();
-        }
-
-        //퀘스트 진행 상태를 문자열로 나타내는 메서드
-        string GetStateStr(QuestState state)
-        {
-            return state switch
-            {
-                QuestState.Inactive => "수락 가능",
-                QuestState.Active => "진행 중",
-                QuestState.Completed => "보상 받기 가능",
-                QuestState.Rewarded => "완료",
-                _ => "",
-            };
         }
         #endregion
     }
