@@ -17,8 +17,8 @@ namespace Team20_TextRPG
 
             Console.WriteLine("1. 상태 보기");
             Console.WriteLine("2. 전투 시작");
-            Console.WriteLine("3. 인벤토리");
-            Console.WriteLine("4. 상점");
+            Console.WriteLine("3. 퀘스트 확인");
+            Console.WriteLine("4. 인벤토리");
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
 
@@ -36,8 +36,7 @@ namespace Team20_TextRPG
         {
             TextRPG_StatusScene status = new TextRPG_StatusScene();
             TextRPG_BattleProgress battleProgress = new TextRPG_BattleProgress();
-
-            //TextRPG_Player player = new TextRPG_Player(1, "이세계 용사", "이세계 전사", 100, 5, 100, 100, 1000);
+            TextRPG_QuestScene quest = new TextRPG_QuestScene();
 
             switch (input)
             {
@@ -56,14 +55,13 @@ namespace Team20_TextRPG
                     // 전투 시작
                     battleProgress.StartBattle(TextRPG_Manager.Instance.playerInstance);
                     break;
+
                 case 3:
-                    InventorySystem.InventoryMenu(TextRPG_Manager.Instance.playerInstance);
+                    Console.Clear();
+                    quest.DisplayQuestScene();
                     break;
                 case 4:
-                    break;
-                default:
-                    Console.Clear();
-                    Console.WriteLine("잘못된 입력입니다.\n");
+                    InventorySystem.InventoryMenu(TextRPG_Manager.Instance.playerInstance);
                     break;
             }
         }

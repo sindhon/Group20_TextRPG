@@ -43,7 +43,7 @@ namespace Team20_TextRPG
         #endregion
 
         #region 플레이어 공통 속성
-        public TextRPG_Player(int level, string name, string job, int atk, int def, int hp, int maxHP,int gold)
+        public TextRPG_Player(int level, string name, string job, int atk, int def, int hp, int maxHP, int gold)
         {
             Level = level;
             Name = name;
@@ -67,7 +67,7 @@ namespace Team20_TextRPG
             Hp = 0;
             MaxHp = 100;
             Gold = 0;
-            
+
         }
         #endregion
 
@@ -94,9 +94,9 @@ namespace Team20_TextRPG
 
             for (int i = 0; i < Inventory.Count; i++)
             {
-                    string equipTag = EquippedItems.Contains(Inventory[i]) ? "[E] " : "";
-                    string indexText = viewMode == InventoryDisplayMode.WithIndex ? $"{i + 1}. " : "";
-                    Console.WriteLine($"{indexText}{equipTag}{Inventory[i].GetDisplayString(mode)}");
+                string equipTag = EquippedItems.Contains(Inventory[i]) ? "[E] " : "";
+                string indexText = viewMode == InventoryDisplayMode.WithIndex ? $"{i + 1}. " : "";
+                Console.WriteLine($"{indexText}{equipTag}{Inventory[i].GetDisplayString(mode)}");
             }
         }
         #endregion
@@ -154,6 +154,19 @@ namespace Team20_TextRPG
             Console.WriteLine($"{item.Name}을(를) 장착했습니다.");
         }
         #endregion
+
+        public void LevelUP()
+        {
+            if ((Level == 1 && Exp >= 10) || (Level == 2 && Exp >= 35) || (Level == 3 && Exp >= 65) || (Level == 4 && Exp >= 100))
+            {
+                Level += 1;
+
+                Atk += (int)0.5;
+                Def += 1;
+                MaxHp += 50;
+            }
+
+        }
 
         public bool IsEquipped(ItemSystem.Item item)
         {
