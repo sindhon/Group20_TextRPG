@@ -72,7 +72,7 @@ namespace Team20_TextRPG
                     case 1:
                         DrawBattleUI(player);
                         PlayerTurn(player);
-                        return;
+                        break;
                     case 2:
                         ChoiceSkill(player);
                         break;
@@ -83,6 +83,8 @@ namespace Team20_TextRPG
                     isCanceled = false;
                     continue;
                 }
+
+                return;
             }
         }
         #endregion
@@ -99,7 +101,7 @@ namespace Team20_TextRPG
                 {
                     var skill = player.Skills[i];
                     Console.WriteLine($"{i + 1}. {skill.Name} - MP {skill.MPCost}");
-                    Console.WriteLine($"{skill.Description}");
+                    Console.WriteLine($"   {skill.Description}");
                 }
 
                 Console.WriteLine("\n0. 취소");
@@ -108,6 +110,7 @@ namespace Team20_TextRPG
 
                 if (input == 0)
                 {
+                    isCanceled = true;
                     return;
                 }
 
@@ -134,7 +137,7 @@ namespace Team20_TextRPG
         #endregion
 
 
-        #region 플레이어 턴 (대상 선택)
+        #region 플레이어 턴 (공격 대상 선택)
         void PlayerTurn(TextRPG_Player player)
         {
             DrawBattleUI(player);
