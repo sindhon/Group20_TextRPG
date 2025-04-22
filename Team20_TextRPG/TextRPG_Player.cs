@@ -38,16 +38,42 @@ namespace Team20_TextRPG
             Atk = atk;
             Def = def;
             Hp = hp;
+<<<<<<< Updated upstream
             Gold = gold;
         }
 
+=======
+            MaxHp = maxHP;
+            Exp = 0;
+            Gold = gold;
+        }
+
+        public TextRPG_Player()
+        {
+            Level = 0;
+            Name = string.Empty;
+            Job = string.Empty;
+            Atk = 0;
+            Def = 0;
+            Hp = 0;
+            MaxHp = 100;
+            Exp = 0;
+            Gold = 0;
+        }
+
+>>>>>>> Stashed changes
         public void DisplayCharacterInfo()
         {
             Console.WriteLine($"Lv. {Level:D2}");
             Console.WriteLine($"{Name} {{ {Job} }}");
             Console.WriteLine(ExtraAtk == 0 ? $"공격력 : {Atk}" : $"공격력 : {Atk + ExtraAtk} (+{ExtraAtk})");
             Console.WriteLine(ExtraDef == 0 ? $"방어력 : {Def}" : $"방어력 : {Def + ExtraDef} (+{ExtraDef})");
+<<<<<<< Updated upstream
             Console.WriteLine($"체력 : {Hp}");
+=======
+            Console.WriteLine($"체력 : {Hp} / 최대 체력: {MaxHp}");
+            Console.WriteLine($"경험치: {Exp}");
+>>>>>>> Stashed changes
             Console.WriteLine($"Gold : {Gold} G");
         }
 
@@ -97,6 +123,45 @@ namespace Team20_TextRPG
         public bool HasItem(TextRPG_Item item)
         {
             return Inventory.Contains(item);
+        }
+
+        public void LevelUP()
+        {
+            if(Level == 1 && Exp >= 10)
+            {
+                Level += 1;
+
+                Atk += (int)0.5;
+                Def += 1;
+                MaxHp += 50;
+            }
+
+            else if(Level == 2 && Exp >= 35)
+            {
+                Level += 1;
+
+                Atk += (int)0.5;
+                Def += 1;
+                MaxHp += 50;
+            }
+
+            else if(Level == 3 && Exp >= 65)
+            {
+                Level += 1;
+
+                Atk += (int)0.5;
+                Def += 1;
+                MaxHp += 50;
+            }
+
+            else if(Level == 4 && Exp >= 100)
+            {
+                Level += 1;
+
+                Atk += (int)0.5;
+                Def += 1;
+                MaxHp += 50;
+            }
         }
     }
 }
