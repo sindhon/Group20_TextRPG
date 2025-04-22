@@ -32,8 +32,7 @@ namespace Team20_TextRPG
 
         static void Main(string[] args)
         {
-            TextRPG_Manager.Instance.Init();
-
+            TextRPG_CreateCharacter.CreateCharacter();
             TextRPG_StartScene.DisplayStartScene();
         }
 
