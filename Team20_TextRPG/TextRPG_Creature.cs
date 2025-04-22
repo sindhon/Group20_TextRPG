@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Team20_TextRPG
 {
-    partial class TextRPG_Creature 
+    partial class TextRPG_Creature
     {
         public int Level { get; protected set; }
         public string Name { get; protected set; }
@@ -15,10 +16,13 @@ namespace Team20_TextRPG
         public int Def { get; protected set; }
         public int Hp { get; protected set; }
         public int MaxHp { get; protected set; }
+        public int Mp { get; protected set; }
+        public int MaxMp { get; protected set; }
         public int Exp { get; protected set; }
         public int Gold { get; protected set; }
         public int DataId { get; protected set; }
         public bool IsDead { get; protected set; }
+        public bool isDodged { get; set; }
 
         public TextRPG_Creature()
         {
@@ -39,13 +43,9 @@ namespace Team20_TextRPG
             IsDead = false;
         }
 
-        public int OnDamaged(TextRPG_Creature attacker)
+        public int OnDamaged(TextRPG_Creature attacker, int baseDamage)
         {
-            Random rand = new Random();
-            int diff = (int)Math.Ceiling((double)attacker.Atk / 10); // 공격력 오차
-            int min = attacker.Atk - diff;
-            int max = attacker.Atk + diff + 1;
-            int totalDamage = rand.Next(min, max); // 최종 데이지
+            int totalDamage = calcDmg(baseDamage);
 
             Hp -= totalDamage; // 체력 감소
 
@@ -56,6 +56,34 @@ namespace Team20_TextRPG
 
                 attacker.Exp += Exp;
             }
+
+            return totalDamage; // 텍스트에 들어갈 입힌 데미지
+        }
+
+        public int calcDmg(int damage)
+        {
+            Random rand = new Random();
+            int diff = (int)Math.Ceiling((double)damage / 10); // 공격력 오차
+            int min = damage - diff;
+            int max = damage + diff + 1;
+            int totalDamage = rand.Next(min, max); // 최종 데이지
+
+            // 15% 확률로 크리티컬
+            int critChance = rand.Next(100);
+            if (critChance < 15)
+            {
+                int critDamage = totalDamage * 16 / 10;
+                totalDamage = critDamage;
+            }
+
+            // 10% 확률로 회피
+            int dodgeChance = rand.Next(100);
+            if (dodgeChance < 10)
+            { 
+                totalDamage = 0;
+            }
+
+            if (totalDamage == 0) isDodged = true;
 
             return totalDamage;
         }
