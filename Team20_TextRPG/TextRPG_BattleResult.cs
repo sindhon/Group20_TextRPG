@@ -8,7 +8,7 @@ namespace Team20_TextRPG
 {
     partial class TextRPG_BattleResult
     {
-        public static void BattleResult(TextRPG_Player player,List<TextRPG_Monster> monsters ,int beforeHp, int beforeLevel, int beforeExp)
+        public static void BattleResult(TextRPG_Player player, List<TextRPG_Monster> monsters, int beforeHp, int beforeLevel, int beforeExp)
         {
             Console.Clear();
             Console.WriteLine("========== [전투 결과] ==========");
@@ -44,9 +44,6 @@ namespace Team20_TextRPG
                 Console.WriteLine($"경험치: {beforeExp} → {player.Exp}");
                 Console.WriteLine();
 
-                Console.WriteLine("획득 아이템");
-                Console.WriteLine($"획득 골드: {player.Gold} Gold");
-                Console.WriteLine("획득 아이템 리스트");
 
                 Console.WriteLine("0. 다음");
             }
