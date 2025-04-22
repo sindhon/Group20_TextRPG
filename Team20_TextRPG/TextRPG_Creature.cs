@@ -8,15 +8,6 @@ namespace Team20_TextRPG
 {
     partial class TextRPG_Creature 
     {
-<<<<<<< Updated upstream
-        public int Level { get; }
-        public string Name { get; }
-        public string Job { get; }
-        public int Atk { get; }
-        public int Def { get; }
-        public int Hp { get; }
-        public int Gold { get; private set; }
-=======
         public int Level { get; protected set; }
         public string Name { get; protected set; }
         public string Job { get; protected set; }
@@ -74,6 +65,5 @@ namespace Team20_TextRPG
         {
             return Atk;
         }
->>>>>>> Stashed changes
     }
 }

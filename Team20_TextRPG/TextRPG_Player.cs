@@ -8,13 +8,17 @@ namespace Team20_TextRPG
 {
     class TextRPG_Player
     {
-        public int Level { get; }
-        public string Name { get; }
-        public string Job { get; }
-        public int Atk { get; }
-        public int Def { get; }
-        public int Hp { get; }
-        public int Gold { get; private set; }
+        public int Level { get; protected set; }
+        public string Name { get; protected set; }
+        public string Job { get; protected set; }
+        public int Atk { get; protected set; }
+        public int Def { get; protected set; }
+        public int Hp { get; protected set; }
+        public int MaxHp { get; protected set; }
+        public int Gold { get; protected set; }
+        public int Exp { get; protected set; }
+        public int DataId { get; protected set; }
+        public bool IsDead { get; protected set; }
 
         public int ExtraAtk { get; private set; }
         public int ExtraDef { get; private set; }
@@ -30,7 +34,7 @@ namespace Team20_TextRPG
             }
         }
 
-        public TextRPG_Player(int level, string name, string job, int atk, int def, int hp, int gold)
+        public TextRPG_Player(int level, string name, string job, int atk, int def, int hp, int gold, int maxHP)
         {
             Level = level;
             Name = name;
@@ -38,15 +42,11 @@ namespace Team20_TextRPG
             Atk = atk;
             Def = def;
             Hp = hp;
-<<<<<<< Updated upstream
             Gold = gold;
-        }
-
-=======
             MaxHp = maxHP;
             Exp = 0;
-            Gold = gold;
         }
+
 
         public TextRPG_Player()
         {
@@ -61,19 +61,15 @@ namespace Team20_TextRPG
             Gold = 0;
         }
 
->>>>>>> Stashed changes
         public void DisplayCharacterInfo()
         {
             Console.WriteLine($"Lv. {Level:D2}");
             Console.WriteLine($"{Name} {{ {Job} }}");
             Console.WriteLine(ExtraAtk == 0 ? $"공격력 : {Atk}" : $"공격력 : {Atk + ExtraAtk} (+{ExtraAtk})");
             Console.WriteLine(ExtraDef == 0 ? $"방어력 : {Def}" : $"방어력 : {Def + ExtraDef} (+{ExtraDef})");
-<<<<<<< Updated upstream
             Console.WriteLine($"체력 : {Hp}");
-=======
             Console.WriteLine($"체력 : {Hp} / 최대 체력: {MaxHp}");
             Console.WriteLine($"경험치: {Exp}");
->>>>>>> Stashed changes
             Console.WriteLine($"Gold : {Gold} G");
         }
 
