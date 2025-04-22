@@ -185,12 +185,29 @@ namespace Team20_TextRPG
             return Inventory.Contains(item);
         }
 
+        //Quest Clear 보상
+        public void AddItem(ItemSystem.Item item)
+        {
+            Inventory.Add(item);
+        }
+
         public void Heal(int amount)
         {
             Hp += amount;
             if (Hp > MaxHp) Hp = MaxHp;
             Console.WriteLine($"HP가 {amount}만큼 회복되었습니다. 현재 HP: {Hp}/{MaxHp}");
         }
+
+        public void AddExp(int exp)
+        {
+            Exp += exp;
+        }
+
+        public void AddGold(int gold)
+        {
+            Gold += gold;
+        }
+
         #region 시작 아이템 이후 삭제 해도 됌
         public void InitDefaultItems()
         {

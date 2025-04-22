@@ -89,7 +89,7 @@ namespace Team20_TextRPG
             string json = File.ReadAllText(filePath);
             Quests = JsonConvert.DeserializeObject<List<QuestData>>(json);
 
-            Console.WriteLine($"총 {Quests.Count}개의 퀘스트를 불러왔습니다.");
+            //Console.WriteLine($"총 {Quests.Count}개의 퀘스트를 불러왔습니다.");
         }
 
         //모든 퀘스트들을 출력하는 메서드
@@ -142,7 +142,7 @@ namespace Team20_TextRPG
         public void CompleteQuest(QuestData quest)
         {
             //퀘스트가 완료 상태로 변경
-            if (quest.State == QuestState.Active && quest.MissionProgressValue >= quest.MissionTargetvalue)
+            if (quest.State == QuestState.Active /*&& quest.MissionProgressValue >= quest.MissionTargetvalue*/)
             {
                 quest.State = QuestState.Completed;
                 Console.WriteLine($"퀘스트 '{quest.title}'을(를) 완료했습니다.");
@@ -176,17 +176,17 @@ namespace Team20_TextRPG
         {
             switch(reward.Name)
             {
-                case "Gold":
+                case "gold":
                     //Gold Player에 추가
-                    //TextRPG_Manager.Instance.playerInstance.AddGold(reward.Quantity);
+                    TextRPG_Manager.Instance.playerInstance.AddGold(reward.Quantity);
                     break;
-                case "Exp":
+                case "exp":
                     //Exp Player에 추가 
-                    //TextRPG_Manager.Instance.playerInstance.AddExp(reward.Quantity);
+                    TextRPG_Manager.Instance.playerInstance.AddExp(reward.Quantity);
                     break;
                 default:
                     //인벤토리에 아이템 추가
-                    //TextRPG_Manager.Instance.Inventory.AddItem(reward.Name, reward.Quantity);
+                    //TextRPG_Manager.Instance.playerInstance.AddItem(reward.Name, reward.Quantity);
                     break;
             }
         }
