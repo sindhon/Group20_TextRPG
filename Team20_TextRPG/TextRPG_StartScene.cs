@@ -18,6 +18,7 @@ namespace Team20_TextRPG
             Console.WriteLine("1. 상태 보기");
             Console.WriteLine("2. 전투 시작");
             Console.WriteLine("3. 퀘스트 확인");
+            Console.WriteLine("4. 인벤토리");
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
 
@@ -26,7 +27,7 @@ namespace Team20_TextRPG
             // 사용자에게 입력을 받아 TryParse로 정수형인지 확인하고
             // 판단 결과는 isSuccess에, 정수값은 input에 담는다.
 
-            int input = TextRPG_SceneManager.CheckInput(0, 3);
+            int input = TextRPG_SceneManager.CheckInput(0, 4);
             SwitchScene(input);
 
         }
@@ -58,6 +59,9 @@ namespace Team20_TextRPG
                 case 3:
                     Console.Clear();
                     quest.DisplayQuestScene();
+                    break;
+                case 4:
+                    InventorySystem.InventoryMenu(TextRPG_Manager.Instance.playerInstance);
                     break;
             }
         }
