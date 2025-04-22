@@ -153,6 +153,9 @@ namespace Team20_TextRPG
             EquippedItems.Add(item);
             EquippedItemIds.Add(item.Id);
             Console.WriteLine($"{item.Name}을(를) 장착했습니다.");
+
+            //아이템 장착 퀘스트 진행
+            TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.EquipEquipment, 1);
         }
         #endregion
 

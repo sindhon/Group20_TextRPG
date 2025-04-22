@@ -142,7 +142,7 @@ namespace Team20_TextRPG
         public void CompleteQuest(QuestData quest)
         {
             //퀘스트가 완료 상태로 변경
-            if (quest.State == QuestState.Active /*&& quest.MissionProgressValue >= quest.MissionTargetvalue*/)
+            if (quest.State == QuestState.Active && quest.MissionProgressValue >= quest.MissionTargetvalue)
             {
                 quest.State = QuestState.Completed;
                 Console.WriteLine($"퀘스트 '{quest.title}'을(를) 완료했습니다.");
@@ -191,5 +191,28 @@ namespace Team20_TextRPG
             }
         }
         #endregion
+
+        public void UpdateQuestProgress(QuestId id, int amount)
+        {
+            QuestData quest = Quests.FirstOrDefault(q => q.id == (int)id);
+            if (quest == null)
+            {
+                Console.Write("해당 ID의 퀘스트를 찾을 수 없습니다.");
+                return;
+            }
+
+            if (quest.State != QuestState.Active)
+            {
+                return;
+            }
+
+            quest.MissionProgressValue += amount;
+
+            // 목표치 달성 시 완료 처리
+            if (quest.MissionProgressValue >= quest.MissionTargetvalue)
+            {
+                CompleteQuest(quest);
+            }
+        }
     }
 }
