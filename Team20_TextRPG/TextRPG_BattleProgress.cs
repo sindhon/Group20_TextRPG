@@ -65,12 +65,12 @@ namespace Team20_TextRPG
             //int damage = player.GetAttackDamage();
             enemyBeforeHP = target.Hp;
 
-            target.OnDamaged(player);
+            int PlayerDamage = target.OnDamaged(player);
 
             Console.Clear();
             Console.WriteLine("Battle!!\n");
             Console.WriteLine($"{player.Name} 의 공격!");
-            Console.WriteLine($"Lv.{target.Level} {target.Name} 을(를) 맞췄습니다. [데미지 : {player.Atk}]\n");
+            Console.WriteLine($"Lv.{target.Level} {target.Name} 을(를) 맞췄습니다. [데미지 : {PlayerDamage}]\n");
 
             if (target.IsDead)
                 Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {enemyBeforeHP} -> Dead");
@@ -91,15 +91,15 @@ namespace Team20_TextRPG
                 if (monster.IsDead) continue;
 
                 int damage = monster.GetAttackDamage();
-                //int beforeHP = player.Hp;
+                playerBeforeHP = player.Hp;
                 //enemyBeforeHP = monster.Hp;
 
-                player.OnDamaged(monster);
+                int EnemyDamage = player.OnDamaged(monster);
 
                 Console.Clear();
                 Console.WriteLine("Battle!!\n");
                 Console.WriteLine($"Lv.{monster.Level} {monster.Name} 의 공격!");
-                Console.WriteLine($"{player.Name} 을(를) 맞췄습니다. [데미지 : {damage}]\n");
+                Console.WriteLine($"{player.Name} 을(를) 맞췄습니다. [데미지 : {EnemyDamage}]\n");
 
                 Console.WriteLine($"Lv.{player.Level} {player.Name}");
                 Console.WriteLine($"HP {playerBeforeHP} -> {player.Hp}");

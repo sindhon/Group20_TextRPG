@@ -37,11 +37,13 @@ namespace Team20_TextRPG
             IsDead = false;
         }
 
-        public void OnDamaged(TextRPG_Creature attacker)
+        public int OnDamaged(TextRPG_Creature attacker)
         {
             Random rand = new Random();
             int diff = (int)Math.Ceiling((double)attacker.Atk / 10); // 공격력 오차
-            int totalDamage = rand.Next(attacker.Atk - diff, attacker.Atk + diff + 1); // 최종 데이지
+            int min = attacker.Atk - diff;
+            int max = attacker.Atk + diff + 1;
+            int totalDamage = rand.Next(min, max); // 최종 데이지
 
             Hp -= totalDamage; // 체력 감소
 
@@ -50,6 +52,8 @@ namespace Team20_TextRPG
                 IsDead = true;
                 Hp = 0;
             }
+
+            return totalDamage;
         }
 
         public int GetAttackDamage()
