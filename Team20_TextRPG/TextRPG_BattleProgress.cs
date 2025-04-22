@@ -18,6 +18,8 @@ namespace Team20_TextRPG
 
         int enemyBeforeHP = 0;
 
+        bool isCanceled = false;
+
         #region 몬스터 스폰
         public void SpawnMonsters()
         {
@@ -41,8 +43,7 @@ namespace Team20_TextRPG
 
             while (!IsBattleOver(player))
             {
-                DrawBattleUI(player);
-                PlayerTurn(player);
+                ChoiceAtk(player);
                 if (IsBattleOver(player)) break;
                 EnemyPhase(player);
             }
@@ -51,16 +52,53 @@ namespace Team20_TextRPG
         }
         #endregion
 
+        #region 플레이어 턴 (공격 / 스킬 선택)
+        void ChoiceAtk(TextRPG_Player player)
+        {
+            DrawBattleUI(player);
+            Console.WriteLine("\n1. 공격");
+            Console.WriteLine("2. 스킬");
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            int input = TextRPG_SceneManager.CheckInput(1, 2);
 
-        #region 플레이어 턴
+            switch (input)
+            {
+                case 1:
+                    DrawBattleUI(player);
+                    PlayerTurn(player);
+                    if (isCanceled)
+                    {
+                        ChoiceAtk(player);
+                        isCanceled = false;
+                    }
+                    break;
+
+                case 2:
+                    DrawBattleUI(player);
+                    PlayerTurn(player);
+                    if (isCanceled)
+                    {
+                        ChoiceAtk(player);
+                        isCanceled = false;
+                    }
+                    break;
+            }
+        }
+        #endregion
+
+
+        #region 플레이어 턴 (대상 선택)
         void PlayerTurn(TextRPG_Player player)
         {
             Console.WriteLine("\n0. 취소");
             Console.Write("대상을 선택해주세요: ");
 
             int targetIndex = ReadValidTargetInput();
-            if (targetIndex == 0) return;
-
+            if (targetIndex == 0) 
+            {
+                isCanceled = true;
+                return;
+            }
             TextRPG_Monster target = monsters[targetIndex - 1];
             //int damage = player.GetAttackDamage();
             enemyBeforeHP = target.Hp;
