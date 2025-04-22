@@ -234,5 +234,44 @@ namespace Team20_TextRPG
             Inventory.Remove(item);
         }
         #endregion
+
+        /*
+        //Save Player Data
+        public PlayerSaveData CreatePlayerSaveData(TextRPG_Player player)
+        {
+            PlayerSaveData saveData = new PlayerSaveData
+            {
+                Level = player.Level,
+                Name = player.Name,
+                Job = player.Job,
+                Atk = player.Atk,
+                Def = player.Def,
+                Hp = player.Hp,
+                MaxHp = player.MaxHp,
+                Mp = player.Mp,
+                MaxMp = player.MaxMp,
+                Exp = player.Exp,
+                Gold = player.Gold,
+                DataId = player.DataId,
+                IsDead = player.IsDead,
+                ExtraAtk = player.ExtraAtk,
+                ExtraDef = player.ExtraDef,
+                Inventory = player.readInventory.Select(item => new ItemSaveData
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Description = item.Description,
+                    Price = item.Price,
+                    Type = item.Type,
+                    Sold = item.Sold,
+                    IsStoreItem = item.IsStoreItem
+                }).ToList(),
+                EquippedWeaponId = player.GetEquippedWeapon()?.Id,
+                EquippedArmorId = player.GetEquippedArmor()?.Id
+            };
+
+            return saveData;
+        }
+        */
     }
 }
