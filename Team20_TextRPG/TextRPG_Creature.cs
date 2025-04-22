@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Team20_TextRPG
 {
-    partial class TextRPG_Creature
+    public partial class TextRPG_Creature
     {
         public int Level { get; protected set; }
         public string Name { get; protected set; }
