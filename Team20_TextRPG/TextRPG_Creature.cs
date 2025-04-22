@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Team20_TextRPG
 {
-    partial class TextRPG_Creature 
+    partial class TextRPG_Creature
     {
         public int Level { get; protected set; }
         public string Name { get; protected set; }
@@ -45,6 +46,22 @@ namespace Team20_TextRPG
             int max = attacker.Atk + diff + 1;
             int totalDamage = rand.Next(min, max); // 최종 데이지
 
+            // 15% 확률로 크리티컬
+            int critChance = rand.Next(100);
+            if (critChance < 15)    
+            {
+                int critDamage = totalDamage * 16 / 10;
+                totalDamage = critDamage;
+            }
+
+            // 10% 확률로 회피
+            int dodgeChance = rand.Next(100);
+            if (dodgeChance < 10)   
+            {
+                totalDamage = 0;
+            }
+
+
             Hp -= totalDamage; // 체력 감소
 
             if (Hp <= 0) // 체력이 0 이하일 경우 체력이 0이 됨
@@ -53,7 +70,7 @@ namespace Team20_TextRPG
                 Hp = 0;
             }
 
-            return totalDamage;
+            return totalDamage; // 텍스트에 들어갈 입힌 데미지
         }
 
         public int GetAttackDamage()
