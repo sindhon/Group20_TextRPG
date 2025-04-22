@@ -8,7 +8,7 @@ namespace Team20_TextRPG
 {
     partial class TextRPG_BattleResult
     {
-        public static void BattleResult(TextRPG_Player player, int beforeHp, int beforeLevel, int beforeExp)
+        public static void BattleResult(TextRPG_Player player,List<TextRPG_Monster> monsters ,int beforeHp, int beforeLevel, int beforeExp)
         {
             Console.Clear();
             Console.WriteLine("========== [전투 결과] ==========");
@@ -36,13 +36,18 @@ namespace Team20_TextRPG
                 Console.WriteLine("Victory!!!");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine();
-                Console.WriteLine("던전에서 몬스터 3마리를 잡았습니다");
+                Console.WriteLine($"던전에서 몬스터 {monsters.Count}마리를 잡았습니다");
 
-                //  이후, 보상 관련 내용 추가 예정 → 작업 완료 시 반영하여 만들어두겠습니다!
+                Console.WriteLine("[캐릭터 정보]");
                 Console.WriteLine($"LV. {beforeLevel} | {player.Name} → LV. {player.Level} | {player.Name}");
                 Console.WriteLine($"체력: {beforeHp} → {player.Hp}");
                 Console.WriteLine($"경험치: {beforeExp} → {player.Exp}");
                 Console.WriteLine();
+
+                Console.WriteLine("획득 아이템");
+                Console.WriteLine($"획득 골드: {player.Gold} Gold");
+                Console.WriteLine("획득 아이템 리스트");
+
                 Console.WriteLine("0. 다음");
             }
 
