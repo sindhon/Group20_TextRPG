@@ -16,7 +16,8 @@ namespace Team20_TextRPG
 
         public void Init()
         {
-            playerInstance = new TextRPG_Player(1, "이세계 용사", "이세계 전사", 100, 5, 100, 100, 1000);
+            //playerInstance = new TextRPG_Player(1, "이세계 용사", "이세계 전사", 100, 5, 100, 100, 1000);
+            playerInstance = TextRPG_CreateCharacter.CreateCharacter();
         }
     }
 }
