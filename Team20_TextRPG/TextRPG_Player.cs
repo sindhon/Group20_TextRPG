@@ -160,17 +160,24 @@ namespace Team20_TextRPG
         }
         #endregion
 
+
+        //레벨 업 경험치 테이블
+        Dictionary<int, int> levelExpTable = new Dictionary<int, int>()
+        {
+            { 1, 0 },
+            { 2, 10 },
+            { 3, 20 },
+            { 4, 30 },
+            { 5, 40 },
+            { 6, 50 },
+        };
+
         public void LevelUP()
         {
-            if ((Level == 1 && Exp >= 10) || (Level == 2 && Exp >= 35) || (Level == 3 && Exp >= 65) || (Level == 4 && Exp >= 100))
-            {
-                Level += 1;
-
-                Atk += (int)0.5;
-                Def += 1;
-                MaxHp += 50;
-            }
-
+            Level++;
+            Atk += (int)0.5;
+            Def += 1;
+            MaxHp += 50;
         }
 
         public bool IsEquipped(ItemSystem.Item item)
@@ -209,9 +216,14 @@ namespace Team20_TextRPG
             Console.WriteLine($"HP가 {amount}만큼 회복되었습니다. 현재 HP: {Hp}/{MaxHp}");
         }
 
-        public void AddExp(int exp)
+        public override void AddExp(int exp)
         {
             Exp += exp;
+            if (Exp >= levelExpTable[Level + 1])
+            {
+                Exp -= levelExpTable[Level + 1];
+                LevelUP();
+            }
         }
 
         public void AddGold(int gold)
