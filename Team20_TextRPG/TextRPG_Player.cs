@@ -186,5 +186,13 @@ namespace Team20_TextRPG
             Inventory.Add(ItemFactory.Create("potion001"));
         }
         #endregion
+
+        #region 아이템 삭제
+        public void RemoveItem(ItemSystem.Item item)
+        {
+            Inventory.Remove(item);
+        }
+        #endregion
+
     }
 }
