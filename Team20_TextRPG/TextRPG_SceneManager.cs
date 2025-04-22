@@ -19,8 +19,12 @@ namespace Team20_TextRPG
                 if (isNumber)
                 {
                     if (result >= min && result <= max)
+                    {
+                        Console.Clear();
                         return result;
+                    } 
                 }
+                Console.Clear();
                 Console.WriteLine("잘못된 입력입니다!!!!");
             }
         } 

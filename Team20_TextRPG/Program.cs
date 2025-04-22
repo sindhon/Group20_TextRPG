@@ -33,7 +33,6 @@ namespace Team20_TextRPG
         static void Main(string[] args)
         {
             TextRPG_Manager.Instance.Init();
-
             TextRPG_StartScene.DisplayStartScene();
         }
 
