@@ -155,9 +155,11 @@ namespace Team20_TextRPG
                 Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {enemyBeforeHP} -> Dead");
                 if (target.Name == "미니언")
                 {
-                    //미니언 퀘스트 진행 ㄱ
-                    //TextRPG_Manager.Instance.QuestManager.Quests
+                    //미니언 퀘스트 진행
+                    TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.KillMinion, 1);
                 }
+                //Kill Monster 퀘스트 진행
+                TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.KillMonster, 1);
             }
             else
             {

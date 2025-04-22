@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Team20_TextRPG.ItemSystem;
 
 // 내꺼
 namespace Team20_TextRPG
@@ -105,29 +106,10 @@ namespace Team20_TextRPG
         #region 아이템 장비
         public void EquipItem(ItemSystem.Item item)
         {
-            // 이미 장착되어 있으면 해제
-            if (EquippedItems.Contains(item))
-            {
-                EquippedItems.Remove(item);
-                EquippedItemIds.Remove(item.Id);
-
-                if (item is ItemSystem.Weapon weapon)
-                {
-                    EquippedWeapon = null;
-                    ExtraAtk -= weapon.Atk;
-                }
-                else if (item is ItemSystem.Armor armor)
-                {
-                    EquippedArmor = null;
-                    ExtraDef -= armor.Def;
-                }
-                Console.WriteLine($"{item.Name}을(를) 장착 해제했습니다.");
-                return;
-            }
-
             // 타입별 장비 교체
             if (item is ItemSystem.Weapon newWeapon)
             {
+                //무기 장비 로직
                 if (EquippedWeapon is ItemSystem.Weapon oldWeapon)
                 {
                     EquippedItems.Remove(EquippedWeapon);
@@ -137,6 +119,9 @@ namespace Team20_TextRPG
                 }
                 EquippedWeapon = newWeapon;
                 ExtraAtk += newWeapon.Atk;
+                EquippedItems.Add(newWeapon);
+                EquippedItemIds.Add(newWeapon.Id);
+                Console.WriteLine($"{newWeapon.Name}을(를) 장착했습니다.");
             }
             else if (item is ItemSystem.Armor newArmor)
             {
@@ -149,24 +134,38 @@ namespace Team20_TextRPG
                 }
                 EquippedArmor = newArmor;
                 ExtraDef += newArmor.Def;
+                EquippedItems.Add(item);
+                EquippedItemIds.Add(item.Id);
+                Console.WriteLine($"{item.Name}을(를) 장착했습니다.");
             }
-            EquippedItems.Add(item);
-            EquippedItemIds.Add(item.Id);
-            Console.WriteLine($"{item.Name}을(를) 장착했습니다.");
+            else
+            {
+                Console.WriteLine($"{item.Name}은(는) 장비할 수 없습니다.");
+            }
+
+            //아이템 장착 퀘스트 진행
+            TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.EquipEquipment, 1);
         }
         #endregion
 
+
+        //레벨 업 경험치 테이블
+        Dictionary<int, int> levelExpTable = new Dictionary<int, int>()
+        {
+            { 1, 0 },
+            { 2, 10 },
+            { 3, 20 },
+            { 4, 30 },
+            { 5, 40 },
+            { 6, 50 },
+        };
+
         public void LevelUP()
         {
-            if ((Level == 1 && Exp >= 10) || (Level == 2 && Exp >= 35) || (Level == 3 && Exp >= 65) || (Level == 4 && Exp >= 100))
-            {
-                Level += 1;
-
-                Atk += (int)0.5;
-                Def += 1;
-                MaxHp += 50;
-            }
-
+            Level++;
+            Atk += (int)0.5;
+            Def += 1;
+            MaxHp += 50;
         }
 
         public bool IsEquipped(ItemSystem.Item item)
@@ -186,9 +185,16 @@ namespace Team20_TextRPG
         }
 
         //Quest Clear 보상
-        public void AddItem(ItemSystem.Item item)
+        public void AddItem(string itemID, int quantity)
         {
-            Inventory.Add(item);
+            for (int i = 0; i < quantity; i++)
+            {
+                var item = ItemFactory.Create(itemID);
+                if (item != null)
+                    Inventory.Add(item);
+                else
+                    Console.WriteLine($"[오류] ID가 {itemID}인 아이템이 존재하지 않습니다.");
+            }
         }
 
         public void Heal(int amount)
@@ -198,9 +204,14 @@ namespace Team20_TextRPG
             Console.WriteLine($"HP가 {amount}만큼 회복되었습니다. 현재 HP: {Hp}/{MaxHp}");
         }
 
-        public void AddExp(int exp)
+        public override void AddExp(int exp)
         {
             Exp += exp;
+            if (Exp >= levelExpTable[Level + 1])
+            {
+                Exp -= levelExpTable[Level + 1];
+                LevelUP();
+            }
         }
 
         public void AddGold(int gold)
@@ -214,6 +225,13 @@ namespace Team20_TextRPG
             Inventory.Add(ItemFactory.Create("sword001"));
             Inventory.Add(ItemFactory.Create("armor001"));
             Inventory.Add(ItemFactory.Create("potion001"));
+        }
+        #endregion
+
+        #region 아이템 삭제
+        public void RemoveItem(ItemSystem.Item item)
+        {
+            Inventory.Remove(item);
         }
         #endregion
     }

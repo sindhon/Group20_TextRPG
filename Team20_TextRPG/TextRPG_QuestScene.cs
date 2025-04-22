@@ -53,9 +53,6 @@ namespace Team20_TextRPG
                     Console.WriteLine("0. 돌아가기");
                     break;
                 case QuestState.Active:
-                    Console.WriteLine("\n1. 완료하기"); //임시 나중에 지우기
-                    Console.WriteLine("0. 돌아가기");
-                    break;
                 case QuestState.Rewarded:
                     Console.WriteLine("\n0. 돌아가기");
                     break;
@@ -72,7 +69,6 @@ namespace Team20_TextRPG
             {
                 QuestState.Inactive => 2,
                 QuestState.Completed => 1,
-                QuestState.Active => 1,
                 _ => 0,
             };
         }
@@ -96,13 +92,6 @@ namespace Team20_TextRPG
                     if (input == 1)
                     {
                         TextRPG_Manager.Instance.QuestManager.ClaimReward(quest);
-                    }
-                    break;
-                case QuestState.Active:
-                    if (input == 1)
-                    {
-                        TextRPG_Manager.Instance.QuestManager.CompleteQuest(quest);
-                        Console.WriteLine("퀘스트 완료 (임시)");
                     }
                     break;
             }
