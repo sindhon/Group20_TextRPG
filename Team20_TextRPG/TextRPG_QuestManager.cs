@@ -18,7 +18,7 @@ namespace Team20_TextRPG
         }
     }
 
-    public enum QuestStatus
+    public enum QuestState
     {
         Inactive,   //수락 X
         Active,     //수락 O
@@ -79,7 +79,7 @@ namespace Team20_TextRPG
         public int CurrentProgress;     //현재 달성도
         public int RequiredProgress;    //목표 달성에 필요한 수치
         public List<Reward> Rewards;    //보상 리스트
-        public QuestStatus Status;
+        public QuestState State;
 
         public QuestData(int questId, string title, string description, string objective, int requiredProgress, List<Reward> rewards)
         {
@@ -90,7 +90,7 @@ namespace Team20_TextRPG
             CurrentProgress = 0;
             RequiredProgress = requiredProgress;
             Rewards = rewards;
-            Status = QuestStatus.Inactive;
+            State = QuestState.Inactive;
         }
 
         public void DisplayQuestDataInfo()
@@ -120,19 +120,20 @@ namespace Team20_TextRPG
             //QuestDatabase의 퀘스트를 Quests에 추가
             foreach (QuestData quest in QuestDatabase.questDic.Values)
             {
-                if (quest.Status == QuestStatus.Inactive)
+                if (quest.State == QuestState.Inactive)
                 {
                     Quests.Add(quest);
                 }
             }
         }
 
+        #region Quest Accept, Complete, Reward Method
         //퀘스트 수락 메서드
         public void AcceptQuest(QuestData quest)
         {
-            if (quest.Status == QuestStatus.Inactive)
+            if (quest.State == QuestState.Inactive)
             {
-                quest.Status = QuestStatus.Active;
+                quest.State = QuestState.Active;
                 Console.WriteLine($"퀘스트 '{quest.QuestTitle}'을(를) 수락했습니다.");
             }
             else
@@ -145,9 +146,9 @@ namespace Team20_TextRPG
         public void CompleteQuest(QuestData quest)
         {
             //퀘스트가 완료 상태로 변경
-            if (quest.Status == QuestStatus.Active /*&& quest.CurrentProgress >= quest.RequiredProgress*/)
+            if (quest.State == QuestState.Active /*&& quest.CurrentProgress >= quest.RequiredProgress*/)
             {
-                quest.Status = QuestStatus.Completed;
+                quest.State = QuestState.Completed;
                 Console.WriteLine($"퀘스트 '{quest.QuestTitle}'을(를) 완료했습니다.");
             }
             else
@@ -160,12 +161,12 @@ namespace Team20_TextRPG
         public void ClaimReward(QuestData quest)
         {
             //퀘스트가 완료되었고 보상이 지급되지 않았다면 보상 지급
-            if (quest.Status == QuestStatus.Completed)
+            if (quest.State == QuestState.Completed)
             {
-                quest.Status = QuestStatus.Rewarded;
-                foreach(var reward in quest.Rewards)
+                quest.State = QuestState.Rewarded;
+                foreach(Reward reward in quest.Rewards)
                 {
-                    Console.WriteLine($"보상: {reward.Name} x {reward.Quantity}");
+                    ApplyRewardToPlayer(reward);
                 }
             }
             else
@@ -174,13 +175,35 @@ namespace Team20_TextRPG
             }
         }
 
+        //보상 적용 메서드
+        private void ApplyRewardToPlayer(Reward reward)
+        {
+            switch(reward.Name)
+            {
+                case "Gold":
+                    //Gold Player에 추가
+                    //TextRPG_Manager.Instance.playerInstance.AddGold(reward.Quantity);
+                    break;
+                case "Exp":
+                    //Exp Player에 추가 
+                    //TextRPG_Manager.Instance.playerInstance.AddExp(reward.Quantity);
+                    break;
+                default:
+                    //인벤토리에 아이템 추가
+                    //TextRPG_Manager.Instance.Inventory.AddItem(reward.Name, reward.Quantity);
+                    break;
+            }
+        }
+        #endregion
+
+        #region Display Quest
         //모든 퀘스트들을 출력하는 메서드
         public void DisplayQuests()
         {
             foreach(var quest in Quests)
             {
-                string statusStr = GetStatusStr(quest.Status);
-                Console.WriteLine($"{quest.QuestID}. {quest.QuestTitle} ({statusStr})");
+                string stateStr = GetStateStr(quest.State);
+                Console.WriteLine($"{quest.QuestID}. {quest.QuestTitle} ({stateStr})");
             }
         }
 
@@ -190,17 +213,18 @@ namespace Team20_TextRPG
             quest.DisplayQuestDataInfo();
         }
 
-
-        string GetStatusStr(QuestStatus status)
+        //퀘스트 진행 상태를 문자열로 나타내는 메서드
+        string GetStateStr(QuestState state)
         {
-            return status switch
-            { 
-                QuestStatus.Inactive => "수락 가능",
-                QuestStatus.Active => "진행 중",
-                QuestStatus.Completed => "보상 받기 가능",
-                QuestStatus.Rewarded => "완료",
+            return state switch
+            {
+                QuestState.Inactive => "수락 가능",
+                QuestState.Active => "진행 중",
+                QuestState.Completed => "보상 받기 가능",
+                QuestState.Rewarded => "완료",
                 _ => "",
             };
         }
+        #endregion
     }
 }
