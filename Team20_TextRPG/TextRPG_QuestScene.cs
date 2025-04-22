@@ -8,7 +8,7 @@ namespace Team20_TextRPG
 {
     partial class TextRPG_QuestScene
     {
-        public static void DisplayQuestScene()
+        public void DisplayQuestScene()
         {
             Console.Clear();
             Console.WriteLine("Quest!!\n");
@@ -106,7 +106,7 @@ namespace Team20_TextRPG
                     break;
             }
 
-            DisplayQuestScene();
+            //DisplayQuestScene();
         }
     }
 }

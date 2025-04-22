@@ -16,6 +16,7 @@ namespace Team20_TextRPG
         public int Def { get; protected set; }
         public int Hp { get; protected set; }
         public int MaxHp { get; protected set; }
+        public int Exp { get; protected set; }
         public int Gold { get; protected set; }
         public int DataId { get; protected set; }
         public bool IsDead { get; protected set; }
@@ -35,6 +36,7 @@ namespace Team20_TextRPG
             Def = defense;
             Hp = maxHp;
             MaxHp = maxHp;
+            Exp = 0;
             Gold = gold;
             IsDead = false;
         }
@@ -49,6 +51,8 @@ namespace Team20_TextRPG
             {
                 IsDead = true;
                 Hp = 0;
+
+                attacker.Exp += Exp;
             }
 
             return totalDamage; // 텍스트에 들어갈 입힌 데미지

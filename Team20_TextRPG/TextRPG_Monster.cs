@@ -34,6 +34,8 @@ namespace Team20_TextRPG
         : base(level, name, job, attack, defense, maxHp, gold)
         {
             this.DataId = dataId;
+
+            Exp = level;
         }
 
         public TextRPG_Monster Clone()
