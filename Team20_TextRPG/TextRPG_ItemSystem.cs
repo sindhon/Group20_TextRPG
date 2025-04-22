@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Xml.Linq;
 using Team20_TextRPG;
+using static Team20_TextRPG.ItemSystem;
 
 namespace Team20_TextRPG
 {
