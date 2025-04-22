@@ -58,8 +58,8 @@ namespace Team20_TextRPG
                 questId: 3,
                 title: "더욱 더 강해지기",
                 description: "힘을 원하나? 그럼 싸워야지!\n몬스터를 처치하고 경험을 쌓아 이전보다 강해진 자신을 느껴보게.\n자네의 힘이 시험받을 시간이야!",
-                objective: "몬스터 3마리 처치",
-                requiredProgress: 5,
+                objective: "몬스터 10마리 처치",
+                requiredProgress: 10,
                 rewards: new List<Reward>
                 {
                     new Reward("강철 장갑", 1),
