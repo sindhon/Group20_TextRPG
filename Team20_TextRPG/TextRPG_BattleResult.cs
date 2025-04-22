@@ -6,8 +6,24 @@ using System.Threading.Tasks;
 
 namespace Team20_TextRPG
 {
+    public partial class DungeonReward
+    {
+        public string Name { get; set; }
+        public int Quantity { get; set; }
+
+        public DungeonReward(string name, int quantity)
+        {
+            Name = name;
+            Quantity = quantity;
+        }
+
+        public DungeonReward() { }
+    }
+
     partial class TextRPG_BattleResult
     {
+        public List<DungeonReward> dungeonReward = new List<DungeonReward>();
+
         public static void BattleResult(TextRPG_Player player, List<TextRPG_Monster> monsters, int beforeHp, int beforeLevel, int beforeExp)
         {
             Console.Clear();
@@ -31,6 +47,8 @@ namespace Team20_TextRPG
             else if ( player.Hp > 0)
             {
                 player.LevelUP();
+                TextRPG_Manager.Instance.playerInstance.AddItem("sword001", 1);
+
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Victory!!!");
@@ -44,7 +62,8 @@ namespace Team20_TextRPG
                 Console.WriteLine($"경험치: {beforeExp} → {player.Exp}");
                 Console.WriteLine();
 
-
+                Console.WriteLine("[획득 아이템]");
+                Console.WriteLine($"{player.Inventory[player.Inventory.Count - 1].Name}");
                 Console.WriteLine("0. 다음");
             }
 
@@ -55,5 +74,12 @@ namespace Team20_TextRPG
                 TextRPG_StartScene.DisplayStartScene();
             }
         }
+        private static void ClearRewardToPlayer(DungeonReward dungeonReward)
+        {
+            TextRPG_Manager.Instance.playerInstance.AddItem(dungeonReward.Name, dungeonReward.Quantity);
+        }
+
     }
+
+   
 }

@@ -185,7 +185,7 @@ namespace Team20_TextRPG
         }
 
         //Quest Clear 보상
-        public void AddItem(string itemID, int quantity)
+        public override void AddItem(string itemID, int quantity) 
         {
             for (int i = 0; i < quantity; i++)
             {

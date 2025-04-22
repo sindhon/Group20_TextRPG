@@ -10,6 +10,8 @@ using Team20_TextRPG;
 
 namespace Team20_TextRPG
 {
+    
+
     partial class TextRPG_BattleProgress
     {
         private List<TextRPG_Monster> monsters = new List<TextRPG_Monster>();
