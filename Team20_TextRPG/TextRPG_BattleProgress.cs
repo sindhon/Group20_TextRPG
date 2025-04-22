@@ -52,13 +52,13 @@ namespace Team20_TextRPG
         }
         #endregion
 
-        #region 플레이어 턴 (공격 / 스킬 선택)
+        #region 플레이어 턴 (공격 선택)
         void ChoiceAtk(TextRPG_Player player)
         {
             DrawBattleUI(player);
             Console.WriteLine("\n1. 공격");
             Console.WriteLine("2. 스킬");
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.WriteLine("\n원하시는 행동을 입력해주세요.");
             int input = TextRPG_SceneManager.CheckInput(1, 2);
 
             switch (input)
@@ -66,22 +66,52 @@ namespace Team20_TextRPG
                 case 1:
                     DrawBattleUI(player);
                     PlayerTurn(player);
-                    if (isCanceled)
-                    {
-                        ChoiceAtk(player);
-                        isCanceled = false;
-                    }
                     break;
+                case 2:
+                    DrawBattleUI(player);
+                    ChoiceSkill(player);
+                    break;
+            }
 
+            if (isCanceled)
+            {
+                ChoiceAtk(player);
+                isCanceled = false;
+            }
+        }
+        #endregion
+
+        #region 플레이어 턴 (스킬 선택)
+        void ChoiceSkill(TextRPG_Player player)
+        {
+            DrawBattleUI(player);
+            Console.WriteLine("\n1. 알파 스트라이크 - MP {필요 마나}");
+            Console.WriteLine("{스킬1 설명}");
+            Console.WriteLine("2. 더블 스트라이크 - MP {필요 마나}");
+            Console.WriteLine("{스킬2 설명}");
+            Console.WriteLine("0. 취소");
+            Console.WriteLine("\n원하시는 행동을 입력해주세요.");
+            int input = TextRPG_SceneManager.CheckInput(0, 2);
+
+            switch (input)
+            {
+                case 0:
+                    ChoiceAtk(player);
+                    break;
+                case 1:
+                    DrawBattleUI(player);
+                    PlayerTurn(player);
+                    break;
                 case 2:
                     DrawBattleUI(player);
                     PlayerTurn(player);
-                    if (isCanceled)
-                    {
-                        ChoiceAtk(player);
-                        isCanceled = false;
-                    }
                     break;
+            }
+
+            if (isCanceled)
+            {
+                ChoiceSkill(player);
+                isCanceled = false;
             }
         }
         #endregion
@@ -91,7 +121,7 @@ namespace Team20_TextRPG
         void PlayerTurn(TextRPG_Player player)
         {
             Console.WriteLine("\n0. 취소");
-            Console.Write("대상을 선택해주세요: ");
+            Console.Write("\n대상을 선택해주세요: ");
 
             int targetIndex = ReadValidTargetInput();
             if (targetIndex == 0) 
@@ -103,12 +133,18 @@ namespace Team20_TextRPG
             //int damage = player.GetAttackDamage();
             enemyBeforeHP = target.Hp;
 
-            int PlayerDamage = target.OnDamaged(player);
+            int PlayerDamage = target.OnDamaged(player, player.Atk);
+
 
             Console.Clear();
             Console.WriteLine("Battle!!\n");
             Console.WriteLine($"{player.Name} 의 공격!");
-            Console.WriteLine($"Lv.{target.Level} {target.Name} 을(를) 맞췄습니다. [데미지 : {PlayerDamage}]\n");
+            //Console.WriteLine($"Lv.{target.Level} {target.Name} 을(를) 맞췄습니다. [데미지 : {PlayerDamage}]\n");
+
+            // 회피 시 텍스트 변경
+            string result = target.isDodged ? "이(가) 회피했습니다" : "을(를) 맞췄습니다";
+            Console.WriteLine($"Lv.{target.Level} {target.Name} {result}. [데미지 : {PlayerDamage}]\n");
+            target.isDodged = false;
 
             if (target.IsDead)
                 Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {enemyBeforeHP} -> Dead");
@@ -132,12 +168,17 @@ namespace Team20_TextRPG
                 playerBeforeHP = player.Hp;
                 //enemyBeforeHP = monster.Hp;
 
-                int EnemyDamage = player.OnDamaged(monster);
+                int EnemyDamage = player.OnDamaged(monster, monster.Atk);
 
                 Console.Clear();
                 Console.WriteLine("Battle!!\n");
                 Console.WriteLine($"Lv.{monster.Level} {monster.Name} 의 공격!");
-                Console.WriteLine($"{player.Name} 을(를) 맞췄습니다. [데미지 : {EnemyDamage}]\n");
+                //Console.WriteLine($"{player.Name} 을(를) 맞췄습니다. [데미지 : {EnemyDamage}]\n");
+
+                // 회피 시 텍스트 변경
+                string result = player.isDodged ? "이(가) 회피했습니다" : "을(를) 맞췄습니다";
+                Console.WriteLine($"{player.Name} {result}. [데미지 : {EnemyDamage}]\n");
+                player.isDodged = false;
 
                 Console.WriteLine($"Lv.{player.Level} {player.Name}");
                 Console.WriteLine($"HP {playerBeforeHP} -> {player.Hp}");
