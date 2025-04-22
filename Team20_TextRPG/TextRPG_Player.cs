@@ -22,6 +22,8 @@ namespace Team20_TextRPG
         public int ExtraDef { get; private set; }
         #endregion
 
+        public List<TextRPG_Skill> Skills { get; private set; }
+
         #region 인벤토리 및 장비 리스트
         public List<ItemSystem.Item> Inventory = new List<ItemSystem.Item>();
         private List<ItemSystem.Item> EquippedItems = new List<ItemSystem.Item>();
@@ -44,7 +46,7 @@ namespace Team20_TextRPG
         #endregion
 
         #region 플레이어 공통 속성
-        public TextRPG_Player(int level, string name, string job, int atk, int def, int hp, int maxHP, int gold)
+        public TextRPG_Player(int level, string name, string job, int atk, int def, int hp, int maxHP, int mp, int maxMp, int gold)
         {
             Level = level;
             Name = name;
@@ -53,7 +55,10 @@ namespace Team20_TextRPG
             Def = def;
             Hp = hp;
             MaxHp = maxHP;
+            Mp = mp;
+            MaxMp = maxMp;
             Gold = gold;
+            Skills = new List<TextRPG_Skill>();
         }
         #endregion
 
