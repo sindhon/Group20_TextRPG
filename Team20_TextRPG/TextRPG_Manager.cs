@@ -13,10 +13,13 @@ namespace Team20_TextRPG
         public static TextRPG_Manager Instance => _instance ??= new TextRPG_Manager();
 
         public TextRPG_Player playerInstance { get; private set; }
+        public TextRPG_QuestManager QuestManager { get; private set; }
+
 
         public void Init()
         {
             playerInstance = new TextRPG_Player(1, "이세계 용사", "이세계 전사", 100, 5, 100, 100, 1000);
+            QuestManager = new TextRPG_QuestManager();
         }
     }
 }
