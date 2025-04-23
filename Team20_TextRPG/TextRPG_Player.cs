@@ -181,7 +181,7 @@ namespace Team20_TextRPG
             MaxHp += 50;
         }
 
-        public void UseSkill(TextRPG_Skill skill)
+        public void UseMana(TextRPG_Skill skill)
         {
             Mp -= skill.MPCost;
         }
