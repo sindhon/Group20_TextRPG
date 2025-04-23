@@ -467,9 +467,10 @@ namespace Team20_TextRPG
             Console.ResetColor();
             Console.WriteLine("\n[내정보]");
             Console.WriteLine($"Lv.{player.Level}  {player.Name} ({player.Job})");
-            DisplayHealthBar(player.Hp, player.MaxHp);
-            Console.WriteLine($"HP {player.Hp} / {player.MaxHp}");
-            Console.WriteLine($"MP {player.Mp} / {player.MaxMp}");
+            DisplayHPUIBar(player.Hp, player.MaxHp);
+            //Console.WriteLine($"HP {player.Hp} / {player.MaxHp}");
+            DisplayMPUIBar(player.Mp, player.MaxMp);
+            //Console.WriteLine($"MP {player.Mp} / {player.MaxMp}");
         }
         #endregion
 
@@ -510,7 +511,7 @@ namespace Team20_TextRPG
         #endregion
 
         //  체력 바 UI 함수
-        public static void DisplayHealthBar(int currentHealth, int maxHealth)
+        public static void DisplayHPUIBar(int currentHealth, int maxHealth)
         {
             //  체력 표시용 UI 변수들
             int currentHPUI = (int)(currentHealth * 0.1);
@@ -533,6 +534,33 @@ namespace Team20_TextRPG
                         Console.Write("■"); // 체력 부분
                         Console.ForegroundColor = ConsoleColor.White;
                     }
+                }
+
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.Write("□"); // 빈 부분
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+            Console.WriteLine();
+        }
+
+        public static void DisplayMPUIBar(int currentMP, int maxMP)
+        {
+            //  체력 표시용 UI 변수들
+            int currentMPUI = (int)(currentMP * 0.1);
+            int maxMPUI = (int)(maxMP * 0.1);
+
+            for (int i = 0; i < maxMPUI; i++)
+            {
+                if (i < currentMPUI)
+                {
+
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    Console.Write("■"); // 마나 부분
+                    Console.ForegroundColor = ConsoleColor.White;
+
                 }
 
                 else
