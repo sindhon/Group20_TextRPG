@@ -108,8 +108,8 @@ namespace Team20_TextRPG
                 string equipTag = EquippedItems.Contains(Inventory[i]) ? "[E] " : "";
                 string indexText = viewMode == InventoryDisplayMode.WithIndex ? $"{i + 1}. " : "";
 
-                string stackTag = item.IsStackable && potionStack.ContainsKey(item.Name)
-                    ? $" x{potionStack[item.Name]}"
+                string stackTag = item.IsStackable && potionStack.ContainsKey(item.ItemId)
+                    ? $" x{potionStack[item.ItemId]}"
                     : "";
 
                 Console.WriteLine($"{indexText}{equipTag}{Inventory[i].GetDisplayString(mode)}{stackTag}");
@@ -126,15 +126,29 @@ namespace Team20_TextRPG
                 //무기 장비 로직
                 if (EquippedWeapon is ItemSystem.Weapon oldWeapon)
                 {
-                    EquippedItems.Remove(EquippedWeapon);
-                    EquippedItemIds.Remove(EquippedWeapon.Id);
+                    if (newWeapon.Id == oldWeapon.Id)
+                    {
+                        EquippedItems.Remove(oldWeapon);
+                        EquippedItemIds.Remove(oldWeapon.Id);
+                        EquippedWeapon = null;
+                        ExtraAtk -= oldWeapon.Atk;
+                        Console.WriteLine($"{oldWeapon.Name}을(를) 장착 해제합니다.");
+                        return;
+                    }
+                    EquippedItems.Remove(oldWeapon);
+                    EquippedItemIds.Remove(oldWeapon.Id);
                     ExtraAtk -= oldWeapon.Atk;
                     Console.WriteLine($"{oldWeapon.Name}을(를) 장착 해제합니다.");
                 }
                 EquippedWeapon = newWeapon;
                 ExtraAtk += newWeapon.Atk;
-                EquippedItems.Add(newWeapon);
-                EquippedItemIds.Add(newWeapon.Id);
+
+                if(!EquippedItems.Contains(newWeapon))
+                    EquippedItems.Add(newWeapon);
+
+                if(!EquippedItemIds.Contains(newWeapon.Id))
+                    EquippedItemIds.Add(newWeapon.Id);
+
                 Console.WriteLine($"{newWeapon.Name}을(를) 장착했습니다.");
                 TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.EquipEquipment, 1);
             }
@@ -142,15 +156,31 @@ namespace Team20_TextRPG
             {
                 if (EquippedArmor is ItemSystem.Armor oldArmor)
                 {
-                    EquippedItems.Remove(EquippedArmor);
-                    EquippedItemIds.Remove(EquippedArmor.Id);
+                    if (newArmor.Id == oldArmor.Id)
+                    {
+                        EquippedItems.Remove(oldArmor);
+                        EquippedItemIds.Remove(oldArmor.Id);
+                        EquippedArmor = null;
+                        ExtraDef -= oldArmor.Def;
+                        Console.WriteLine($"{oldArmor.Name}을(를) 장착 해제합니다.");
+                        return;
+                    }
+                    
+                    EquippedItems.Remove(oldArmor);
+                    EquippedItemIds.Remove(oldArmor.Id);
                     ExtraDef -= oldArmor.Def;
-                    Console.WriteLine($"{EquippedArmor.Name}을(를) 장착 해제합니다.");
+                    Console.WriteLine($"{oldArmor.Name}을(를) 장착 해제합니다.");
                 }
+
                 EquippedArmor = newArmor;
                 ExtraDef += newArmor.Def;
-                EquippedItems.Add(item);
-                EquippedItemIds.Add(item.Id);
+                
+                if(!EquippedItems.Contains(newArmor))
+                    EquippedItems.Add(item);
+
+                if(!EquippedItemIds.Contains(newArmor.Id))
+                    EquippedItemIds.Add(item.Id);
+
                 Console.WriteLine($"{item.Name}을(를) 장착했습니다.");
                 TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.EquipEquipment, 1);
             }
@@ -160,7 +190,6 @@ namespace Team20_TextRPG
             }
         }
         #endregion
-
 
         //레벨 업 경험치 테이블
         Dictionary<int, int> levelExpTable = new Dictionary<int, int>()
@@ -216,15 +245,15 @@ namespace Team20_TextRPG
 
                 if (item.IsStackable)
                 {
-                    var existing = Inventory.FirstOrDefault(x => x.Name == item.Name);
+                    var existing = Inventory.FirstOrDefault(x => x.ItemId == item.ItemId);
                     if (existing == null)
                     {
                         Inventory.Add(item);
-                        SetPotionCount(item.Name, 1);
+                        SetPotionCount(item.ItemId, 1);
                     }
                     else
                     {
-                        IncreasePotionCount(existing.Name, 1);
+                        IncreasePotionCount(existing.ItemId, 1);
                     }
                 }
                 else
@@ -270,7 +299,7 @@ namespace Team20_TextRPG
         #region 시작 아이템 이후 삭제 해도 됌
         public void InitDefaultItems()
         {
-            AddItem("sword001", 1);
+            AddItem("weapon001", 1);
             AddItem("armor001", 1);
             AddItem("potion001", 3);
         }
@@ -281,12 +310,12 @@ namespace Team20_TextRPG
         {
             if (item.IsStackable)
             {
-                if (potionStack.ContainsKey(item.Name))
+                if (potionStack.ContainsKey(item.ItemId))
                 {
-                    potionStack[item.Name]--;
-                    if (potionStack[item.Name] <= 0)
+                    potionStack[item.ItemId]--;
+                    if (potionStack[item.ItemId] <= 0)
                     {
-                        potionStack.Remove(item.Name);
+                        potionStack.Remove(item.ItemId);
                         Inventory.Remove(item);
                     }
                 }
