@@ -59,8 +59,8 @@ namespace Team20_TextRPG
             //  클리어 처리
             else if ( player.Hp > 0)
             {
-                //  임시 적용 → 수정이 많이 필요함
                 TextRPG_Manager.Instance.playerInstance.AddItem("sword001", 1);
+
                 player.CurrentStage++;
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Victory!!!");

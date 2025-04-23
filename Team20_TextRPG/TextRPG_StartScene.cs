@@ -70,7 +70,7 @@ namespace Team20_TextRPG
             Console.WriteLine("원하시는 행동을 입력해 주세요.");
             
             int input = TextRPG_SceneManager.CheckInput(0, 6);
-            SwitchScene(input);
+            SwitchScene(input, stage);
         }
 
         public static void SwitchScene(int input, Stage stage)

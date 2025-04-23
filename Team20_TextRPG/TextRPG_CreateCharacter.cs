@@ -35,7 +35,7 @@ namespace Team20_TextRPG
                 jobDescription = "클라이언트 개발자가 되고 싶은 취준생",
                 jobAtk = 18,
                 jobDef = 12,
-                jobmaxHP = 100,
+                jobmaxHP = 600,
                 jobmaxMP = 50,
                 jobSkill = "요건 기획이 너무 복잡해요"
             },
@@ -45,7 +45,7 @@ namespace Team20_TextRPG
                 jobDescription = "서버 개발자가 되고 싶은 취준생",
                 jobAtk = 12,
                 jobDef = 20,
-                jobmaxHP = 130,
+                jobmaxHP = 630,
                 jobmaxMP = 50,
                 jobSkill = "그건 클라이언트 쪽 문제에요"
             },
@@ -55,7 +55,7 @@ namespace Team20_TextRPG
                 jobDescription = "기획자가 되고 싶은 취준생",
                 jobAtk = 22,
                 jobDef = 8,
-                jobmaxHP = 90,
+                jobmaxHP = 590,
                 jobmaxMP = 50,
                 jobSkill = "기획서에는 분명히 그렇게 써 있어요"
             },
