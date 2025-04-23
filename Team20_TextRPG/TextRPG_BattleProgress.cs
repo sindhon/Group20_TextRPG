@@ -195,7 +195,7 @@ namespace Team20_TextRPG
         }
         #endregion
 
-        #region 플레이어 턴 (스킬 대상 선택)
+        #region 플레이어 턴 (스킬 종류)
         void PlayerSkillTurn(TextRPG_Player player, TextRPG_Skill skill)
         {
             switch(skill.Type)
