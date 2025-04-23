@@ -144,7 +144,6 @@ namespace Team20_TextRPG
         }
         #endregion
 
-
         #region 플레이어 턴 (공격 대상 선택)
         void PlayerTurn(TextRPG_Player player)
         {
@@ -410,7 +409,7 @@ namespace Team20_TextRPG
                 TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.KillMonster, 1);
             }
             else
-                Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {beforeHP} -> {target.Hp}");
+                Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {beforeHP} -> {target.Hp}\n");
         }
         #endregion
 

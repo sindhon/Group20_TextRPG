@@ -11,7 +11,7 @@ namespace Team20_TextRPG
     public enum SkillType
     {
         SingleTarget,     // 1인 타겟
-        MultipleTarget,  // 다수 타겟
+        MultipleTarget,  // 다중 타겟
         RandomTarget,     // 랜덤 타겟
         AllTarget,       // 전체 타겟
     }
@@ -20,25 +20,31 @@ namespace Team20_TextRPG
     {
         public string Name { get; }
         public string Description { get; }
-        public int Power { get; }        // 공격력 계수
+        public int MinPower { get; }        // 공격력 계수
+        public int MaxPower { get; }
         public int MPCost { get; }       // 마나 소모량
         public SkillType Type { get; }  // 스킬 종류
 
-        bool isSkill = true;
+        public bool canDodge { get; } // 회피 가능한지 확인 (true: 회피 가능 false: 회피 불가능)
 
-        public TextRPG_Skill(string name, string description, int power, int mpCost, SkillType type)
+        Random rand = new Random();
+
+        public TextRPG_Skill(string name, string description, int minPower,int maxPower, int mpCost, SkillType type, bool dodge)
         {
             Name = name;
             Description = description;
-            Power = power;
+            MinPower = minPower;
+            MaxPower = maxPower;
             MPCost = mpCost;
             Type = type;
+            canDodge = dodge;
         }
 
         public int UseSkill(TextRPG_Monster target, TextRPG_Player player)
         {
+            int Power = rand.Next(MinPower, MaxPower + 1);
             int damage = player.Atk * Power / 100;
-            int resultDamage = target.OnDamaged(player, damage, isSkill);
+            int resultDamage = target.OnDamaged(player, damage, canDodge);
             return resultDamage;
         }
 

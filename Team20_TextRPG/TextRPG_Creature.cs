@@ -22,7 +22,7 @@ namespace Team20_TextRPG
         public int Gold { get; protected set; }
         public int DataId { get; protected set; }
         public bool IsDead { get; protected set; }
-        public bool isDodged { get; set; }
+        public bool isDodged { get; set; } // 회피했는지 확인
 
         public TextRPG_Creature()
         {
@@ -44,9 +44,9 @@ namespace Team20_TextRPG
             isDodged = false;
         }
 
-        public int OnDamaged(TextRPG_Creature attacker, int baseDamage, bool isSkill = false)
+        public int OnDamaged(TextRPG_Creature attacker, int baseDamage, bool candodge = true)
         {
-            int totalDamage = calcDmg(baseDamage, isSkill);
+            int totalDamage = calcDmg(baseDamage, candodge);
 
             Hp -= totalDamage; // 체력 감소
 
@@ -61,7 +61,7 @@ namespace Team20_TextRPG
             return totalDamage; // 텍스트에 들어갈 입힌 데미지
         }
 
-        public int calcDmg(int damage, bool isSkill = false)
+        public int calcDmg(int damage, bool candodge = true)
         {
             Random rand = new Random();
             int diff = (int)Math.Ceiling((double)damage / 10); // 공격력 오차
@@ -79,7 +79,7 @@ namespace Team20_TextRPG
 
             // 10% 확률로 회피
             int dodgeChance = rand.Next(100);
-            if (!isSkill && dodgeChance < 10)
+            if (candodge && dodgeChance < 10)
             { 
                 totalDamage = 0;
                 isDodged = true;
