@@ -168,13 +168,13 @@ namespace Team20_TextRPG
             //Console.WriteLine("Battle!!\n");
             Console.OutputEncoding = Encoding.UTF8;
 
-            Console.WriteLine("=================================================================");
+            Console.WriteLine("============================================================");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(@"
-     ___  ___  ___  ___  _    ___ 
-    | . >| . ||_ _||_ _|| |  | __>
-    | . \|   | | |  | | | |_ | _> 
-    |___/|_|_| |_|  |_| |___||___>
+             ___  ___  ___  ___  _    ___ 
+            | . >| . ||_ _||_ _|| |  | __>
+            | . \|   | | |  | | | |_ | _> 
+            |___/|_|_| |_|  |_| |___||___>
 ");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("=================================================================");
@@ -258,10 +258,10 @@ namespace Team20_TextRPG
             Console.WriteLine("============================================================");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(@"
-     ___  ___  ___  ___  _    ___ 
-    | . >| . ||_ _||_ _|| |  | __>
-    | . \|   | | |  | | | |_ | _> 
-    |___/|_|_| |_|  |_| |___||___>
+             ___  ___  ___  ___  _    ___ 
+            | . >| . ||_ _||_ _|| |  | __>
+            | . \|   | | |  | | | |_ | _> 
+            |___/|_|_| |_|  |_| |___||___>
 ");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("============================================================");
@@ -304,10 +304,10 @@ namespace Team20_TextRPG
             Console.WriteLine("============================================================");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(@"
-     ___  ___  ___  ___  _    ___ 
-    | . >| . ||_ _||_ _|| |  | __>
-    | . \|   | | |  | | | |_ | _> 
-    |___/|_|_| |_|  |_| |___||___>
+             ___  ___  ___  ___  _    ___ 
+            | . >| . ||_ _||_ _|| |  | __>
+            | . \|   | | |  | | | |_ | _> 
+            |___/|_|_| |_|  |_| |___||___>
 ");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("============================================================");
@@ -480,10 +480,10 @@ namespace Team20_TextRPG
                 Console.WriteLine("============================================================");
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(@"
-     ___  ___  ___  ___  _    ___ 
-    | . >| . ||_ _||_ _|| |  | __>
-    | . \|   | | |  | | | |_ | _> 
-    |___/|_|_| |_|  |_| |___||___>
+             ___  ___  ___  ___  _    ___ 
+            | . >| . ||_ _||_ _|| |  | __>
+            | . \|   | | |  | | | |_ | _> 
+            |___/|_|_| |_|  |_| |___||___>
 ");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("============================================================");
@@ -518,10 +518,10 @@ namespace Team20_TextRPG
             Console.WriteLine("============================================================");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(@"
-     ___  ___  ___  ___  _    ___ 
-    | . >| . ||_ _||_ _|| |  | __>
-    | . \|   | | |  | | | |_ | _> 
-    |___/|_|_| |_|  |_| |___||___>
+             ___  ___  ___  ___  _    ___ 
+            | . >| . ||_ _||_ _|| |  | __>
+            | . \|   | | |  | | | |_ | _> 
+            |___/|_|_| |_|  |_| |___||___>
 ");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("============================================================");
@@ -595,8 +595,8 @@ namespace Team20_TextRPG
         public static void DisplayHPUIBar(int currentHealth, int maxHealth)
         {
             //  체력 표시용 UI 변수들
-            int currentHPUI = (int)(currentHealth * 0.1);
-            int maxHPUI = (int)(maxHealth * 0.1);
+            int currentHPUI = (currentHealth / 60);
+            int maxHPUI = (maxHealth / 60);
 
             for (int i = 0; i < maxHPUI; i++)
             {

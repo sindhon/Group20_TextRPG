@@ -47,6 +47,7 @@ namespace Team20_TextRPG
                     TextRPG_SaveManager.Load(playerInstance, "save.json");
                     Console.WriteLine("저장 데이터를 불러왔습니다.");
                 }
+
                 else
                 {
                     playerInstance = TextRPG_CreateCharacter.CreateCharacter();
