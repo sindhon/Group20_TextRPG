@@ -76,7 +76,7 @@ namespace Team20_TextRPG
         public static string SetName()
         {
             string name;
-            Console.Clear();
+            //Console.Clear();
             Console.WriteLine("스파르타 던전에 오신 여러분 환영합니다.");
 
             while (true) {
