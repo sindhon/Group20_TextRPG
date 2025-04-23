@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace Team20_TextRPG
 {
@@ -9,10 +10,29 @@ namespace Team20_TextRPG
 			while (true)
 			{
 				Console.Clear();
-                Console.WriteLine("=== 상점에 오신 걸 환영합니다 ===\n");
+
+                Console.OutputEncoding = Encoding.UTF8;
+
+                Console.WriteLine("=================================================================");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write(@"                                  
+            ___  ___  ___  ___  ___        
+           / __>|_ _|| . || . \| __>       
+           \__ \ | | | | ||   /| _>        
+           <___/ |_| `___'|_\_\|___>       
+                                         
+");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("=================================================================");
+                Console.WriteLine();
+                Console.WriteLine(" 상점에 오신 걸 환영합니다 \n");
+                Console.WriteLine();
                 Console.WriteLine("1. 무기 보기");
+                Console.WriteLine();
                 Console.WriteLine("2. 방어구 보기");
+                Console.WriteLine();
                 Console.WriteLine("3. 포션 보기");
+                Console.WriteLine();
                 Console.WriteLine("\n0. 나가기");
                 Console.Write("\n>> ");
                 string input = Console.ReadLine();

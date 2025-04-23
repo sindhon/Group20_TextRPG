@@ -63,6 +63,8 @@ namespace Team20_TextRPG
 
         public static TextRPG_Player CreateCharacter()
         {
+          
+
             string name = SetName();
             Job selectJob = ChooseJob(jobs);
             return SetPlayer(name, selectJob);
@@ -72,9 +74,25 @@ namespace Team20_TextRPG
         {
             string name;
             Console.Clear();
-            Console.WriteLine("스파르타 던전에 오신 여러분 환영합니다.");
+            Console.OutputEncoding = Encoding.UTF8;
 
-            while (true) {
+            Console.WriteLine("=================================================================");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(@"
+        _ _ _  ___  _    ___  ___  __ __  ___  _ 
+        | | | || __>| |  |  _>| . ||  \  \| __>| |
+        | | | || _> | |_ | <__| | ||     || _> |_/
+        |__/_/ |___>|___|`___/`___'|_|_|_||___><_>
+");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("=================================================================");
+
+            Console.WriteLine();
+            Console.WriteLine("스파르타 던전에 오신 여러분 환영합니다.");
+            Console.WriteLine();
+
+            while (true) 
+            {
                 Console.WriteLine("원하시는 이름을 설정해 주세요.");
                 name = Console.ReadLine();
 
