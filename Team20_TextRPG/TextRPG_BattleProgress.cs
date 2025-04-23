@@ -11,7 +11,7 @@ using System.Numerics;
 
 namespace Team20_TextRPG
 {
-    
+
 
     partial class TextRPG_BattleProgress
     {
@@ -152,7 +152,7 @@ namespace Team20_TextRPG
             Console.Write("\n대상을 선택해주세요: ");
 
             int targetIndex = ReadValidTargetInput();
-            if (targetIndex == 0) 
+            if (targetIndex == 0)
             {
                 isCanceled = true;
                 return;
@@ -197,7 +197,7 @@ namespace Team20_TextRPG
         #region 플레이어 턴 (스킬 종류)
         void PlayerSkillTurn(TextRPG_Player player, TextRPG_Skill skill)
         {
-            switch(skill.Type)
+            switch (skill.Type)
             {
                 case SkillType.SingleTarget:
                     SingleTargetSkill(player, skill);
@@ -313,13 +313,13 @@ namespace Team20_TextRPG
 
             player.UseMana(skill);
 
-            Console.Clear();    
+            Console.Clear();
             Console.WriteLine("Battle!!\n");
 
             Console.WriteLine($"{player.Name} 의 {skill.Name}!");
             Console.WriteLine($"MP {playerBeforeMp} -> {player.Mp}");
 
-            
+
             int damage = skill.UseSkill(target, player);
             PrintSkill(target, player, enemyBeforeHP, damage, playerBeforeMp);
 
@@ -466,6 +466,7 @@ namespace Team20_TextRPG
             Console.ResetColor();
             Console.WriteLine("\n[내정보]");
             Console.WriteLine($"Lv.{player.Level}  {player.Name} ({player.Job})");
+            DisplayHealthBar(player.Hp, player.MaxHp);
             Console.WriteLine($"HP {player.Hp} / {player.MaxHp}");
             Console.WriteLine($"MP {player.Mp} / {player.MaxMp}");
         }
@@ -506,5 +507,41 @@ namespace Team20_TextRPG
             return player.IsDead || monsters.All(m => m.IsDead);
         }
         #endregion
+
+        //  체력 바 UI 함수
+        public static void DisplayHealthBar(int currentHealth, int maxHealth)
+        {
+            //  체력 표시용 UI 변수들
+            int currentHPUI = (int)(currentHealth * 0.1);
+            int maxHPUI = (int)(maxHealth * 0.1);
+
+            for (int i = 0; i < maxHPUI; i++)
+            {
+                if (i < currentHPUI)
+                {
+                    if(currentHealth <= maxHealth * 0.5)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.Write("■"); // 체력 부분
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write("■"); // 체력 부분
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                }
+
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.Write("□"); // 빈 부분
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+            Console.WriteLine();
+        }
     }
 }
