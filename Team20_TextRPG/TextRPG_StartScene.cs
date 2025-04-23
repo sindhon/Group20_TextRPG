@@ -19,12 +19,13 @@ namespace Team20_TextRPG
             Console.WriteLine("3. 퀘스트 확인");
             Console.WriteLine("4. 인벤토리");
             Console.WriteLine("5. 상점");
+            Console.WriteLine("6. 저장");
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
 
             Console.WriteLine("원하시는 행동을 입력해 주세요.");
             
-            int input = TextRPG_SceneManager.CheckInput(0, 5);
+            int input = TextRPG_SceneManager.CheckInput(0, 6);
             SwitchScene(input);
         }
 
@@ -61,6 +62,14 @@ namespace Team20_TextRPG
                     break;
                 case 5:
                     StoreSystem.EnterStore(TextRPG_Manager.Instance.playerInstance, TextRPG_Manager.Instance.StoreInstance);
+                    break;
+                case 6:
+                    Console.Clear();
+                    TextRPG_SaveManager.Save(TextRPG_Manager.Instance.playerInstance, "save.json");
+                    Console.WriteLine("게임이 저장되었습니다!");
+                    Console.WriteLine("아무 키나 눌러 계속...");
+                    Console.ReadKey();
+                    DisplayStartScene();
                     break;
             }
         }

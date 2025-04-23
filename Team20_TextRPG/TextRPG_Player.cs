@@ -36,6 +36,10 @@ namespace Team20_TextRPG
         private ItemSystem.Item EquippedWeapon = null;
         private ItemSystem.Item EquippedArmor = null;
 
+        public ItemSystem.Item ReadEquippedWeapon => EquippedWeapon;
+        public ItemSystem.Item ReadEquippedArmor => EquippedArmor;
+
+
         private Dictionary<string, int> potionStack = new Dictionary<string, int>();
 
 
@@ -105,7 +109,7 @@ namespace Team20_TextRPG
             for (int i = 0; i < Inventory.Count; i++)
             {
                 var item = Inventory[i];
-                string equipTag = EquippedItems.Contains(Inventory[i]) ? "[E] " : "";
+                string equipTag = EquippedItems.Any(e => e.ItemId == item.ItemId) ? "[E] " : "";
                 string indexText = viewMode == InventoryDisplayMode.WithIndex ? $"{i + 1}. " : "";
 
                 string stackTag = item.IsStackable && potionStack.ContainsKey(item.ItemId)
@@ -126,7 +130,7 @@ namespace Team20_TextRPG
                 //무기 장비 로직
                 if (EquippedWeapon is ItemSystem.Weapon oldWeapon)
                 {
-                    if (newWeapon.Id == oldWeapon.Id)
+                    if (newWeapon.ItemId == oldWeapon.ItemId)
                     {
                         EquippedItems.Remove(oldWeapon);
                         EquippedItemIds.Remove(oldWeapon.Id);
@@ -156,7 +160,7 @@ namespace Team20_TextRPG
             {
                 if (EquippedArmor is ItemSystem.Armor oldArmor)
                 {
-                    if (newArmor.Id == oldArmor.Id)
+                    if (newArmor.ItemId == oldArmor.ItemId)
                     {
                         EquippedItems.Remove(oldArmor);
                         EquippedItemIds.Remove(oldArmor.Id);
@@ -295,6 +299,20 @@ namespace Team20_TextRPG
             Gold += gold;
         }
 
+        #region 스탯 재설정
+        public void SetBaseStats(string name, int level, int atk, int def, int hp, int maxHp, int gold, int exp)
+        {
+            Name = name;
+            Level = level;
+            Atk = atk;
+            Def = def;
+            Hp = hp;
+            MaxHp = maxHp;
+            Gold = gold;
+            Exp = exp;
+        }
+        #endregion
+
         #region 시작 아이템 이후 삭제 해도 됌
         public void InitDefaultItems()
         {
@@ -325,5 +343,18 @@ namespace Team20_TextRPG
             }
         }
         #endregion
+
+        #region 포션 개수 주고 받기
+        public bool HasPotionCount(string itemId)
+        {
+            return potionStack.ContainsKey(itemId);
+        }
+
+        public int GetPotionCount(string itemId)
+        {
+            return potionStack.TryGetValue(itemId, out int count) ? count : 1;
+        }
+        #endregion
+
     }
 }

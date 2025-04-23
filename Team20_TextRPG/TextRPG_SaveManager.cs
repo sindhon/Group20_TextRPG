@@ -1,15 +1,23 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace Team20_TextRPG
 {
-    partial class TextRPG_SaveManager
+    public static class TextRPG_SaveManager
     {
-        
+        public static void Save(TextRPG_Player player, string path)
+        {
+            SaveData data = SaveData.FromPlayer(player);
+            string json = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(path, json);
+        }
+
+        public static void Load(TextRPG_Player player, string path)
+        {
+            string json = File.ReadAllText(path);
+            SaveData data = JsonSerializer.Deserialize<SaveData>(json);
+            data.ApplyToPlayer(player);
+        }
     }
 }

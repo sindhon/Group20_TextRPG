@@ -188,7 +188,7 @@ namespace Team20_TextRPG
                     break;
                 default:
                     //인벤토리에 아이템 추가
-                    TextRPG_Manager.Instance.playerInstance.AddItem(reward.ItemId, reward.Quantity);
+                    TextRPG_Manager.Instance.playerInstance.AddItem(reward.Name, reward.Quantity);
                     break;
             }
         }
