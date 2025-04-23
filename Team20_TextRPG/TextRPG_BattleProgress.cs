@@ -168,10 +168,12 @@ namespace Team20_TextRPG
             Console.WriteLine($"{player.Name} 의 공격!");
             //Console.WriteLine($"Lv.{target.Level} {target.Name} 을(를) 맞췄습니다. [데미지 : {PlayerDamage}]\n");
 
-            // 회피 시 텍스트 변경
+            // 회피, 크리티컬 시 텍스트 변경
             string result = target.isDodged ? "이(가) 회피했습니다" : "을(를) 맞췄습니다";
-            Console.WriteLine($"Lv.{target.Level} {target.Name} {result}. [데미지 : {PlayerDamage}]\n");
+            string crit = target.isCrit ? "( 크리티컬!! )" : "";
+            Console.WriteLine($"Lv.{target.Level} {target.Name} {result}. [데미지 : {PlayerDamage} {crit}]\n");
             target.isDodged = false;
+            target.isCrit = false;
 
             if (target.IsDead)
             {
@@ -394,9 +396,13 @@ namespace Team20_TextRPG
         void PrintSkill(TextRPG_Monster target, TextRPG_Player player, int beforeHP, int damageDealt, int beforeMP)
         {
             Console.WriteLine();
+
+            // 회피, 크리티컬 시 텍스트 변경
             string result = target.isDodged ? "이(가) 회피했습니다" : "을(를) 맞췄습니다";
-            Console.WriteLine($"Lv.{target.Level} {target.Name} {result}. [데미지 : {damageDealt}]\n");
+            string crit = target.isCrit ? "( 크리티컬!! )" : "";
+            Console.WriteLine($"Lv.{target.Level} {target.Name} {result}. [데미지 : {damageDealt} {crit}]\n");
             target.isDodged = false;
+            target.isCrit = false;
 
             if (target.IsDead)
             {
@@ -433,10 +439,12 @@ namespace Team20_TextRPG
                 Console.WriteLine($"Lv.{monster.Level} {monster.Name} 의 공격!");
                 //Console.WriteLine($"{player.Name} 을(를) 맞췄습니다. [데미지 : {EnemyDamage}]\n");
 
-                // 회피 시 텍스트 변경
+                // 회피, 크리티컬 시 텍스트 변경
                 string result = player.isDodged ? "이(가) 회피했습니다" : "을(를) 맞췄습니다";
-                Console.WriteLine($"{player.Name} {result}. [데미지 : {EnemyDamage}]\n");
+                string crit = player.isCrit ? "( 크리티컬!! )" : "";
+                Console.WriteLine($"{player.Name} {result}. [데미지 : {EnemyDamage} {crit}]\n");
                 player.isDodged = false;
+                player.isCrit = false;
 
                 Console.WriteLine($"Lv.{player.Level} {player.Name}");
                 Console.WriteLine($"HP {playerBeforeHP} -> {player.Hp}");

@@ -23,6 +23,7 @@ namespace Team20_TextRPG
         public int DataId { get; protected set; }
         public bool IsDead { get; protected set; }
         public bool isDodged { get; set; } // 회피했는지 확인
+        public bool isCrit { get; set; } // 크리티컬 여부
 
         public TextRPG_Creature()
         {
@@ -42,6 +43,7 @@ namespace Team20_TextRPG
             Gold = gold;
             IsDead = false;
             isDodged = false;
+            isCrit = false;
         }
 
         public int OnDamaged(TextRPG_Creature attacker, int baseDamage, bool candodge = true)
@@ -71,10 +73,11 @@ namespace Team20_TextRPG
 
             // 15% 확률로 크리티컬
             int critChance = rand.Next(100);
-            if (critChance < 15)
+            if (critChance < 100)
             {
                 int critDamage = totalDamage * 16 / 10;
                 totalDamage = critDamage;
+                isCrit = true;
             }
 
             // 10% 확률로 회피
