@@ -18,7 +18,7 @@ namespace Team20_TextRPG
             Console.WriteLine("2. 전투 시작");
             Console.WriteLine("3. 퀘스트 확인");
             Console.WriteLine("4. 인벤토리");
-            Console.WriteLine("5. 저장하기");
+            Console.WriteLine("5. 상점");
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
 
@@ -60,7 +60,7 @@ namespace Team20_TextRPG
                     InventorySystem.InventoryMenu(TextRPG_Manager.Instance.playerInstance);
                     break;
                 case 5:
-                    TextRPG_Manager.Instance.SaveData();
+                    StoreSystem.EnterStore(TextRPG_Manager.Instance.playerInstance, TextRPG_Manager.Instance.StoreInstance);
                     break;
             }
         }

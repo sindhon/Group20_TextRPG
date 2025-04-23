@@ -9,29 +9,33 @@ namespace Team20_TextRPG
 	{
 		private static Dictionary<string, ItemSystem.Item> itemDatabase = new();
 
-		public static void LoadItemsFromJson(string path)
+		public static void LoadItemsFromFolder(string folderPath)
 		{
-			string json = File.ReadAllText(path);
-			JsonDocument doc = JsonDocument.Parse(json);
-			foreach (var element in doc.RootElement.EnumerateArray())
+			foreach (string file in Directory.GetFiles(folderPath, "items_*.json"))
 			{
-				string id = element.GetProperty("id").GetString();
-				string type = element.GetProperty("type").GetString();
-				string name = element.GetProperty("name").GetString();
-				string description = element.GetProperty("description").GetString();
-				int price = element.GetProperty("price").GetInt32();
+				string json = File.ReadAllText(file);
+				JsonDocument doc = JsonDocument.Parse(json);
 
-				ItemSystem.Item item = type switch
+				foreach (var element in doc.RootElement.EnumerateArray())
 				{
-					"Weapon" => new ItemSystem.Weapon(name, element.GetProperty("atk").GetInt32(), description, price),
-					"Armor" => new ItemSystem.Armor(name, element.GetProperty("def").GetInt32(), description, price),
-					"Potion" => new ItemSystem.Potion(name, element.GetProperty("heal").GetInt32(), description, price),
-					_ => null
-				};
+					string id = element.GetProperty("id").GetString();
+					string type = element.GetProperty("type").GetString();
+					string name = element.GetProperty("name").GetString();
+					string description = element.GetProperty("description").GetString();
+					int price = element.GetProperty("price").GetInt32();
 
-				if(item != null)
-				{
-					itemDatabase[id] = item;
+					ItemSystem.Item item = type switch
+					{
+						"Weapon" => new ItemSystem.Weapon(id, name, element.GetProperty("atk").GetInt32(), description, price),
+						"Armor" => new ItemSystem.Armor(id, name, element.GetProperty("def").GetInt32(), description, price),
+						"Potion" => new ItemSystem.Potion(id, name, element.GetProperty("heal").GetInt32(), description, price),
+						_ => null
+					};
+
+					if (item != null)
+					{
+						itemDatabase[id] = item;
+					}
 				}
 			}
 		}
