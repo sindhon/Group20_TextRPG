@@ -11,24 +11,27 @@ namespace Team20_TextRPG
         private static Dictionary<int, TextRPG_Monster> monsterDic = new Dictionary<int, TextRPG_Monster>()
         {
             // int dataId, int level, string name, string job, int attack, int defense, int maxHp, int gold
-            { 1, new TextRPG_Monster(1, 2, "알고리즘","몬스터" ,1, 1, 15, 1) },
-            { 2, new TextRPG_Monster(2, 3, "유니티", "몬스터",2, 2, 10, 2) },
-            { 3, new TextRPG_Monster(3, 5, "언리얼", "몬스터", 3, 3, 25, 3) },
+            { 1, new TextRPG_Monster(1, 2, "무한반복","몬스터" , 15, 10, 100, 10) },
+            { 2, new TextRPG_Monster(2, 3, "데이터맹", "몬스터", 20, 5, 120, 12) },
+            { 3, new TextRPG_Monster(3, 5, "취업공부", "몬스터", 10, 8, 80, 8) },
 
-            { 4, new TextRPG_Monster(4, 7, "이력서", "몬스터", 5, 5, 35, 7) },
-            { 5, new TextRPG_Monster(5, 8, "포트폴리오", "몬스터", 7, 6, 40, 10) },
-            { 6, new TextRPG_Monster(6, 9, "자기소개서", "몬스터", 8, 7, 40, 13) },
+            { 4, new TextRPG_Monster(4, 7, "문서왕", "몬스터", 18, 20, 130, 14) },
+            { 5, new TextRPG_Monster(5, 8, "탈락자", "몬스터", 25, 12, 90, 18) },
+            { 6, new TextRPG_Monster(6, 9, "형식의 마법사", "몬스터", 12, 15, 100, 10) },
 
-            { 7, new TextRPG_Monster(7, 10, "알고리즘 지식", "몬스터", 10, 8, 43, 15) },
-            { 8, new TextRPG_Monster(8, 12, "유니티 지식", "몬스터", 12, 8, 43, 15) },
-            { 9, new TextRPG_Monster(9, 15, "코딩 지식", "몬스터", 15, 9, 45, 17) },
+            { 7, new TextRPG_Monster(7, 10, "버그몬", "몬스터", 22, 8, 110, 18) },
+            { 8, new TextRPG_Monster(8, 12, "타임워커", "몬스터", 18, 12, 95, 16) },
+            { 9, new TextRPG_Monster(9, 15, "루프룬", "몬스터", 30, 5, 140, 22) },
 
-            { 10, new TextRPG_Monster(10, 20, "기술 실장", "중간 보스 몬스터", 25, 15, 90, 30) }, // 중간 보스
-            { 11, new TextRPG_Monster(11, 19, "기술 팀장", "몬스터", 20, 10, 55, 23) },
-            { 12, new TextRPG_Monster(12, 17, "시니어 개발자", "몬스터", 17, 10, 50, 20) },
+            { 10, new TextRPG_Monster(10, 20, "성능의 사신", "몬스터", 28, 12, 130, 25) },
+            { 11, new TextRPG_Monster(11, 21, "질문괴물", "몬스터", 20, 10, 100, 18) },
+            { 12, new TextRPG_Monster(12, 22, "타입매치", "몬스터", 18, 18, 120, 20) },
+            { 13, new TextRPG_Monster(13, 23, "디버그룬", "몬스터", 35, 5, 150, 30) },
 
-            { 13, new TextRPG_Monster(13, 30, "임원진", "최종 보스 몬스터", 50, 50, 250, 100) },  // 최종 보스
-            { 14, new TextRPG_Monster(14, 25, "PD", "몬스터", 40, 40, 100, 50) },
+            { 14, new TextRPG_Monster(14, 25, "질문왕", "몬스터", 15, 10, 110, 22) },
+            { 15, new TextRPG_Monster(15, 25, "협력왕", "몬스터", 25, 20, 130, 26) },
+            { 16, new TextRPG_Monster(16, 26, "면접공포", "몬스터", 18, 15, 120, 25) },
+            { 17, new TextRPG_Monster(17, 27, "경험블라스터", "몬스터", 22, 10, 100, 30) },
         };
 
         private static Random rand = new Random();

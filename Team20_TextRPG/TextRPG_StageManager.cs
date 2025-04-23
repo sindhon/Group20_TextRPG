@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using static Team20_TextRPG.TextRPG_StageManager;
 
 namespace Team20_TextRPG
 {
@@ -36,22 +37,28 @@ namespace Team20_TextRPG
 
         public static void LoadStage(string path)
         {
+            // Stage stage = new Stage();
             if (!File.Exists(path))
             {
                 Console.WriteLine("스테이지 파일을 찾을 수 없습니다.");
                 return;
             }
 
-            // Log 출력
+            // 파일 로드 Log 출력
             Console.WriteLine("스테이지 파일 로드 성공");
 
             string json = File.ReadAllText(path);
-
             List<Stage> stages = JsonConvert.DeserializeObject<List<Stage>>(File.ReadAllText(path));
 
-            foreach (Stage stage in stages)
+            // 파일 내용 확인
+            foreach (Stage stg in stages)
             {
-                Console.WriteLine($"Stage {stage.id}: {stage.title}");
+                Console.WriteLine($"Stage {stg.id}: {stg.title}");
+
+                foreach (StageMonster mon in stg.monsters)
+                {
+                    Console.WriteLine($"Mon ID {mon.dataId}: {mon.name}");
+                }
             }
         }
     }
