@@ -28,6 +28,7 @@ namespace Team20_TextRPG
         #region 인벤토리 및 장비 리스트
         public List<ItemSystem.Item> Inventory = new List<ItemSystem.Item>();
         private List<ItemSystem.Item> EquippedItems = new List<ItemSystem.Item>();
+        private List<Guid> EquippedItemIds = new List<Guid>();
         #endregion
 
         public IReadOnlyList<ItemSystem.Item> readInventory => Inventory;
@@ -128,20 +129,25 @@ namespace Team20_TextRPG
                     if (newWeapon.Id == oldWeapon.Id)
                     {
                         EquippedItems.Remove(oldWeapon);
+                        EquippedItemIds.Remove(oldWeapon.Id);
                         EquippedWeapon = null;
                         ExtraAtk -= oldWeapon.Atk;
                         Console.WriteLine($"{oldWeapon.Name}을(를) 장착 해제합니다.");
                         return;
                     }
                     EquippedItems.Remove(oldWeapon);
+                    EquippedItemIds.Remove(oldWeapon.Id);
                     ExtraAtk -= oldWeapon.Atk;
                     Console.WriteLine($"{oldWeapon.Name}을(를) 장착 해제합니다.");
                 }
                 EquippedWeapon = newWeapon;
                 ExtraAtk += newWeapon.Atk;
 
-                if(!EquippedItems.Contains(newWeapon))
+                if (!EquippedItems.Contains(newWeapon))
                     EquippedItems.Add(newWeapon);
+
+                if (!EquippedItemIds.Contains(newWeapon.Id))
+                    EquippedItemIds.Add(newWeapon.Id);
 
                 Console.WriteLine($"{newWeapon.Name}을(를) 장착했습니다.");
                 TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.EquipEquipment, 1);
@@ -153,22 +159,27 @@ namespace Team20_TextRPG
                     if (newArmor.Id == oldArmor.Id)
                     {
                         EquippedItems.Remove(oldArmor);
+                        EquippedItemIds.Remove(oldArmor.Id);
                         EquippedArmor = null;
                         ExtraDef -= oldArmor.Def;
                         Console.WriteLine($"{oldArmor.Name}을(를) 장착 해제합니다.");
                         return;
                     }
-                    
+
                     EquippedItems.Remove(oldArmor);
+                    EquippedItemIds.Remove(oldArmor.Id);
                     ExtraDef -= oldArmor.Def;
                     Console.WriteLine($"{oldArmor.Name}을(를) 장착 해제합니다.");
                 }
 
                 EquippedArmor = newArmor;
                 ExtraDef += newArmor.Def;
-                
-                if(!EquippedItems.Contains(newArmor))
+
+                if (!EquippedItems.Contains(newArmor))
                     EquippedItems.Add(item);
+
+                if (!EquippedItemIds.Contains(newArmor.Id))
+                    EquippedItemIds.Add(item.Id);
 
                 Console.WriteLine($"{item.Name}을(를) 장착했습니다.");
                 TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.EquipEquipment, 1);
