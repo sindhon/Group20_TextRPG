@@ -20,16 +20,18 @@ namespace Team20_TextRPG
         public int MaxMp { get; protected set; }
         public int Exp { get; protected set; }
         public int Gold { get; protected set; }
+        public int CurrentStage { get; set; }
         public int DataId { get; protected set; }
         public bool IsDead { get; protected set; }
         public bool isDodged { get; set; } // 회피했는지 확인
+        public bool isCrit { get; set; } // 크리티컬 여부
 
         public TextRPG_Creature()
         {
 
         }
 
-        public TextRPG_Creature(int level, string name, string job, int attack, int defense, int maxHp, int gold)
+        public TextRPG_Creature(int level, string name, string job, int attack, int defense, int maxHp, int gold, int curStg)
         {
             Level = level;
             Name = name;
@@ -40,8 +42,10 @@ namespace Team20_TextRPG
             MaxHp = maxHp;
             Exp = 0;
             Gold = gold;
+            CurrentStage = 1;
             IsDead = false;
             isDodged = false;
+            isCrit = false;
         }
 
         public int OnDamaged(TextRPG_Creature attacker, int baseDamage, bool candodge = true)
@@ -75,6 +79,7 @@ namespace Team20_TextRPG
             {
                 int critDamage = totalDamage * 16 / 10;
                 totalDamage = critDamage;
+                isCrit = true;
             }
 
             // 10% 확률로 회피
@@ -84,6 +89,9 @@ namespace Team20_TextRPG
                 totalDamage = 0;
                 isDodged = true;
             }
+
+            float reduction = Def / (Def + 100f);
+            totalDamage = (int)(totalDamage * (1 - reduction));
 
             return totalDamage;
         }

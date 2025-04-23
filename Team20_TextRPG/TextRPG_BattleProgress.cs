@@ -32,23 +32,23 @@ namespace Team20_TextRPG
         bool isCanceled = false;
 
         #region 몬스터 스폰
-        public void SpawnMonsters()
+        public void SpawnMonsters(Stage stage)
         {
             Random random = new Random();
             int count = random.Next(1, 5);
 
             for (int i = 0; i < count; i++)
             {
-                TextRPG_Monster monster = TextRPG_MonsterSpawner.SpawnRandomMonster();
+                TextRPG_Monster monster = TextRPG_MonsterSpawner.SpawnRandomMonster(stage);
                 monsters.Add(monster);
             }
         }
         #endregion
 
         #region 전투 시작
-        public void StartBattle(TextRPG_Player player)
+        public void StartBattle(TextRPG_Player player, Stage stage)
         {
-            SpawnMonsters();
+            SpawnMonsters(stage);
 
             playerStartHP = player.Hp;
             playerStartLevel = player.Level;
@@ -182,10 +182,12 @@ namespace Team20_TextRPG
             Console.WriteLine($"{player.Name} 의 공격!");
             //Console.WriteLine($"Lv.{target.Level} {target.Name} 을(를) 맞췄습니다. [데미지 : {PlayerDamage}]\n");
 
-            // 회피 시 텍스트 변경
+            // 회피, 크리티컬 시 텍스트 변경
             string result = target.isDodged ? "이(가) 회피했습니다" : "을(를) 맞췄습니다";
-            Console.WriteLine($"Lv.{target.Level} {target.Name} {result}. [데미지 : {PlayerDamage}]\n");
+            string crit = target.isCrit ? "( 크리티컬!! )" : "";
+            Console.WriteLine($"Lv.{target.Level} {target.Name} {result}. [데미지 : {PlayerDamage} {crit}]\n");
             target.isDodged = false;
+            target.isCrit = false;
 
             if (target.IsDead)
             {
@@ -432,13 +434,18 @@ namespace Team20_TextRPG
         #region 스킬 사용 시 화면 출력
         void PrintSkill(TextRPG_Monster target, TextRPG_Player player, int beforeHP, int damageDealt, int beforeMP)
         {
+            Console.WriteLine();
+
+            // 회피, 크리티컬 시 텍스트 변경
             string result = target.isDodged ? "이(가) 회피했습니다" : "을(를) 맞췄습니다";
-            Console.WriteLine($"Lv.{target.Level} {target.Name} {result}. [데미지 : {damageDealt}]\n");
+            string crit = target.isCrit ? "( 크리티컬!! )" : "";
+            Console.WriteLine($"Lv.{target.Level} {target.Name} {result}. [데미지 : {damageDealt} {crit}]\n");
             target.isDodged = false;
+            target.isCrit = false;
 
             if (target.IsDead)
             {
-                Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {enemyBeforeHP} -> Dead");
+                Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {enemyBeforeHP} -> Dead\n");
                 if (target.Name == "미니언")
                 {
                     //미니언 퀘스트 진행
@@ -483,10 +490,12 @@ namespace Team20_TextRPG
                 Console.WriteLine($"Lv.{monster.Level} {monster.Name} 의 공격!");
                 //Console.WriteLine($"{player.Name} 을(를) 맞췄습니다. [데미지 : {EnemyDamage}]\n");
 
-                // 회피 시 텍스트 변경
+                // 회피, 크리티컬 시 텍스트 변경
                 string result = player.isDodged ? "이(가) 회피했습니다" : "을(를) 맞췄습니다";
-                Console.WriteLine($"{player.Name} {result}. [데미지 : {EnemyDamage}]\n");
+                string crit = player.isCrit ? "( 크리티컬!! )" : "";
+                Console.WriteLine($"{player.Name} {result}. [데미지 : {EnemyDamage} {crit}]\n");
                 player.isDodged = false;
+                player.isCrit = false;
 
                 Console.WriteLine($"Lv.{player.Level} {player.Name}");
                 Console.WriteLine($"HP {playerBeforeHP} -> {player.Hp}");
