@@ -1,0 +1,50 @@
+[
+    {
+        "id": "weapon001",
+        "type": "Weapon",
+        "name": "간단한 포트폴리오",
+        "atk": 25,
+        "description": "간단하게 만들 수 있는 게임 포트폴리오다.",
+        "price": 350
+    },
+    {
+        "id": "weapon002",
+        "type": "Weapon",
+        "name": "디버그의 마법서",
+        "atk": 50,
+        "description": "디버깅을 통한 마법 공격",
+        "price": 600
+    },
+    {
+        "id": "weapon003",
+        "type": "Weapon",
+        "name": "버그박멸자의 대검",
+        "atk": 60,
+        "description": "버그를 제거하는 강력한 검",
+        "price": 1000
+    },
+    {
+        "id": "weapon004",
+        "type": "Weapon",
+        "name": "컴파일러의 검은 지팡이",
+        "atk": 80,
+        "description": "컴파일 중 발생하는 폭발적인 공격",
+        "price": 1500
+    },
+    {
+        "id": "weapon005",
+        "type": "Weapon",
+        "name": "스크립트의 성배",
+        "atk": 100,
+        "description": "완벽한 스크립트로 적을 무찌른다.",
+        "price": 1800
+    },
+    {
+        "id": "weapon333",
+        "type": "Weapon",
+        "name": "IYS-333",
+        "atk": 333,
+        "description": "갖고 있는 것만으로 코딩을 더 잘 하게 될 것 같다.",
+        "price": 333
+    }
+]

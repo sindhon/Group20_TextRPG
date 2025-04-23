@@ -1,0 +1,42 @@
+[
+    {
+        "id": "armor001",
+        "type": "Armor",
+        "name": "명상법",
+        "def": 25,
+        "description": "마음을 다스리는 법에 대해 적혀있다.",
+        "price": 200
+    },
+    {
+        "id": "armor002",
+        "type": "Armor",
+        "name": "신속한 성능의 부츠",
+        "def": 50,
+        "description": "빠른 성능으로 적의 공격을 피하는 부츠",
+        "price": 700
+    },
+    {
+        "id": "armor003",
+        "type": "Armor",
+        "name": "화려한 코드 망토",
+        "def": 80,
+        "description": "정리된 코드처럼 적의 공격을 깔끔하게 방어할 수 있는 망토",
+        "price": 800
+    },
+    {
+        "id": "armor004",
+        "type": "Armor",
+        "name": "무한 루프의 팔찌",
+        "def": 100,
+        "description": "반복 작업에서 오는 강력한 방어력",
+        "price": 1100
+    },
+    {
+        "id": "armor005",
+        "type": "Armor",
+        "name": "오류의 파수꾼 방패",
+        "def": 150,
+        "description": "오류를 방어하는 강력한 방패",
+        "price": 1600
+    }
+]
