@@ -23,7 +23,7 @@ namespace Team20_TextRPG
             public void DisplayJob()
             {
                 Console.WriteLine($"{jobName}\n{jobDescription}");
-                Console.WriteLine($"공격력 : {jobAtk}\t\\ 방어력 : {jobDef}\t\\ 최대 체력 : {jobmaxHP}\t\\ 스킬 : {jobSkill}\n");
+                Console.WriteLine($"공격력 : {jobAtk}\t\\ 방어력 : {jobDef}\t\\ 최대 체력 : {jobmaxHP}\t\\ 최대 마나 : {jobmaxMP}\t\\ 스킬 : {jobSkill}\n");
             }
         }
 
@@ -31,43 +31,33 @@ namespace Team20_TextRPG
         {
             new Job
             {
-                jobName = "전사",
-                jobDescription = "",
-                jobAtk = 100,
-                jobDef = 15,
+                jobName = "클라 개발자 지망생",
+                jobDescription = "클라이언트 개발자가 되고 싶은 취준생",
+                jobAtk = 18,
+                jobDef = 12,
                 jobmaxHP = 100,
                 jobmaxMP = 50,
-                jobSkill = "검 휘두르기"
+                jobSkill = "요건 기획이 너무 복잡해요"
             },
             new Job
             {
-                jobName = "마법사",
-                jobDescription = "",
-                jobAtk = 120,
-                jobDef = 5,
-                jobmaxHP = 90,
+                jobName = "서버 개발자 지망생",
+                jobDescription = "서버 개발자가 되고 싶은 취준생",
+                jobAtk = 12,
+                jobDef = 20,
+                jobmaxHP = 130,
                 jobmaxMP = 50,
-                jobSkill = "아바다 케다브라"
+                jobSkill = "그건 클라이언트 쪽 문제에요"
             },
             new Job
             {
-                jobName = "궁수",
-                jobDescription = "",
+                jobName = "기획 지망생",
+                jobDescription = "기획자가 되고 싶은 취준생",
                 jobAtk = 110,
                 jobDef = 8,
                 jobmaxHP = 95,
                 jobmaxMP = 50,
-                jobSkill = "화살 소나기"
-            },
-            new Job
-            {
-                jobName = "도적",
-                jobDescription = "",
-                jobAtk = 105,
-                jobDef = 10,
-                jobmaxHP = 100,
-                jobmaxMP = 50,
-                jobSkill = "표창 세례"
+                jobSkill = "기획서에는 분명히 그렇게 써 있어요"
             },
         };
 
@@ -121,13 +111,13 @@ namespace Team20_TextRPG
 
             switch (job.jobName)
             {
-                case "전사":
+                case "클라 개발자 지망생":
                     player.Skills.Add(new TextRPG_Skill("검 휘두르기", "검을 크게 휘둘러 적 하나에게 150% 의 피해를 줍니다.", 150, 10, SkillType.SingleTarget));
                     break;
-                case "마법사":
+                case "서버 개발자 지망생":
                     player.Skills.Add(new TextRPG_Skill("아바다 케다브라", "죽음을 부르는 마법. 랜덤으로 적 하나에게 250%의 피해를 줍니다.", 250, 30, SkillType.RandomTarget));
                     break;
-                case "궁수":
+                case "기획 지망생":
                     player.Skills.Add(new TextRPG_Skill("화살 소나기", "여러 개의 화살을 날려 모든 적에게 60% 의 피해를 줍니다.", 60, 15, SkillType.AllTarget));
                     break;
                 case "도적":

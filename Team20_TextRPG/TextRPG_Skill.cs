@@ -22,7 +22,9 @@ namespace Team20_TextRPG
         public string Description { get; }
         public int Power { get; }        // 공격력 계수
         public int MPCost { get; }       // 마나 소모량
-        public SkillType Type { get; set; }  // 스킬 종류
+        public SkillType Type { get; }  // 스킬 종류
+
+        bool isSkill = true;
 
         public TextRPG_Skill(string name, string description, int power, int mpCost, SkillType type)
         {
@@ -36,7 +38,7 @@ namespace Team20_TextRPG
         public int UseSkill(TextRPG_Monster target, TextRPG_Player player)
         {
             int damage = player.Atk * Power / 100;
-            int resultDamage = target.OnDamaged(player, damage);
+            int resultDamage = target.OnDamaged(player, damage, isSkill);
             return resultDamage;
         }
 
