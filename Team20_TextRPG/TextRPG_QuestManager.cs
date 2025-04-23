@@ -26,11 +26,13 @@ namespace Team20_TextRPG
     [System.Serializable]
     public partial class Reward
     {
+        public string ItemId { get; set; }
         public string Name { get; set; }
         public int Quantity { get; set; }
 
-        public Reward(string name, int quantity)
+        public Reward(string itemId, string name, int quantity)
         {
+            ItemId = itemId;
             Name = name;
             Quantity = quantity;
         }
@@ -186,7 +188,7 @@ namespace Team20_TextRPG
                     break;
                 default:
                     //인벤토리에 아이템 추가
-                    TextRPG_Manager.Instance.playerInstance.AddItem(reward.Name, reward.Quantity);
+                    TextRPG_Manager.Instance.playerInstance.AddItem(reward.ItemId, reward.Quantity);
                     break;
             }
         }

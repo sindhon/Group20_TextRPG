@@ -41,26 +41,9 @@ namespace Team20_TextRPG
             Exp = level;
         }
 
-        ////  보상 아이템을 지급하는 몬스터용 생성자
-        //public TextRPG_Monster(int dataId, int level, string name, string job, int attack, int defense, int maxHp, int gold, ItemSystem.Item rewardItem)
-        //: base(level, name, job, attack, defense, maxHp, gold)
-        //{
-        //    this.DataId = dataId;
-
-        //    Exp = level;
-
-        //    Inventory.Add(rewardItem);
-        //}
-
         public TextRPG_Monster Clone()
         {
             var clone = new TextRPG_Monster(DataId, Level, Name, Job, Atk, Def, MaxHp, Gold);
-
-            //// 보상 아이템도 복사
-            //foreach (var item in Inventory)
-            //{
-            //    clone.Inventory.Add(item.Clone()); // 아이템도 복사
-            //}
 
             return clone;
         }
