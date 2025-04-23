@@ -39,6 +39,7 @@ namespace Team20_TextRPG
                 Console.WriteLine($"LV. {beforeLevel} | {player.Name} → LV. {player.Level} | {player.Name}");
                 Console.WriteLine($"체력: {beforeHp} → {player.Hp}");
                 Console.WriteLine();
+
                 Console.WriteLine("0. 다음");
             }
 
@@ -47,7 +48,7 @@ namespace Team20_TextRPG
             {
                 //  임시 적용 → 수정이 많이 필요함
                 TextRPG_Manager.Instance.playerInstance.AddItem("sword001", 1);
-
+                player.CurrentStage++;
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Victory!!!");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -64,6 +65,8 @@ namespace Team20_TextRPG
                 Console.WriteLine($"{player.Inventory[player.Inventory.Count - 1].Name}");
                 Console.WriteLine("0. 다음");
             }
+
+            player.GetMana(10); // 전투 종료시 마나 10 회복
 
             int input = TextRPG_SceneManager.CheckInput(0, 0);
 

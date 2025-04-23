@@ -54,7 +54,7 @@ namespace Team20_TextRPG
         #endregion
 
         #region 플레이어 공통 속성
-        public TextRPG_Player(int level, string name, string job, int atk, int def, int hp, int maxHP, int mp, int maxMp, int gold)
+        public TextRPG_Player(int level, string name, string job, int atk, int def, int hp, int maxHP, int mp, int maxMp, int gold, int curStg)
         {
             Level = level;
             Name = name;
@@ -67,6 +67,7 @@ namespace Team20_TextRPG
             MaxMp = maxMp;
             Gold = gold;
             Skills = new List<TextRPG_Skill>();
+            CurrentStage = curStg;
         }
         #endregion
 
@@ -81,7 +82,7 @@ namespace Team20_TextRPG
             Hp = 0;
             MaxHp = 100;
             Gold = 0;
-
+            CurrentStage = 1;
         }
         #endregion
 
@@ -216,6 +217,13 @@ namespace Team20_TextRPG
         public void UseMana(TextRPG_Skill skill)
         {
             Mp -= skill.MPCost;
+        }
+
+        public void GetMana(int amount)
+        {
+            Mp += amount;
+            if (Mp > MaxMp) Mp = MaxMp;
+            // Console.WriteLine($"MP가 {amount}만큼 회복되었습니다. 현재 HP: {Mp}/{MaxMp}");
         }
 
         public bool IsEquipped(ItemSystem.Item item)

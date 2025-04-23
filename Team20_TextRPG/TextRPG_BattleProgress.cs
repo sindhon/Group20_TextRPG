@@ -11,7 +11,7 @@ using System.Numerics;
 
 namespace Team20_TextRPG
 {
-    
+
 
     partial class TextRPG_BattleProgress
     {
@@ -31,23 +31,23 @@ namespace Team20_TextRPG
         bool isCanceled = false;
 
         #region 몬스터 스폰
-        public void SpawnMonsters()
+        public void SpawnMonsters(Stage stage)
         {
             Random random = new Random();
             int count = random.Next(1, 5);
 
             for (int i = 0; i < count; i++)
             {
-                TextRPG_Monster monster = TextRPG_MonsterSpawner.SpawnRandomMonster();
+                TextRPG_Monster monster = TextRPG_MonsterSpawner.SpawnRandomMonster(stage);
                 monsters.Add(monster);
             }
         }
         #endregion
 
         #region 전투 시작
-        public void StartBattle(TextRPG_Player player)
+        public void StartBattle(TextRPG_Player player, Stage stage)
         {
-            SpawnMonsters();
+            SpawnMonsters(stage);
 
             playerStartHP = player.Hp;
             playerStartLevel = player.Level;
@@ -144,7 +144,6 @@ namespace Team20_TextRPG
         }
         #endregion
 
-
         #region 플레이어 턴 (공격 대상 선택)
         void PlayerTurn(TextRPG_Player player)
         {
@@ -153,7 +152,7 @@ namespace Team20_TextRPG
             Console.Write("\n대상을 선택해주세요: ");
 
             int targetIndex = ReadValidTargetInput();
-            if (targetIndex == 0) 
+            if (targetIndex == 0)
             {
                 isCanceled = true;
                 return;
@@ -169,10 +168,12 @@ namespace Team20_TextRPG
             Console.WriteLine($"{player.Name} 의 공격!");
             //Console.WriteLine($"Lv.{target.Level} {target.Name} 을(를) 맞췄습니다. [데미지 : {PlayerDamage}]\n");
 
-            // 회피 시 텍스트 변경
+            // 회피, 크리티컬 시 텍스트 변경
             string result = target.isDodged ? "이(가) 회피했습니다" : "을(를) 맞췄습니다";
-            Console.WriteLine($"Lv.{target.Level} {target.Name} {result}. [데미지 : {PlayerDamage}]\n");
+            string crit = target.isCrit ? "( 크리티컬!! )" : "";
+            Console.WriteLine($"Lv.{target.Level} {target.Name} {result}. [데미지 : {PlayerDamage} {crit}]\n");
             target.isDodged = false;
+            target.isCrit = false;
 
             if (target.IsDead)
             {
@@ -198,7 +199,7 @@ namespace Team20_TextRPG
         #region 플레이어 턴 (스킬 종류)
         void PlayerSkillTurn(TextRPG_Player player, TextRPG_Skill skill)
         {
-            switch(skill.Type)
+            switch (skill.Type)
             {
                 case SkillType.SingleTarget:
                     SingleTargetSkill(player, skill);
@@ -314,13 +315,13 @@ namespace Team20_TextRPG
 
             player.UseMana(skill);
 
-            Console.Clear();    
+            Console.Clear();
             Console.WriteLine("Battle!!\n");
 
             Console.WriteLine($"{player.Name} 의 {skill.Name}!");
             Console.WriteLine($"MP {playerBeforeMp} -> {player.Mp}");
 
-            
+
             int damage = skill.UseSkill(target, player);
             PrintSkill(target, player, enemyBeforeHP, damage, playerBeforeMp);
 
@@ -394,13 +395,18 @@ namespace Team20_TextRPG
         #region 스킬 사용 시 화면 출력
         void PrintSkill(TextRPG_Monster target, TextRPG_Player player, int beforeHP, int damageDealt, int beforeMP)
         {
+            Console.WriteLine();
+
+            // 회피, 크리티컬 시 텍스트 변경
             string result = target.isDodged ? "이(가) 회피했습니다" : "을(를) 맞췄습니다";
-            Console.WriteLine($"Lv.{target.Level} {target.Name} {result}. [데미지 : {damageDealt}]\n");
+            string crit = target.isCrit ? "( 크리티컬!! )" : "";
+            Console.WriteLine($"Lv.{target.Level} {target.Name} {result}. [데미지 : {damageDealt} {crit}]\n");
             target.isDodged = false;
+            target.isCrit = false;
 
             if (target.IsDead)
             {
-                Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {enemyBeforeHP} -> Dead");
+                Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {enemyBeforeHP} -> Dead\n");
                 if (target.Name == "미니언")
                 {
                     //미니언 퀘스트 진행
@@ -410,7 +416,7 @@ namespace Team20_TextRPG
                 TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.KillMonster, 1);
             }
             else
-                Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {beforeHP} -> {target.Hp}");
+                Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {beforeHP} -> {target.Hp}\n");
         }
         #endregion
 
@@ -433,10 +439,12 @@ namespace Team20_TextRPG
                 Console.WriteLine($"Lv.{monster.Level} {monster.Name} 의 공격!");
                 //Console.WriteLine($"{player.Name} 을(를) 맞췄습니다. [데미지 : {EnemyDamage}]\n");
 
-                // 회피 시 텍스트 변경
+                // 회피, 크리티컬 시 텍스트 변경
                 string result = player.isDodged ? "이(가) 회피했습니다" : "을(를) 맞췄습니다";
-                Console.WriteLine($"{player.Name} {result}. [데미지 : {EnemyDamage}]\n");
+                string crit = player.isCrit ? "( 크리티컬!! )" : "";
+                Console.WriteLine($"{player.Name} {result}. [데미지 : {EnemyDamage} {crit}]\n");
                 player.isDodged = false;
+                player.isCrit = false;
 
                 Console.WriteLine($"Lv.{player.Level} {player.Name}");
                 Console.WriteLine($"HP {playerBeforeHP} -> {player.Hp}");
@@ -467,8 +475,10 @@ namespace Team20_TextRPG
             Console.ResetColor();
             Console.WriteLine("\n[내정보]");
             Console.WriteLine($"Lv.{player.Level}  {player.Name} ({player.Job})");
-            Console.WriteLine($"HP {player.Hp} / {player.MaxHp}");
-            Console.WriteLine($"MP {player.Mp} / {player.MaxMp}");
+            DisplayHPUIBar(player.Hp, player.MaxHp);
+            //Console.WriteLine($"HP {player.Hp} / {player.MaxHp}");
+            DisplayMPUIBar(player.Mp, player.MaxMp);
+            //Console.WriteLine($"MP {player.Mp} / {player.MaxMp}");
         }
         #endregion
 
@@ -507,5 +517,68 @@ namespace Team20_TextRPG
             return player.IsDead || monsters.All(m => m.IsDead);
         }
         #endregion
+
+        //  체력 바 UI 함수
+        public static void DisplayHPUIBar(int currentHealth, int maxHealth)
+        {
+            //  체력 표시용 UI 변수들
+            int currentHPUI = (int)(currentHealth * 0.1);
+            int maxHPUI = (int)(maxHealth * 0.1);
+
+            for (int i = 0; i < maxHPUI; i++)
+            {
+                if (i < currentHPUI)
+                {
+                    if(currentHealth <= maxHealth * 0.5)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.Write("■"); // 체력 부분
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write("■"); // 체력 부분
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                }
+
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.Write("□"); // 빈 부분
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+            Console.WriteLine();
+        }
+
+        public static void DisplayMPUIBar(int currentMP, int maxMP)
+        {
+            //  체력 표시용 UI 변수들
+            int currentMPUI = (int)(currentMP * 0.1);
+            int maxMPUI = (int)(maxMP * 0.1);
+
+            for (int i = 0; i < maxMPUI; i++)
+            {
+                if (i < currentMPUI)
+                {
+
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    Console.Write("■"); // 마나 부분
+                    Console.ForegroundColor = ConsoleColor.White;
+
+                }
+
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.Write("□"); // 빈 부분
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+            Console.WriteLine();
+        }
     }
 }

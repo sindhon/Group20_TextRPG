@@ -23,7 +23,7 @@ namespace Team20_TextRPG
             public void DisplayJob()
             {
                 Console.WriteLine($"{jobName}\n{jobDescription}");
-                Console.WriteLine($"공격력 : {jobAtk}\t\\ 방어력 : {jobDef}\t\\ 최대 체력 : {jobmaxHP}\t\\ 스킬 : {jobSkill}\n");
+                Console.WriteLine($"공격력 : {jobAtk} \\ 방어력 : {jobDef} \\ 최대 체력 : {jobmaxHP} \\ 최대 마나 : {jobmaxMP} \\ 스킬 : {jobSkill}\n");
             }
         }
 
@@ -31,50 +31,40 @@ namespace Team20_TextRPG
         {
             new Job
             {
-                jobName = "전사",
-                jobDescription = "",
-                jobAtk = 100,
-                jobDef = 15,
+                jobName = "클라 개발자 지망생",
+                jobDescription = "클라이언트 개발자가 되고 싶은 취준생",
+                jobAtk = 18,
+                jobDef = 12,
                 jobmaxHP = 100,
                 jobmaxMP = 50,
-                jobSkill = "검 휘두르기"
+                jobSkill = "요건 기획이 너무 복잡해요"
             },
             new Job
             {
-                jobName = "마법사",
-                jobDescription = "",
-                jobAtk = 120,
-                jobDef = 5,
+                jobName = "서버 개발자 지망생",
+                jobDescription = "서버 개발자가 되고 싶은 취준생",
+                jobAtk = 12,
+                jobDef = 20,
+                jobmaxHP = 130,
+                jobmaxMP = 50,
+                jobSkill = "그건 클라이언트 쪽 문제에요"
+            },
+            new Job
+            {
+                jobName = "기획 지망생",
+                jobDescription = "기획자가 되고 싶은 취준생",
+                jobAtk = 22,
+                jobDef = 8,
                 jobmaxHP = 90,
                 jobmaxMP = 50,
-                jobSkill = "아바다 케다브라"
-            },
-            new Job
-            {
-                jobName = "궁수",
-                jobDescription = "",
-                jobAtk = 110,
-                jobDef = 8,
-                jobmaxHP = 95,
-                jobmaxMP = 50,
-                jobSkill = "화살 소나기"
-            },
-            new Job
-            {
-                jobName = "도적",
-                jobDescription = "",
-                jobAtk = 105,
-                jobDef = 10,
-                jobmaxHP = 100,
-                jobmaxMP = 50,
-                jobSkill = "표창 세례"
+                jobSkill = "기획서에는 분명히 그렇게 써 있어요"
             },
         };
 
         public static TextRPG_Player CreateCharacter()
         {
             string name = SetName();
-            Job selectJob = ChooseJob(name, jobs);
+            Job selectJob = ChooseJob(jobs);
             return SetPlayer(name, selectJob);
         }
 
@@ -91,7 +81,7 @@ namespace Team20_TextRPG
                 Console.Clear();
                 Console.WriteLine($"입력하신 이름은 {name}입니다.");
                 Console.WriteLine();
-
+              
                 Console.WriteLine("1. 맞습니다.");
                 Console.WriteLine("2. 아닙니다.");
                 Console.WriteLine();
@@ -117,28 +107,40 @@ namespace Team20_TextRPG
 
         public static TextRPG_Player SetPlayer(string name, Job job)
         {
-            var player = new TextRPG_Player(1, name, job.jobName, job.jobAtk, job.jobDef, job.jobmaxHP, job.jobmaxHP, job.jobmaxMP, job.jobmaxMP, 1000);
+            var player = new TextRPG_Player(1, name, job.jobName, job.jobAtk, job.jobDef, job.jobmaxHP, job.jobmaxHP, job.jobmaxMP, job.jobmaxMP, 1000, 1);
 
             switch (job.jobName)
             {
-                case "전사":
-                    player.Skills.Add(new TextRPG_Skill("검 휘두르기", "검을 크게 휘둘러 적 하나에게 150% 의 피해를 줍니다.", 150, 10, SkillType.SingleTarget));
+                // 스킬 (이름, 설명, 최소 데미지, 최대 데미지, 마나 소모량, 스킬 종류, 회피 여부)
+                // 직업마다 스킬 추가
+                case "클라 개발자 지망생":
+                    player.Skills.Add(new TextRPG_Skill("요건 기획이 너무 복잡해요", "1명의 몬스터에게 공격력의 150% ~ 200%의 데미지를 입힌다. 해당 스킬은 회피 가능", 
+                                                        150, 200, 10, SkillType.SingleTarget, true));
+                    player.Skills.Add(new TextRPG_Skill("서버에서 응답이 이상해요", "랜덤으로 1명의 몬스터에게 공격력의 200% 데미지를 입힌다. 해당 스킬은 회피 불가", 
+                                                        200, 200, 15, SkillType.RandomTarget, false));
                     break;
-                case "마법사":
-                    player.Skills.Add(new TextRPG_Skill("아바다 케다브라", "죽음을 부르는 마법. 랜덤으로 적 하나에게 250%의 피해를 줍니다.", 250, 30, SkillType.RandomTarget));
+                case "서버 개발자 지망생":
+                    player.Skills.Add(new TextRPG_Skill("그건 클라이언트 쪽 문제에요", "1명의 몬스터에게 공격력의 150% ~ 200%의 데미지를 입힌다. 해당 스킬은 회피 가능", 
+                                                        150, 200, 10, SkillType.SingleTarget, true));
+                    player.Skills.Add(new TextRPG_Skill("로컬에서는 잘 되는데요?", "랜덤으로 1명의 몬스터에게 200%의 데미지를 입힌다. 해당 스킬은 회피 불가",
+                                                        200, 200, 15, SkillType.RandomTarget, false));
                     break;
-                case "궁수":
-                    player.Skills.Add(new TextRPG_Skill("화살 소나기", "여러 개의 화살을 날려 모든 적에게 60% 의 피해를 줍니다.", 60, 15, SkillType.AllTarget));
-                    break;
-                case "도적":
-                    player.Skills.Add(new TextRPG_Skill("표창 세례", "빠르게 여러 개의 표창을 던져 적 둘에게 100% 의 피해를 줍니다.", 100, 20, SkillType.MultipleTarget));
+                case "기획 지망생":
+                    player.Skills.Add(new TextRPG_Skill("기획서에는 분명히 그렇게 써 있어요", "1명의 몬스터에게 150% ~ 200%의 데미지를 입힌다. 해당 스킬은 회피 가능", 
+                                                        150, 200, 10, SkillType.SingleTarget, true));
+                    player.Skills.Add(new TextRPG_Skill("이건 개발 쪽에서 좀 더 확인해야 할 것 같아요", "랜덤으로 1명의 몬스터에게 200%의 데미지를 입힌다. 해당 스킬은 회피 불가", 
+                                                        200, 200, 15, SkillType.RandomTarget, false));
                     break;
             }
+
+            // 공용 스킬
+            player.Skills.Add(new TextRPG_Skill("어...?", "모든 몬스터에게 공격력의 60 ~ 80% 데미지를 입힌다. 해당 스킬은 회피 불가.", 
+                                                60, 80, 25, SkillType.AllTarget, false));
 
             return player;
         }
         
-        public static Job ChooseJob(string name, Job[] jobs)
+        public static Job ChooseJob(Job[] jobs)
         {
             Console.WriteLine("직업을 선택해 주세요.");
             Console.WriteLine();
