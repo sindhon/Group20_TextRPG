@@ -334,7 +334,6 @@ namespace Team20_TextRPG
         {
             DrawBattleUI(player);
             Console.WriteLine("\n0. 취소");
-            Console.Write("\n대상을 선택해주세요: ");
 
             List<TextRPG_Monster> targetMonsters = new List<TextRPG_Monster>();
 
@@ -343,6 +342,8 @@ namespace Team20_TextRPG
 
             for (int i = 0; i < targetCount; i++)
             {
+                Console.Write($"\n{i}번째 대상을 선택해주세요: ");
+
                 int targetIndex = ReadValidTargetInput();
 
                 if (targetIndex == 0)
