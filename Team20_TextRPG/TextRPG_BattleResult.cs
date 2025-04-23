@@ -36,7 +36,6 @@ namespace Team20_TextRPG
                 Console.WriteLine("You Lose");
                 Console.ForegroundColor = ConsoleColor.White;
 
-
                 Console.WriteLine($"LV. {beforeLevel} | {player.Name} → LV. {player.Level} | {player.Name}");
                 Console.WriteLine($"체력: {beforeHp} → {player.Hp}");
                 Console.WriteLine();
@@ -47,8 +46,9 @@ namespace Team20_TextRPG
             else if ( player.Hp > 0)
             {
                 player.LevelUP();
-                TextRPG_Manager.Instance.playerInstance.AddItem("sword001", 1);
 
+                //  임시 적용 → 수정이 많이 필요함
+                TextRPG_Manager.Instance.playerInstance.AddItem("sword001", 1);
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Victory!!!");
@@ -78,8 +78,5 @@ namespace Team20_TextRPG
         {
             TextRPG_Manager.Instance.playerInstance.AddItem(dungeonReward.Name, dungeonReward.Quantity);
         }
-
     }
-
-   
 }
