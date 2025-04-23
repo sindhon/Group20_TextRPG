@@ -8,6 +8,32 @@ namespace Team20_TextRPG
 {
     partial class TextRPG_StartScene
     {
+        public static void DisplayLogoScene()
+        {
+            Console.OutputEncoding = Encoding.UTF8;
+
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine(@"      
+░█▀▄░█▀█░▀█▀░▀█▀░█░░░█▀▀░█▀▀░█▀▄░█▀█░█░█░█▀█░█▀▄░░░░░░
+░█▀▄░█▀█░░█░░░█░░█░░░█▀▀░█░█░█▀▄░█░█░█░█░█░█░█░█░░▀░░░
+░▀▀░░▀░▀░░▀░░░▀░░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀░░░▀░░░
+");
+
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine(@"
+░█▀▀░█▄█░█▀█░█░░░█▀█░█░█░█▄█░█▀▀░█▀█░▀█▀              
+░█▀▀░█░█░█▀▀░█░░░█░█░░█░░█░█░█▀▀░█░█░░█░              
+░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀░░▀░░▀░▀░▀▀▀░▀░▀░░▀░        
+");
+
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.WriteLine("Press Zero Key To Continue!!!");
+
+            int input = TextRPG_SceneManager.CheckInput(0, 0);
+            DisplayStartScene();
+        }
+
         public static void DisplayStartScene()
         {
             Console.Clear();
