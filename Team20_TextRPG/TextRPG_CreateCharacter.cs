@@ -112,7 +112,7 @@ namespace Team20_TextRPG
 
         public static TextRPG_Player SetPlayer(string name, Job job)
         {
-            return new TextRPG_Player(1, name, job.jobName, job.jobAtk, job.jobDef, job.jobmaxHP, job.jobmaxHP, 1000);
+            return new TextRPG_Player(1, name, job.jobName, job.jobAtk, job.jobDef, job.jobmaxHP, job.jobmaxHP, 1000, 1);
         }
         
         public static Job ChooseJob(Job[] jobs)

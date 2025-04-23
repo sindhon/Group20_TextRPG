@@ -14,11 +14,11 @@ namespace Team20_TextRPG
 
         public TextRPG_Player playerInstance { get; private set; }
         public TextRPG_QuestManager QuestManager { get; private set; }
-
+        public TextRPG_StageManager StageManager { get; private set; }
 
         public void Init()
         {
-            TextRPG_StageManager.LoadStage("Data/Stage.json");
+            StageManager = new TextRPG_StageManager();
             ItemFactory.LoadItemsFromJson("Data/items.json");
             playerInstance = TextRPG_CreateCharacter.CreateCharacter();
             // playerInstance = new TextRPG_Player(1, "이세계 용사", "이세계 전사", 100, 5, 100, 100, 1000);
