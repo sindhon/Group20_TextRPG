@@ -32,9 +32,9 @@ namespace Team20_TextRPG
 
         static void Main(string[] args)
         {
-            TextRPG_Manager.Instance.Init();
-
-            TextRPG_StartScene.DisplayStartScene();
+            //TextRPG_Manager.Instance.Init();
+            TextRPG_StartScene.DisplayLogoScene();
+            //TextRPG_StartScene.DisplayStartScene();
         }
 
         //static void SetData()

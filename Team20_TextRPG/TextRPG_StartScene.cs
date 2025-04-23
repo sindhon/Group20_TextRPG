@@ -8,34 +8,62 @@ namespace Team20_TextRPG
 {
     partial class TextRPG_StartScene
     {
+        public static void DisplayLogoScene()
+        {
+            Console.OutputEncoding = Encoding.UTF8;
+
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine(@"      
+░█▀▄░█▀█░▀█▀░▀█▀░█░░░█▀▀░█▀▀░█▀▄░█▀█░█░█░█▀█░█▀▄░░░░░░
+░█▀▄░█▀█░░█░░░█░░█░░░█▀▀░█░█░█▀▄░█░█░█░█░█░█░█░█░░▀░░░
+░▀▀░░▀░▀░░▀░░░▀░░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀░░░▀░░░
+");
+
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine(@"
+░█▀▀░█▄█░█▀█░█░░░█▀█░█░█░█▄█░█▀▀░█▀█░▀█▀              
+░█▀▀░█░█░█▀▀░█░░░█░█░░█░░█░█░█▀▀░█░█░░█░              
+░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀░░▀░░▀░▀░▀▀▀░▀░▀░░▀░        
+");
+
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.WriteLine("Press Zero Key To Continue!!!");
+
+            int input = TextRPG_SceneManager.CheckInput(0, 0);
+            TextRPG_Manager.Instance.Init();
+            DisplayStartScene();
+        }
+
         public static void DisplayStartScene()
         {
+            // Player의 Stage와 stage Id를 비교하여 2. 전투 시작에 stage name 표시하기
+            int stageNum = TextRPG_Manager.Instance.playerInstance.CurrentStage;
+            Stage stage = TextRPG_Manager.Instance.StageManager.stages.Find(s => s.id == stageNum);
+
             Console.Clear();
-            Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.");
             Console.WriteLine("이제 전투를 시작할 수 있습니다.");
             Console.WriteLine();
 
             Console.WriteLine("1. 상태 보기");
-            Console.WriteLine("2. 전투 시작");
+            Console.WriteLine($"2. 전투 시작 ({stage.title})");
+            Console.WriteLine("3. 퀘스트 확인");
+            Console.WriteLine("4. 인벤토리");
+            Console.WriteLine("5. 상점");
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
 
             Console.WriteLine("원하시는 행동을 입력해 주세요.");
-
-            // 사용자에게 입력을 받아 TryParse로 정수형인지 확인하고
-            // 판단 결과는 isSuccess에, 정수값은 input에 담는다.
-
-            int input = TextRPG_SceneManager.CheckInput(0, 2);
-            SwitchScene(input);
-
+            
+            int input = TextRPG_SceneManager.CheckInput(0, 5);
+            SwitchScene(input, stage);
         }
 
-        public static void SwitchScene(int input)
+        public static void SwitchScene(int input, Stage stage)
         {
             TextRPG_StatusScene status = new TextRPG_StatusScene();
             TextRPG_BattleProgress battleProgress = new TextRPG_BattleProgress();
-
-            //TextRPG_Player player = new TextRPG_Player(1, "이세계 용사", "이세계 전사", 100, 5, 100, 100, 1000);
+            TextRPG_QuestScene quest = new TextRPG_QuestScene();
 
             switch (input)
             {
@@ -52,7 +80,18 @@ namespace Team20_TextRPG
                 case 2:
                     Console.Clear();
                     // 전투 시작
-                    battleProgress.StartBattle(TextRPG_Manager.Instance.playerInstance);
+                    battleProgress.StartBattle(TextRPG_Manager.Instance.playerInstance, stage);
+                    break;
+
+                case 3:
+                    Console.Clear();
+                    quest.DisplayQuestScene();
+                    break;
+                case 4:
+                    InventorySystem.InventoryMenu(TextRPG_Manager.Instance.playerInstance);
+                    break;
+                case 5:
+                    StoreSystem.EnterStore(TextRPG_Manager.Instance.playerInstance, TextRPG_Manager.Instance.StoreInstance);
                     break;
             }
         }
