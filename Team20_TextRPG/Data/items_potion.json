@@ -1,0 +1,42 @@
+[
+    {
+        "id": "potion001",
+        "type": "Potion",
+        "name": "버전 관리의 신비한 앰플",
+        "heal": 20,
+        "description": "앰플을 마시면 스트레스가 해소되고 몸이 회복된다.",
+        "price": 50
+    },
+    {
+        "id": "potion002",
+        "type": "Potion",
+        "name": "코드 리팩토링의 폭발주",
+        "heal": 30,
+        "description": "코드의 혼란을 정리하며 정신이 맑아지고 피로가 풀린다.",
+        "price": 85
+    },
+    {
+        "id": "potion003",
+        "type": "Potion",
+        "name": "백그라운드 지식의 엘릭서",
+        "heal": 40,
+        "description": "마법의 지식이 흘러들어와 지친 몸에 활력을 준다.",
+        "price": 110
+    },
+    {
+        "id": "potion004",
+        "type": "Potion",
+        "name": "디버깅의 마법 커피",
+        "heal": 50,
+        "description": "커피 한 잔으로 지친 몸과 마음이 마법처럼 회복된다.",
+        "price": 150
+    },
+    {
+        "id": "potion333",
+        "type": "Potion",
+        "name": "청심환",
+        "heal": 999,
+        "description": "마음을 안정시켜주는 약, 발표도 문제 없을 것 같다.",
+        "price": 999
+    }
+]
