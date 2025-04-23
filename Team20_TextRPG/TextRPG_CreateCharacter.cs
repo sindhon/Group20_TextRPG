@@ -17,6 +17,7 @@ namespace Team20_TextRPG
             public int jobAtk;
             public int jobDef;
             public int jobmaxHP;
+            public int jobmaxMP;
             public string jobSkill;
 
             public void DisplayJob()
@@ -35,6 +36,7 @@ namespace Team20_TextRPG
                 jobAtk = 100,
                 jobDef = 15,
                 jobmaxHP = 100,
+                jobmaxMP = 50,
                 jobSkill = "검 휘두르기"
             },
             new Job
@@ -44,6 +46,7 @@ namespace Team20_TextRPG
                 jobAtk = 120,
                 jobDef = 5,
                 jobmaxHP = 90,
+                jobmaxMP = 50,
                 jobSkill = "아바다 케다브라"
             },
             new Job
@@ -53,6 +56,7 @@ namespace Team20_TextRPG
                 jobAtk = 110,
                 jobDef = 8,
                 jobmaxHP = 95,
+                jobmaxMP = 50,
                 jobSkill = "화살 소나기"
             },
             new Job
@@ -62,6 +66,7 @@ namespace Team20_TextRPG
                 jobAtk = 105,
                 jobDef = 10,
                 jobmaxHP = 100,
+                jobmaxMP = 50,
                 jobSkill = "표창 세례"
             },
         };
@@ -112,7 +117,25 @@ namespace Team20_TextRPG
 
         public static TextRPG_Player SetPlayer(string name, Job job)
         {
-            return new TextRPG_Player(1, name, job.jobName, job.jobAtk, job.jobDef, job.jobmaxHP, job.jobmaxHP, 1000);
+            var player = new TextRPG_Player(1, name, job.jobName, job.jobAtk, job.jobDef, job.jobmaxHP, job.jobmaxHP, job.jobmaxMP, job.jobmaxMP, 1000);
+
+            switch (job.jobName)
+            {
+                case "전사":
+                    player.Skills.Add(new TextRPG_Skill("검 휘두르기", "검을 크게 휘둘러 적 하나에게 1.5배 피해를 줍니다.", 150, 10));
+                    break;
+                case "마법사":
+                    player.Skills.Add(new TextRPG_Skill("아바다 케다브라", "죽음을 부르는 마법. 적 하나에게 막대한 피해를 줍니다.", 250, 30));
+                    break;
+                case "궁수":
+                    player.Skills.Add(new TextRPG_Skill("화살 소나기", "여러 개의 화살을 날려 적 하나에게 2회 공격 (각 80%).", 80, 15));
+                    break;
+                case "도적":
+                    player.Skills.Add(new TextRPG_Skill("표창 세례", "빠르게 여러 개의 표창을 던져 1.6배 피해를 줍니다.", 160, 10));
+                    break;
+            }
+
+            return player;
         }
         
         public static Job ChooseJob(string name, Job[] jobs)

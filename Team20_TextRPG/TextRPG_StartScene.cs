@@ -10,6 +10,7 @@ namespace Team20_TextRPG
     {
         public static void DisplayStartScene()
         {
+            Console.Clear();
             Console.WriteLine("이제 전투를 시작할 수 있습니다.");
             Console.WriteLine();
 

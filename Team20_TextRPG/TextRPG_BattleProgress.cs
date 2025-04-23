@@ -10,9 +10,15 @@ using Team20_TextRPG;
 
 namespace Team20_TextRPG
 {
+    
+
     partial class TextRPG_BattleProgress
     {
         private List<TextRPG_Monster> monsters = new List<TextRPG_Monster>();
+
+        int playerStartHP = 0;
+        int playerStartLevel = 0;
+        //int playerStartExp = 0;
 
         int playerBeforeHP = 0;
         int playerBeforeLevel = 0;
@@ -41,8 +47,8 @@ namespace Team20_TextRPG
         {
             SpawnMonsters();
 
-            playerBeforeHP = player.Hp;
-            playerBeforeLevel = player.Level;
+            playerStartHP = player.Hp;
+            playerStartLevel = player.Level;
             playerBeforeExp = player.Exp;
 
             while (!IsBattleOver(player))
@@ -52,35 +58,39 @@ namespace Team20_TextRPG
                 EnemyPhase(player);
             }
 
-            TextRPG_BattleResult.BattleResult(player, playerBeforeHP, playerBeforeLevel, playerBeforeExp);
+            TextRPG_BattleResult.BattleResult(player, monsters, playerStartHP, playerStartLevel, playerBeforeExp);
         }
         #endregion
 
         #region 플레이어 턴 (공격 선택)
         void ChoiceAtk(TextRPG_Player player)
         {
-            DrawBattleUI(player);
-            Console.WriteLine("\n1. 공격");
-            Console.WriteLine("2. 스킬");
-            Console.WriteLine("\n원하시는 행동을 입력해주세요.");
-            int input = TextRPG_SceneManager.CheckInput(1, 2);
-
-            switch (input)
+            while (true)
             {
-                case 1:
-                    DrawBattleUI(player);
-                    PlayerTurn(player);
-                    break;
-                case 2:
-                    DrawBattleUI(player);
-                    ChoiceSkill(player);
-                    break;
-            }
+                DrawBattleUI(player);
+                Console.WriteLine("\n1. 공격");
+                Console.WriteLine("2. 스킬");
+                Console.WriteLine("\n원하시는 행동을 입력해주세요.");
+                int input = TextRPG_SceneManager.CheckInput(1, 2);
 
-            if (isCanceled)
-            {
-                ChoiceAtk(player);
-                isCanceled = false;
+                switch (input)
+                {
+                    case 1:
+                        DrawBattleUI(player);
+                        PlayerTurn(player);
+                        break;
+                    case 2:
+                        ChoiceSkill(player);
+                        break;
+                }
+
+                if (isCanceled)
+                {
+                    isCanceled = false;
+                    continue;
+                }
+
+                return;
             }
         }
         #endregion
@@ -88,42 +98,55 @@ namespace Team20_TextRPG
         #region 플레이어 턴 (스킬 선택)
         void ChoiceSkill(TextRPG_Player player)
         {
-            DrawBattleUI(player);
-            Console.WriteLine("\n1. 알파 스트라이크 - MP {필요 마나}");
-            Console.WriteLine("{스킬1 설명}");
-            Console.WriteLine("2. 더블 스트라이크 - MP {필요 마나}");
-            Console.WriteLine("{스킬2 설명}");
-            Console.WriteLine("0. 취소");
-            Console.WriteLine("\n원하시는 행동을 입력해주세요.");
-            int input = TextRPG_SceneManager.CheckInput(0, 2);
-
-            switch (input)
+            while (true)
             {
-                case 0:
-                    ChoiceAtk(player);
-                    break;
-                case 1:
-                    DrawBattleUI(player);
-                    PlayerTurn(player);
-                    break;
-                case 2:
-                    DrawBattleUI(player);
-                    PlayerTurn(player);
-                    break;
-            }
+                DrawBattleUI(player);
+                Console.WriteLine();
 
-            if (isCanceled)
-            {
-                ChoiceSkill(player);
-                isCanceled = false;
+                for (int i = 0; i < player.Skills.Count; i++)
+                {
+                    var skill = player.Skills[i];
+                    Console.WriteLine($"{i + 1}. {skill.Name} - MP {skill.MPCost}");
+                    Console.WriteLine($"   {skill.Description}");
+                }
+
+                Console.WriteLine("\n0. 취소");
+                Console.WriteLine("\n원하시는 행동을 입력해주세요.");
+                int input = TextRPG_SceneManager.CheckInput(0, player.Skills.Count);
+
+                if (input == 0)
+                {
+                    isCanceled = true;
+                    return;
+                }
+
+                var selectedSkill = player.Skills[input - 1];
+
+                if (player.Mp < selectedSkill.MPCost)
+                {
+                    Console.WriteLine("마나가 부족합니다!");
+                    Thread.Sleep(500);
+                    continue;
+                }
+
+                PlayerSkillTurn(player, selectedSkill);
+
+                if (isCanceled)
+                {
+                    isCanceled = false;
+                    continue;
+                }
+
+                return;
             }
         }
         #endregion
 
 
-        #region 플레이어 턴 (대상 선택)
+        #region 플레이어 턴 (공격 대상 선택)
         void PlayerTurn(TextRPG_Player player)
         {
+            DrawBattleUI(player);
             Console.WriteLine("\n0. 취소");
             Console.Write("\n대상을 선택해주세요: ");
 
@@ -165,6 +188,52 @@ namespace Team20_TextRPG
             {
                 Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {enemyBeforeHP} -> {target.Hp}");
             }
+
+            Console.WriteLine("\n0. 다음");
+            WaitForZeroInput();
+        }
+        #endregion
+
+        #region 플레이어 턴 (스킬 대상 선택)
+        void PlayerSkillTurn(TextRPG_Player player, TextRPG_Skill skill)
+        {
+            DrawBattleUI(player);
+            Console.WriteLine("\n0. 취소");
+            Console.Write("\n대상을 선택해주세요: ");
+
+            int targetIndex = ReadValidTargetInput();
+            if (targetIndex == 0)
+            {
+                isCanceled = true;
+                return;
+            }
+            TextRPG_Monster target = monsters[targetIndex - 1];
+            //int damage = player.GetAttackDamage();
+            enemyBeforeHP = target.Hp;
+            int playerBeforeMp = player.Mp;
+
+            int damage = player.Atk * skill.Power / 100;
+            player.UseSkill(skill); // 마나 소비
+
+            int PlayerDamage = target.OnDamaged(player, damage);
+
+
+            Console.Clear();
+            Console.WriteLine("Battle!!\n");
+            Console.WriteLine($"{player.Name} 의 {player.Name}!");
+            //Console.WriteLine($"Lv.{target.Level} {target.Name} 을(를) 맞췄습니다. [데미지 : {PlayerDamage}]\n");
+
+            Console.WriteLine($"MP {playerBeforeMp} -> {player.Mp}");
+
+            // 회피 시 텍스트 변경
+            string result = target.isDodged ? "이(가) 회피했습니다" : "을(를) 맞췄습니다";
+            Console.WriteLine($"Lv.{target.Level} {target.Name} {result}. [데미지 : {PlayerDamage}]\n");
+            target.isDodged = false;
+
+            if (target.IsDead)
+                Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {enemyBeforeHP} -> Dead");
+            else
+                Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {enemyBeforeHP} -> {target.Hp}");
 
             Console.WriteLine("\n0. 다음");
             WaitForZeroInput();
@@ -225,6 +294,7 @@ namespace Team20_TextRPG
             Console.WriteLine("\n[내정보]");
             Console.WriteLine($"Lv.{player.Level}  {player.Name} ({player.Job})");
             Console.WriteLine($"HP {player.Hp} / {player.MaxHp}");
+            Console.WriteLine($"MP {player.Mp} / {player.MaxMp}");
         }
         #endregion
 

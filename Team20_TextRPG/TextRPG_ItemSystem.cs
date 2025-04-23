@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Xml.Linq;
 using Team20_TextRPG;
+using static Team20_TextRPG.ItemSystem;
 
 namespace Team20_TextRPG
 {
@@ -33,6 +34,7 @@ namespace Team20_TextRPG
 
             public bool IsStoreItem { get; set; } = false;
             public bool Sold { get; set; } = false;
+            public virtual bool IsStackable => false;
 
             #region 아이템 공통 속성
             public Item(string name, string description, int price, ItemType type)
@@ -139,6 +141,7 @@ namespace Team20_TextRPG
         #region 포션
         public class Potion : Item
         {
+            public override bool IsStackable => true;
             public int HealAmount { get; }
 
             #region 포션 생성자 선언 및 아이템 생성자 호출 후 고유 속성 초기화
