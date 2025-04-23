@@ -342,7 +342,7 @@ namespace Team20_TextRPG
 
             for (int i = 0; i < targetCount; i++)
             {
-                Console.Write($"\n{i}번째 대상을 선택해주세요: ");
+                Console.Write($"\n{i + 1}번째 대상을 선택해주세요: ");
 
                 int targetIndex = ReadValidTargetInput();
 
