@@ -214,6 +214,13 @@ namespace Team20_TextRPG
             Mp -= skill.MPCost;
         }
 
+        public void GetMana(int amount)
+        {
+            Mp += amount;
+            if (Mp > MaxMp) Mp = MaxMp;
+            // Console.WriteLine($"MP가 {amount}만큼 회복되었습니다. 현재 HP: {Mp}/{MaxMp}");
+        }
+
         public bool IsEquipped(ItemSystem.Item item)
         {
             return EquippedItems.Contains(item);

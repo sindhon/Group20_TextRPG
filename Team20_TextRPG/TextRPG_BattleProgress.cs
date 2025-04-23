@@ -393,6 +393,7 @@ namespace Team20_TextRPG
         #region 스킬 사용 시 화면 출력
         void PrintSkill(TextRPG_Monster target, TextRPG_Player player, int beforeHP, int damageDealt, int beforeMP)
         {
+            Console.WriteLine();
             string result = target.isDodged ? "이(가) 회피했습니다" : "을(를) 맞췄습니다";
             Console.WriteLine($"Lv.{target.Level} {target.Name} {result}. [데미지 : {damageDealt}]\n");
             target.isDodged = false;
