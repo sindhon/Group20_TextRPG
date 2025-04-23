@@ -31,6 +31,7 @@ namespace Team20_TextRPG
             Console.WriteLine("Press Zero Key To Continue!!!");
 
             int input = TextRPG_SceneManager.CheckInput(0, 0);
+            TextRPG_Manager.Instance.Init();
             DisplayStartScene();
         }
 
