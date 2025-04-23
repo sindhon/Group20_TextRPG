@@ -50,22 +50,19 @@ namespace Team20_TextRPG
                 return new List<Stage>();
             }
 
-            // 파일 로드 Log 출력
-            Console.WriteLine("스테이지 파일 로드 성공");
-
             string json = File.ReadAllText(path);
             List<Stage> LoadStages = JsonConvert.DeserializeObject<List<Stage>>(File.ReadAllText(path));
 
             // 파일 내용 확인
-            foreach (Stage stg in LoadStages)
-            {
-                Console.WriteLine($"Stage {stg.id}: {stg.title}");
+            //foreach (Stage stg in LoadStages)
+            //{
+            //    Console.WriteLine($"Stage {stg.id}: {stg.title}");
 
-                foreach (StageMonster mon in stg.monsters)
-                {
-                    Console.WriteLine($"Mon ID {mon.dataId}: {mon.name}");
-                }
-            }
+            //    foreach (StageMonster mon in stg.monsters)
+            //    {
+            //        Console.WriteLine($"Mon ID {mon.dataId}: {mon.name}");
+            //    }
+            //}
 
             return LoadStages;
         }

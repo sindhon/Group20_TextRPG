@@ -55,7 +55,7 @@ namespace Team20_TextRPG
         public List<ItemSystem.Item> Inventory = new List<ItemSystem.Item>();
 
         //  보상 아이템을 지급하지 않은 몬스터용 생성자
-        public TextRPG_Monster(int dataId, int level, string name, string job, int attack, int defense, int maxHp, int gold)
+        public TextRPG_Monster(int dataId, int level, string name, string job, int attack, int defense, int maxHp, int gold, int curStg)
         : base(level, name, job, attack, defense, maxHp, gold, curStg)
         {
             this.DataId = dataId;
