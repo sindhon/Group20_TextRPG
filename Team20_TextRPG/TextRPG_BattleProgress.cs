@@ -399,7 +399,7 @@ namespace Team20_TextRPG
 
             if (target.IsDead)
             {
-                Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {enemyBeforeHP} -> Dead");
+                Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {enemyBeforeHP} -> Dead\n");
                 if (target.Name == "미니언")
                 {
                     //미니언 퀘스트 진행
