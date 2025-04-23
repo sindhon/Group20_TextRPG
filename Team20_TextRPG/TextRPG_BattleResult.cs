@@ -48,7 +48,7 @@ namespace Team20_TextRPG
             {
                 //  임시 적용 → 수정이 많이 필요함
                 TextRPG_Manager.Instance.playerInstance.AddItem("sword001", 1);
-
+                player.CurrentStage++;
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Victory!!!");
                 Console.ForegroundColor = ConsoleColor.White;

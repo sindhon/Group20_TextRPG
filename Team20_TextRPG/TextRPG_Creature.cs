@@ -20,6 +20,7 @@ namespace Team20_TextRPG
         public int MaxMp { get; protected set; }
         public int Exp { get; protected set; }
         public int Gold { get; protected set; }
+        public int CurrentStage { get; set; }
         public int DataId { get; protected set; }
         public bool IsDead { get; protected set; }
         public bool isDodged { get; set; } // 회피했는지 확인
@@ -30,7 +31,7 @@ namespace Team20_TextRPG
 
         }
 
-        public TextRPG_Creature(int level, string name, string job, int attack, int defense, int maxHp, int gold)
+        public TextRPG_Creature(int level, string name, string job, int attack, int defense, int maxHp, int gold, int curStg)
         {
             Level = level;
             Name = name;
@@ -41,6 +42,7 @@ namespace Team20_TextRPG
             MaxHp = maxHp;
             Exp = 0;
             Gold = gold;
+            CurrentStage = 1;
             IsDead = false;
             isDodged = false;
             isCrit = false;

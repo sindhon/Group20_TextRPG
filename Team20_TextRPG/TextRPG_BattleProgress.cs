@@ -31,23 +31,23 @@ namespace Team20_TextRPG
         bool isCanceled = false;
 
         #region 몬스터 스폰
-        public void SpawnMonsters()
+        public void SpawnMonsters(Stage stage)
         {
             Random random = new Random();
             int count = random.Next(1, 5);
 
             for (int i = 0; i < count; i++)
             {
-                TextRPG_Monster monster = TextRPG_MonsterSpawner.SpawnRandomMonster();
+                TextRPG_Monster monster = TextRPG_MonsterSpawner.SpawnRandomMonster(stage);
                 monsters.Add(monster);
             }
         }
         #endregion
 
         #region 전투 시작
-        public void StartBattle(TextRPG_Player player)
+        public void StartBattle(TextRPG_Player player, Stage stage)
         {
-            SpawnMonsters();
+            SpawnMonsters(stage);
 
             playerStartHP = player.Hp;
             playerStartLevel = player.Level;
