@@ -134,7 +134,7 @@ namespace Team20_TextRPG
             }
 
             // 공용 스킬
-            player.Skills.Add(new TextRPG_Skill("어...?", "모든 몬스터에게 공격력의 60~80% 데미지를 입힌다. 해당 스킬은 회피 불가.", 
+            player.Skills.Add(new TextRPG_Skill("어...?", "모든 몬스터에게 공격력의 60 ~ 80% 데미지를 입힌다. 해당 스킬은 회피 불가.", 
                                                 60, 80, 15, SkillType.AllTarget, false));
 
             return player;
