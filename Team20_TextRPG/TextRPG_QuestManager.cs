@@ -57,7 +57,7 @@ namespace Team20_TextRPG
         {
             Console.OutputEncoding = Encoding.UTF8;
 
-            Console.WriteLine("============================================================");
+            Console.WriteLine("=================================================================");
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine(@"
              ___  _ _  ___  ___  ___
@@ -65,7 +65,7 @@ namespace Team20_TextRPG
             | | || ' || _> \__ \ | | 
             `___\`___'|___><___/ |_| ");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("============================================================");
+            Console.WriteLine("=================================================================");
             //Console.WriteLine("Quest!!\n");
             Console.WriteLine();
             Console.WriteLine($"퀘스트 제목: {title}\n");
@@ -77,7 +77,7 @@ namespace Team20_TextRPG
             {
                 Console.WriteLine($"{reward.Name} x {reward.Quantity}");
             }
-            Console.WriteLine("============================================================");
+            Console.WriteLine("=================================================================");
         }
     }
 

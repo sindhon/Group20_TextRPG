@@ -38,7 +38,20 @@ namespace Team20_TextRPG
         public static void DisplayStartScene()
         {
             Console.Clear();
-            Console.WriteLine("이제 전투를 시작할 수 있습니다.");
+            Console.OutputEncoding = Encoding.UTF8;
+
+            Console.WriteLine("=================================================================");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(@"
+             ___   ___  __ __  ___   __ __  ___  _ _  _ _ 
+            /  _> | . ||  \  \| __> |  \  \| __>| \ || | |
+            | <_/\|   ||     || _>  |     || _> |   || ' |
+            `____/|_|_||_|_|_||___> |_|_|_||___>|_\_|`___'
+");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("=================================================================");
+
+            //Console.WriteLine("이제 전투를 시작할 수 있습니다.");
             Console.WriteLine();
 
             Console.WriteLine("1. 상태 보기");

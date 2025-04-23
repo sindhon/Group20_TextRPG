@@ -13,7 +13,7 @@ namespace Team20_TextRPG
 
                 Console.OutputEncoding = Encoding.UTF8;
 
-                Console.WriteLine("============================================================");
+                Console.WriteLine("=================================================================");
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write(@"                                  
             ___  ___  ___  ___  ___        
@@ -23,7 +23,7 @@ namespace Team20_TextRPG
                                          
 ");
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("============================================================");
+                Console.WriteLine("=================================================================");
                 Console.WriteLine();
                 Console.WriteLine(" 상점에 오신 걸 환영합니다 \n");
                 Console.WriteLine();

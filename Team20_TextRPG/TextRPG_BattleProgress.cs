@@ -168,7 +168,7 @@ namespace Team20_TextRPG
             //Console.WriteLine("Battle!!\n");
             Console.OutputEncoding = Encoding.UTF8;
 
-            Console.WriteLine("============================================================");
+            Console.WriteLine("=================================================================");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(@"
      ___  ___  ___  ___  _    ___ 
@@ -177,7 +177,7 @@ namespace Team20_TextRPG
     |___/|_|_| |_|  |_| |___||___>
 ");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("============================================================");
+            Console.WriteLine("=================================================================");
             Console.WriteLine();
             Console.WriteLine($"{player.Name} 의 공격!");
             //Console.WriteLine($"Lv.{target.Level} {target.Name} 을(를) 맞췄습니다. [데미지 : {PlayerDamage}]\n");
