@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Team20_TextRPG
@@ -36,12 +37,14 @@ namespace Team20_TextRPG
 
         private static Random rand = new Random();
 
-        public static TextRPG_Monster SpawnRandomMonster()
+        public static TextRPG_Monster SpawnRandomMonster(Stage stage)
         {
+            
             List<int> keys = monsterDic.Keys.ToList();
-            int randomKey = keys[rand.Next(keys.Count)];
+            // int randomKey = keys[rand.Next(keys.Count)];
+            StageMonster stageMonster = stage.monsters[rand.Next(stage.monsters.Count)];            
 
-            return monsterDic[randomKey].Clone();
+            return monsterDic[stageMonster.dataId].Clone();
         }
     }
 

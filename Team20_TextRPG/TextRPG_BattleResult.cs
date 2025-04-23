@@ -31,7 +31,7 @@ namespace Team20_TextRPG
             else if ( player.Hp > 0)
             {
                 player.LevelUP();
-
+                player.CurrentStage++;
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Victory!!!");
                 Console.ForegroundColor = ConsoleColor.White;

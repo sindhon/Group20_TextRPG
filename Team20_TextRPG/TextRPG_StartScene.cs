@@ -26,10 +26,10 @@ namespace Team20_TextRPG
             Console.WriteLine("원하시는 행동을 입력해 주세요.");
             
             int input = TextRPG_SceneManager.CheckInput(0, 4);
-            SwitchScene(input);
+            SwitchScene(input, stage);
         }
 
-        public static void SwitchScene(int input)
+        public static void SwitchScene(int input, Stage stage)
         {
             TextRPG_StatusScene status = new TextRPG_StatusScene();
             TextRPG_BattleProgress battleProgress = new TextRPG_BattleProgress();
@@ -50,7 +50,7 @@ namespace Team20_TextRPG
                 case 2:
                     Console.Clear();
                     // 전투 시작
-                    battleProgress.StartBattle(TextRPG_Manager.Instance.playerInstance);
+                    battleProgress.StartBattle(TextRPG_Manager.Instance.playerInstance, stage);
                     break;
 
                 case 3:
