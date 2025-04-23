@@ -26,7 +26,7 @@ namespace Team20_TextRPG
         }
     }
 
-    partial class TextRPG_Monster : TextRPG_Creature
+    public partial class TextRPG_Monster : TextRPG_Creature
     {
         public int DataId;
 

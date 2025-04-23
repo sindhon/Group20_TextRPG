@@ -122,16 +122,16 @@ namespace Team20_TextRPG
             switch (job.jobName)
             {
                 case "전사":
-                    player.Skills.Add(new TextRPG_Skill("검 휘두르기", "검을 크게 휘둘러 적 하나에게 1.5배 피해를 줍니다.", 150, 10));
+                    player.Skills.Add(new TextRPG_Skill("검 휘두르기", "검을 크게 휘둘러 적 하나에게 150% 의 피해를 줍니다.", 150, 10, SkillType.SingleTarget));
                     break;
                 case "마법사":
-                    player.Skills.Add(new TextRPG_Skill("아바다 케다브라", "죽음을 부르는 마법. 적 하나에게 막대한 피해를 줍니다.", 250, 30));
+                    player.Skills.Add(new TextRPG_Skill("아바다 케다브라", "죽음을 부르는 마법. 랜덤으로 적 하나에게 250%의 피해를 줍니다.", 250, 30, SkillType.RandomTarget));
                     break;
                 case "궁수":
-                    player.Skills.Add(new TextRPG_Skill("화살 소나기", "여러 개의 화살을 날려 적 하나에게 2회 공격 (각 80%).", 80, 15));
+                    player.Skills.Add(new TextRPG_Skill("화살 소나기", "여러 개의 화살을 날려 모든 적에게 60% 의 피해를 줍니다.", 60, 15, SkillType.AllTarget));
                     break;
                 case "도적":
-                    player.Skills.Add(new TextRPG_Skill("표창 세례", "빠르게 여러 개의 표창을 던져 1.6배 피해를 줍니다.", 160, 10));
+                    player.Skills.Add(new TextRPG_Skill("표창 세례", "빠르게 여러 개의 표창을 던져 적 둘에게 100% 의 피해를 줍니다.", 100, 20, SkillType.MultipleTarget));
                     break;
             }
 
