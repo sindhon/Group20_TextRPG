@@ -73,7 +73,7 @@ namespace Team20_TextRPG
 
             // 15% 확률로 크리티컬
             int critChance = rand.Next(100);
-            if (critChance < 100)
+            if (critChance < 15)
             {
                 int critDamage = totalDamage * 16 / 10;
                 totalDamage = critDamage;
@@ -87,6 +87,9 @@ namespace Team20_TextRPG
                 totalDamage = 0;
                 isDodged = true;
             }
+
+            float reduction = Def / (Def + 100f);
+            totalDamage = (int)(totalDamage * (1 - reduction));
 
             return totalDamage;
         }
