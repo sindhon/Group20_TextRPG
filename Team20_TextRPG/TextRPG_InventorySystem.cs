@@ -16,10 +16,10 @@ namespace Team20_TextRPG
                 Console.WriteLine("=================================================================");
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
                 Console.WriteLine(@"                                  
-         _  _ _  _ _  ___  _ _  ___  ___  ___  _ _ 
-        | || \ || | || __>| \ ||_ _|| . || . \| | |
-        | ||   || ' || _> |   | | | | | ||   /\   /
-        |_||_\_||__/ |___>|_\_| |_| `___'|_\_\ |_| 
+             _  _ _  _ _  ___  _ _  ___  ___  ___  _ _ 
+            | || \ || | || __>| \ ||_ _|| . || . \| | |
+            | ||   || ' || _> |   | | | | | ||   /\   /
+            |_||_\_||__/ |___>|_\_| |_| `___'|_\_\ |_| 
 ");
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.White;
