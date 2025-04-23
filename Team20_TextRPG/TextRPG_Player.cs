@@ -166,18 +166,17 @@ namespace Team20_TextRPG
         Dictionary<int, int> levelExpTable = new Dictionary<int, int>()
         {
             { 1, 0 },
-            { 2, 10 },
-            { 3, 20 },
-            { 4, 30 },
-            { 5, 40 },
-            { 6, 50 },
+            { 2, 30 },
+            { 3, 70 },
+            { 4, 140 },
+            { 5, 250 }
         };
 
         public void LevelUP()
         {
             Level++;
-            Atk += (int)0.5;
-            Def += 1;
+            Atk += 2;
+            Def += 3;
             MaxHp += 50;
         }
 
