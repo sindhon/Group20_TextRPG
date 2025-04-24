@@ -10,9 +10,9 @@ namespace Team20_TextRPG
 {
     public enum QuestId
     {
-        KillMinion = 1,
+        KillMonster1 = 1,
         EquipEquipment,
-        KillMonster,
+        KillMonster2,
     }
 
     public enum QuestState
@@ -30,7 +30,7 @@ namespace Team20_TextRPG
         public string Name { get; set; }
         public int Quantity { get; set; }
 
-        public Reward(string itemId, string name, int quantity)
+        public Reward(string name, string itemId, int quantity)
         {
             ItemId = itemId;
             Name = name;
@@ -202,7 +202,7 @@ namespace Team20_TextRPG
         //보상 적용 메서드
         private void ApplyRewardToPlayer(Reward reward)
         {
-            switch(reward.Name)
+            switch(reward.ItemId)
             {
                 case "gold":
                     //Gold Player에 추가
@@ -214,7 +214,7 @@ namespace Team20_TextRPG
                     break;
                 default:
                     //인벤토리에 아이템 추가
-                    TextRPG_Manager.Instance.playerInstance.AddItem(reward.Name, reward.Quantity);
+                    TextRPG_Manager.Instance.playerInstance.AddItem(reward.ItemId, reward.Quantity);
                     break;
             }
         }
