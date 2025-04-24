@@ -61,7 +61,7 @@ namespace Team20_TextRPG
                 EnemyPhase(player);
             }
 
-            TextRPG_BattleResult.BattleResult(player, monsters, playerStartHP, playerStartLevel, playerBeforeExp);
+            TextRPG_BattleResult.BattleResult(player, monsters, playerStartHP, playerStartLevel, playerBeforeExp, stage);
         }
         #endregion
 
