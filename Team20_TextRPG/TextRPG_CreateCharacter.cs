@@ -33,7 +33,7 @@ namespace Team20_TextRPG
             {
                 jobName = "클라 개발자 지망생",
                 jobDescription = "클라이언트 개발자가 되고 싶은 취준생",
-                jobAtk = 18,
+                jobAtk = 58,
                 jobDef = 12,
                 jobmaxHP = 600,
                 jobmaxMP = 50,
@@ -43,7 +43,7 @@ namespace Team20_TextRPG
             {
                 jobName = "서버 개발자 지망생",
                 jobDescription = "서버 개발자가 되고 싶은 취준생",
-                jobAtk = 12,
+                jobAtk = 52,
                 jobDef = 20,
                 jobmaxHP = 630,
                 jobmaxMP = 50,
@@ -53,7 +53,7 @@ namespace Team20_TextRPG
             {
                 jobName = "기획 지망생",
                 jobDescription = "기획자가 되고 싶은 취준생",
-                jobAtk = 22,
+                jobAtk = 52,
                 jobDef = 8,
                 jobmaxHP = 590,
                 jobmaxMP = 50,

@@ -26,10 +26,6 @@ namespace Team20_TextRPG
 
 		public void ShowItems(ItemSystem.ItemType type)
 		{
-
-
-
-
             Console.WriteLine($"\n[{type.ToKorean()} 목록]\n");
 			int count = 0;
 			for (int i = 0; i < Items.Count; i++)
