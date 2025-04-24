@@ -355,7 +355,18 @@ namespace Team20_TextRPG
             player.UseMana(skill);
 
             Console.Clear();
-            Console.WriteLine("Battle!!\n");
+            Console.OutputEncoding = Encoding.UTF8;
+
+            Console.WriteLine("============================================================");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(@"
+             ___  ___  ___  ___  _    ___ 
+            | . >| . ||_ _||_ _|| |  | __>
+            | . \|   | | |  | | | |_ | _> 
+            |___/|_|_| |_|  |_| |___||___>
+");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("============================================================");
 
             Console.WriteLine($"{player.Name} 의 {skill.Name}!");
             Console.WriteLine($"MP {playerBeforeMp} -> {player.Mp}");
