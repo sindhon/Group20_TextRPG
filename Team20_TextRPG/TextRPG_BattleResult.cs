@@ -24,7 +24,7 @@ namespace Team20_TextRPG
     {
         public List<DungeonReward> dungeonReward = new List<DungeonReward>();
 
-        public static void BattleResult(TextRPG_Player player, List<TextRPG_Monster> monsters, int beforeHp, int beforeLevel, int beforeExp)
+        public static void BattleResult(TextRPG_Player player, List<TextRPG_Monster> monsters, int beforeHp, int beforeLevel, int beforeExp, Stage stage)
         {
             Console.Clear();
             Console.OutputEncoding = Encoding.UTF8;
@@ -32,15 +32,16 @@ namespace Team20_TextRPG
             Console.WriteLine("=================================================================");
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write(@"
-         ___  ___  ___  ___  _    ___   ___  ___  ___  _ _  _    ___ 
-        | . >| . ||_ _||_ _|| |  | __> | . \| __>/ __>| | || |  |_ _|
-        | . \|   | | |  | | | |_ | _>  |   /| _> \__ \| ' || |_  | | 
-        |___/|_|_| |_|  |_| |___||___> |_\_\|___><___/`___'|___| |_| 
+         ____  ____  ____  ____  ____  ____  _________  ____  ____  ____  ____  ____  ____ 
+        ||B ||||A ||||T ||||T ||||L ||||E ||||       ||||R ||||E ||||S ||||U ||||L ||||T ||
+        ||__||||__||||__||||__||||__||||__||||_______||||__||||__||||__||||__||||__||||__||
+        |/__\||/__\||/__\||/__\||/__\||/__\||/_______\||/__\||/__\||/__\||/__\||/__\||/__\|
 ");
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("=================================================================");
-            //Console.WriteLine("========== [전투 결과] ==========");
+
+            //  최종 스테이지 아닌 경우
 
             //  클리어 실패 처리
             if (player.Hp <= 0)
@@ -57,9 +58,10 @@ namespace Team20_TextRPG
             }
 
             //  클리어 처리
-            else if ( player.Hp > 0)
+            else if (player.Hp > 0)
             {
-                TextRPG_Manager.Instance.playerInstance.AddItem("sword001", 1);
+
+                //TextRPG_Manager.Instance.playerInstance.AddItem("sword001", 1);
 
                 player.CurrentStage++;
                 Console.ForegroundColor = ConsoleColor.Green;
@@ -77,17 +79,21 @@ namespace Team20_TextRPG
                 Console.WriteLine("[획득 아이템]");
                 Console.WriteLine($"{player.Inventory[player.Inventory.Count - 1].Name}");
                 Console.WriteLine("0. 다음");
+
+                TextRPG_EndScene.EndScene();
             }
 
             player.GetMana(10); // 전투 종료시 마나 10 회복
 
             int input = TextRPG_SceneManager.CheckInput(0, 0);
 
-            if(input==0)
+            if(stage.id == 1)
             {
-                TextRPG_StartScene.DisplayStartScene();
+                TextRPG_EndScene.EndScene();
             }
         }
+
+
         private static void ClearRewardToPlayer(DungeonReward dungeonReward)
         {
             TextRPG_Manager.Instance.playerInstance.AddItem(dungeonReward.Name, dungeonReward.Quantity);

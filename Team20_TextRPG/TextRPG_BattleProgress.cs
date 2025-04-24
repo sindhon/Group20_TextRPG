@@ -61,7 +61,7 @@ namespace Team20_TextRPG
                 EnemyPhase(player);
             }
 
-            TextRPG_BattleResult.BattleResult(player, monsters, playerStartHP, playerStartLevel, playerBeforeExp);
+            TextRPG_BattleResult.BattleResult(player, monsters, playerStartHP, playerStartLevel, playerBeforeExp, stage);
         }
         #endregion
 
@@ -171,10 +171,11 @@ namespace Team20_TextRPG
             Console.WriteLine("============================================================");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(@"
-             ___  ___  ___  ___  _    ___ 
-            | . >| . ||_ _||_ _|| |  | __>
-            | . \|   | | |  | | | |_ | _> 
-            |___/|_|_| |_|  |_| |___||___>
+             ____  ____  ____  ____  ____  ____ 
+            ||B ||||A ||||T ||||T ||||L ||||E ||
+            ||__||||__||||__||||__||||__||||__||
+            |/__\||/__\||/__\||/__\||/__\||/__\|
+
 ");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("=================================================================");
@@ -258,10 +259,10 @@ namespace Team20_TextRPG
             Console.WriteLine("============================================================");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(@"
-             ___  ___  ___  ___  _    ___ 
-            | . >| . ||_ _||_ _|| |  | __>
-            | . \|   | | |  | | | |_ | _> 
-            |___/|_|_| |_|  |_| |___||___>
+             ____  ____  ____  ____  ____  ____ 
+            ||B ||||A ||||T ||||T ||||L ||||E ||
+            ||__||||__||||__||||__||||__||||__||
+            |/__\||/__\||/__\||/__\||/__\||/__\|
 ");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("============================================================");
@@ -304,10 +305,10 @@ namespace Team20_TextRPG
             Console.WriteLine("============================================================");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(@"
-             ___  ___  ___  ___  _    ___ 
-            | . >| . ||_ _||_ _|| |  | __>
-            | . \|   | | |  | | | |_ | _> 
-            |___/|_|_| |_|  |_| |___||___>
+             ____  ____  ____  ____  ____  ____ 
+            ||B ||||A ||||T ||||T ||||L ||||E ||
+            ||__||||__||||__||||__||||__||||__||
+            |/__\||/__\||/__\||/__\||/__\||/__\|
 ");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("============================================================");
@@ -480,10 +481,10 @@ namespace Team20_TextRPG
                 Console.WriteLine("============================================================");
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(@"
-             ___  ___  ___  ___  _    ___ 
-            | . >| . ||_ _||_ _|| |  | __>
-            | . \|   | | |  | | | |_ | _> 
-            |___/|_|_| |_|  |_| |___||___>
+                 ____  ____  ____  ____  ____  ____ 
+                ||B ||||A ||||T ||||T ||||L ||||E ||
+                ||__||||__||||__||||__||||__||||__||
+                |/__\||/__\||/__\||/__\||/__\||/__\|
 ");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("============================================================");
@@ -518,10 +519,10 @@ namespace Team20_TextRPG
             Console.WriteLine("============================================================");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(@"
-             ___  ___  ___  ___  _    ___ 
-            | . >| . ||_ _||_ _|| |  | __>
-            | . \|   | | |  | | | |_ | _> 
-            |___/|_|_| |_|  |_| |___||___>
+             ____  ____  ____  ____  ____  ____ 
+            ||B ||||A ||||T ||||T ||||L ||||E ||
+            ||__||||__||||__||||__||||__||||__||
+            |/__\||/__\||/__\||/__\||/__\||/__\|
 ");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("============================================================");

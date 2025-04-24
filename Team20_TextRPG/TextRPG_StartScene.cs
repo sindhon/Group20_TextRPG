@@ -47,10 +47,11 @@ namespace Team20_TextRPG
             Console.WriteLine("=================================================================");
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine(@"
-             ___   ___  __ __  ___   __ __  ___  _ _  _ _ 
-            /  _> | . ||  \  \| __> |  \  \| __>| \ || | |
-            | <_/\|   ||     || _>  |     || _> |   || ' |
-            `____/|_|_||_|_|_||___> |_|_|_||___>|_\_|`___'
+             ____  ____  ____  ____  _________  ____  ____  ____  ____ 
+            ||G ||||A ||||M ||||E ||||       ||||M ||||E ||||N ||||U ||
+            ||__||||__||||__||||__||||_______||||__||||__||||__||||__||
+            |/__\||/__\||/__\||/__\||/_______\||/__\||/__\||/__\||/__\|
+
 ");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("=================================================================");
@@ -83,9 +84,9 @@ namespace Team20_TextRPG
             {
                 case 0:
                     Console.Clear();
-                    Console.WriteLine("게임을 종료합니다.");
+                    TextRPG_EndScene.EndScene();
+                    //Console.WriteLine("게임을 종료합니다.");
                     break;
-
                 case 1:
                     Console.Clear();
                     status.DisplayStatus(TextRPG_Manager.Instance.playerInstance);

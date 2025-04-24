@@ -63,8 +63,6 @@ namespace Team20_TextRPG
 
         public static TextRPG_Player CreateCharacter()
         {
-          
-
             string name = SetName();
             Job selectJob = ChooseJob(jobs);
             return SetPlayer(name, selectJob);
