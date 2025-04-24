@@ -335,7 +335,6 @@ namespace Team20_TextRPG
         public void InitDefaultItems()
         {
             AddItem("weapon001", 1);
-            AddItem("armor001", 1);
             AddItem("potion001", 3);
         }
         #endregion
