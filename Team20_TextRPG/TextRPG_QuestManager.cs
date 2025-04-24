@@ -57,15 +57,18 @@ namespace Team20_TextRPG
         {
             Console.OutputEncoding = Encoding.UTF8;
 
-            Console.WriteLine("=================================================================");
+            Console.WriteLine("==========================================================================");
+
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine(@"
-             ___  _ _  ___  ___  ___
-            | . || | || __>/ __>|_ _|
-            | | || ' || _> \__ \ | | 
-            `___\`___'|___><___/ |_| ");
+             ____  ____  ____  ____  ____ 
+            ||Q ||||U ||||E ||||S ||||T ||
+            ||__||||__||||__||||__||||__||
+            |/__\||/__\||/__\||/__\||/__\| ");
+
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("=================================================================");
+            Console.WriteLine("==========================================================================");
+
             //Console.WriteLine("Quest!!\n");
             Console.WriteLine();
             Console.WriteLine($"퀘스트 제목: {title}\n");
@@ -77,7 +80,8 @@ namespace Team20_TextRPG
             {
                 Console.WriteLine($"{reward.Name} x {reward.Quantity}");
             }
-            Console.WriteLine("=================================================================");
+            Console.WriteLine("==========================================================================");
+
         }
     }
 
@@ -122,7 +126,8 @@ namespace Team20_TextRPG
                 Console.WriteLine();
             }
 
-            Console.WriteLine("================================================");
+            Console.WriteLine("==========================================================================");
+
         }
 
         //퀘스트 진행 상태를 문자열로 나타내는 메서드

@@ -13,7 +13,8 @@ namespace Team20_TextRPG
                 Console.Clear();
                 Console.OutputEncoding = Encoding.UTF8;
 
-                Console.WriteLine("=================================================================");
+                Console.WriteLine("==========================================================================");
+
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
                 Console.WriteLine(@"                                  
              ____  ____  ____  ____  ____  ____  ____  ____  ____ 
@@ -24,7 +25,8 @@ namespace Team20_TextRPG
 ");
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("=================================================================");
+                Console.WriteLine("==========================================================================");
+
                 Console.WriteLine();
                 Console.WriteLine("인벤토리\n보유 중인 아이템을 관리할 수 있습니다.\n");
                 Console.WriteLine("[아이템 목록]");

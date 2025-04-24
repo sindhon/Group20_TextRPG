@@ -44,7 +44,8 @@ namespace Team20_TextRPG
             Console.Clear();
             Console.OutputEncoding = Encoding.UTF8;
 
-            Console.WriteLine("=================================================================");
+            Console.WriteLine("==========================================================================");
+
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine(@"
              ____  ____  ____  ____  _________  ____  ____  ____  ____ 
@@ -54,7 +55,8 @@ namespace Team20_TextRPG
 
 ");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("=================================================================");
+            Console.WriteLine("==========================================================================");
+
 
             //Console.WriteLine("이제 전투를 시작할 수 있습니다.");
             Console.WriteLine();

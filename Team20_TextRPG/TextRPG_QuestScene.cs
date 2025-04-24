@@ -15,7 +15,8 @@ namespace Team20_TextRPG
             //Console.WriteLine("Quest!!\n");
             Console.OutputEncoding = Encoding.UTF8;
 
-            Console.WriteLine("=================================================================");
+            Console.WriteLine("==========================================================================");
+
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine(@"
              ____  ____  ____  ____  ____ 
@@ -24,7 +25,8 @@ namespace Team20_TextRPG
             |/__\||/__\||/__\||/__\||/__\|
 ");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("=================================================================");
+            Console.WriteLine("==========================================================================");
+
 
             TextRPG_Manager.Instance.QuestManager.DisplayQuests();
 

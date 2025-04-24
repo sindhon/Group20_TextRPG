@@ -13,7 +13,8 @@ namespace Team20_TextRPG
             Console.Clear();
             Console.OutputEncoding = Encoding.UTF8;
 
-            Console.Write("============================================================");
+            Console.WriteLine("==========================================================================");
+
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write(@"
                    {\__/}
@@ -26,7 +27,8 @@ namespace Team20_TextRPG
             |/__\||/__\||/__\||/__\||/__\||/__\|
 ");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("============================================================");
+            Console.WriteLine("==========================================================================");
+
             Console.WriteLine(@"팀 명: 20대 라스트 댄스..☆");
             Console.WriteLine();
             Console.ResetColor();
