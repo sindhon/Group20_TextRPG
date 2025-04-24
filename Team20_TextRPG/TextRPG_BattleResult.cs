@@ -43,8 +43,6 @@ namespace Team20_TextRPG
             Console.WriteLine("==========================================================================");
 
 
-            //  최종 스테이지 아닌 경우
-
             //  클리어 실패 처리
             if (player.Hp <= 0)
             {
@@ -62,6 +60,8 @@ namespace Team20_TextRPG
             //  클리어 처리
             else if (player.Hp > 0)
             {
+                TextRPG_Manager.Instance.playerInstance.AddItem($"{stage.rewards.itemId}", 1);
+
                 player.CurrentStage++;
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Victory!!!");
@@ -81,13 +81,19 @@ namespace Team20_TextRPG
                 Console.WriteLine("0. 다음");
             }
 
+            
             player.GetMana(10); // 전투 종료시 마나 10 회복
 
             int input = TextRPG_SceneManager.CheckInput(0, 0);
 
-            if(stage.id == 5)
+            if (stage.id == 5)
             {
                 TextRPG_EndScene.EndScene();
+            }
+
+            else
+            {
+                TextRPG_StartScene.DisplayStartScene();
             }
         }
 
