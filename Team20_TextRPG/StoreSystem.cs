@@ -127,7 +127,7 @@ namespace Team20_TextRPG
                         if (item.IsStackable)
                         {
                             int available = player.GetPotionCount(item.ItemId);
-                            Console.Write($"판매할 수량 (1~{available}: ");
+                            Console.Write($"판매할 수량 (1~{available}): ");
                             int.TryParse(Console.ReadLine(), out quantity);
                             quantity = Math.Clamp(quantity, 1, available);
                         }
