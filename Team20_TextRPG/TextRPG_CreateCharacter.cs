@@ -18,7 +18,7 @@ namespace Team20_TextRPG
             public int jobDef;
             public int jobmaxHP;
             public int jobmaxMP;
-            public string jobSkill;
+            public List<TextRPG_Skill> jobSkill;
 
             public void DisplayJob()
             {
@@ -37,7 +37,13 @@ namespace Team20_TextRPG
                 jobDef = 12,
                 jobmaxHP = 600,
                 jobmaxMP = 50,
-                jobSkill = "요건 기획이 너무 복잡해요"
+                jobSkill = new List<TextRPG_Skill>()
+                {
+                    new TextRPG_Skill("요건 기획이 너무 복잡해요", "1명의 몬스터에게 공격력의 150% ~ 200%의 데미지를 입힌다. 해당 스킬은 회피 가능",
+                                        150, 200, 10, SkillType.SingleTarget, true),
+                    new TextRPG_Skill("서버에서 응답이 이상해요", "랜덤으로 1명의 몬스터에게 공격력의 200% 데미지를 입힌다. 해당 스킬은 회피 불가",
+                                        200, 200, 15, SkillType.RandomTarget, false)
+                }
             },
             new Job
             {
@@ -47,7 +53,13 @@ namespace Team20_TextRPG
                 jobDef = 20,
                 jobmaxHP = 630,
                 jobmaxMP = 50,
-                jobSkill = "그건 클라이언트 쪽 문제에요"
+                jobSkill = new List<TextRPG_Skill>()
+                {
+                    new TextRPG_Skill("그건 클라이언트 쪽 문제에요", "1명의 몬스터에게 공격력의 150% ~ 200%의 데미지를 입힌다. 해당 스킬은 회피 가능",
+                                        150, 200, 10, SkillType.SingleTarget, true),
+                    new TextRPG_Skill("로컬에서는 잘 되는데요?", "랜덤으로 1명의 몬스터에게 200%의 데미지를 입힌다. 해당 스킬은 회피 불가",
+                                        200, 200, 15, SkillType.RandomTarget, false)
+                }
             },
             new Job
             {
@@ -57,7 +69,13 @@ namespace Team20_TextRPG
                 jobDef = 8,
                 jobmaxHP = 590,
                 jobmaxMP = 50,
-                jobSkill = "기획서에는 분명히 그렇게 써 있어요"
+                jobSkill = new List<TextRPG_Skill>()
+                {
+                    new TextRPG_Skill("기획서에는 분명히 그렇게 써 있어요", "1명의 몬스터에게 150% ~ 200%의 데미지를 입힌다. 해당 스킬은 회피 가능",
+                                        150, 200, 10, SkillType.SingleTarget, true),
+                    new TextRPG_Skill("이건 개발 쪽에서 좀 더 확인해야 할 것 같아요", "랜덤으로 1명의 몬스터에게 200%의 데미지를 입힌다. 해당 스킬은 회피 불가",
+                                        200, 200, 15, SkillType.RandomTarget, false)
+                }
             },
         };
 
@@ -126,30 +144,31 @@ namespace Team20_TextRPG
         public static TextRPG_Player SetPlayer(string name, Job job)
         {
             var player = new TextRPG_Player(1, name, job.jobName, job.jobAtk, job.jobDef, job.jobmaxHP, job.jobmaxHP, job.jobmaxMP, job.jobmaxMP, 1000, 1);
+            player.Skills.AddRange(job.jobSkill);
 
-            switch (job.jobName)
-            {
-                // 스킬 (이름, 설명, 최소 데미지, 최대 데미지, 마나 소모량, 스킬 종류, 회피 여부)
-                // 직업마다 스킬 추가
-                case "클라 개발자 지망생":
-                    player.Skills.Add(new TextRPG_Skill("요건 기획이 너무 복잡해요", "1명의 몬스터에게 공격력의 150% ~ 200%의 데미지를 입힌다. 해당 스킬은 회피 가능", 
-                                                        150, 200, 10, SkillType.SingleTarget, true));
-                    player.Skills.Add(new TextRPG_Skill("서버에서 응답이 이상해요", "랜덤으로 1명의 몬스터에게 공격력의 200% 데미지를 입힌다. 해당 스킬은 회피 불가", 
-                                                        200, 200, 15, SkillType.RandomTarget, false));
-                    break;
-                case "서버 개발자 지망생":
-                    player.Skills.Add(new TextRPG_Skill("그건 클라이언트 쪽 문제에요", "1명의 몬스터에게 공격력의 150% ~ 200%의 데미지를 입힌다. 해당 스킬은 회피 가능", 
-                                                        150, 200, 10, SkillType.SingleTarget, true));
-                    player.Skills.Add(new TextRPG_Skill("로컬에서는 잘 되는데요?", "랜덤으로 1명의 몬스터에게 200%의 데미지를 입힌다. 해당 스킬은 회피 불가",
-                                                        200, 200, 15, SkillType.RandomTarget, false));
-                    break;
-                case "기획 지망생":
-                    player.Skills.Add(new TextRPG_Skill("기획서에는 분명히 그렇게 써 있어요", "1명의 몬스터에게 150% ~ 200%의 데미지를 입힌다. 해당 스킬은 회피 가능", 
-                                                        150, 200, 10, SkillType.SingleTarget, true));
-                    player.Skills.Add(new TextRPG_Skill("이건 개발 쪽에서 좀 더 확인해야 할 것 같아요", "랜덤으로 1명의 몬스터에게 200%의 데미지를 입힌다. 해당 스킬은 회피 불가", 
-                                                        200, 200, 15, SkillType.RandomTarget, false));
-                    break;
-            }
+            //switch (job.jobName)
+            //{
+            //    // 스킬 (이름, 설명, 최소 데미지, 최대 데미지, 마나 소모량, 스킬 종류, 회피 여부)
+            //    // 직업마다 스킬 추가
+            //    case "클라 개발자 지망생":
+            //        player.Skills.Add(new TextRPG_Skill("요건 기획이 너무 복잡해요", "1명의 몬스터에게 공격력의 150% ~ 200%의 데미지를 입힌다. 해당 스킬은 회피 가능", 
+            //                                            150, 200, 10, SkillType.SingleTarget, true));
+            //        player.Skills.Add(new TextRPG_Skill("서버에서 응답이 이상해요", "랜덤으로 1명의 몬스터에게 공격력의 200% 데미지를 입힌다. 해당 스킬은 회피 불가", 
+            //                                            200, 200, 15, SkillType.RandomTarget, false));
+            //        break;
+            //    case "서버 개발자 지망생":
+            //        player.Skills.Add(new TextRPG_Skill("그건 클라이언트 쪽 문제에요", "1명의 몬스터에게 공격력의 150% ~ 200%의 데미지를 입힌다. 해당 스킬은 회피 가능", 
+            //                                            150, 200, 10, SkillType.SingleTarget, true));
+            //        player.Skills.Add(new TextRPG_Skill("로컬에서는 잘 되는데요?", "랜덤으로 1명의 몬스터에게 200%의 데미지를 입힌다. 해당 스킬은 회피 불가",
+            //                                            200, 200, 15, SkillType.RandomTarget, false));
+            //        break;
+            //    case "기획 지망생":
+            //        player.Skills.Add(new TextRPG_Skill("기획서에는 분명히 그렇게 써 있어요", "1명의 몬스터에게 150% ~ 200%의 데미지를 입힌다. 해당 스킬은 회피 가능", 
+            //                                            150, 200, 10, SkillType.SingleTarget, true));
+            //        player.Skills.Add(new TextRPG_Skill("이건 개발 쪽에서 좀 더 확인해야 할 것 같아요", "랜덤으로 1명의 몬스터에게 200%의 데미지를 입힌다. 해당 스킬은 회피 불가", 
+            //                                            200, 200, 15, SkillType.RandomTarget, false));
+            //        break;
+            //}
 
             // 공용 스킬
             player.Skills.Add(new TextRPG_Skill("어...?", "모든 몬스터에게 공격력의 60 ~ 80% 데미지를 입힌다. 해당 스킬은 회피 불가.", 
@@ -200,17 +219,15 @@ namespace Team20_TextRPG
             Console.WriteLine($"{job.jobName}\n");
             Console.WriteLine($"공격력 : {job.jobAtk} | 방어력 : {job.jobDef} | 최대 체력 : {job.jobmaxHP} | 최대 마나 : {job.jobmaxMP}\n");
 
-            switch (job.jobName)
+            Console.WriteLine("전용 스킬\n");
+
+            if (job.jobSkill != null)
             {
-                case "클라 개발자 지망생":
-                    clientSkillDesc();
-                    break;
-                case "서버 개발자 지망생":
-                    serverSkillDesc();
-                    break;
-                case "기획 지망생":
-                    plannerSkillDesc();
-                    break;
+                for (int i = 0; i < job.jobSkill.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {job.jobSkill[i].Name}   소모 마나: {job.jobSkill[i].MPCost}");
+                    Console.WriteLine($"   {job.jobSkill[i].Description}\n");
+                }
             }
 
             commonSkillDesc();
@@ -218,7 +235,7 @@ namespace Team20_TextRPG
             Console.WriteLine("해당 직업으로 하시겠습니까?");
             Console.WriteLine("1. 예");
             Console.WriteLine("2. 아니요\n");
-            Console.Write(">>");
+            Console.Write(">> ");
             return TextRPG_SceneManager.CheckInput(1, 2);
         }
 
@@ -228,39 +245,6 @@ namespace Team20_TextRPG
 
             Console.WriteLine("1. 어..?    소모 마나: 25");
             Console.WriteLine("   모든 몬스터에게 공격력의 60 ~ 80% 데미지를 입힌다. 해당 스킬은 회피 불가.\n");
-        }
-
-        static void clientSkillDesc()
-        {
-            Console.WriteLine("전용 스킬\n");
-
-            Console.WriteLine("1. 요건 기획이 너무 복잡해요   소모 마나: 10");
-            Console.WriteLine("   1명의 몬스터에게 공격력의 150% ~ 200%의 데미지를 입힌다. 해당 스킬은 회피 가능\n");
-
-            Console.WriteLine("2. 서버에서 응답이 이상해요   소모 마나: 15");
-            Console.WriteLine("   랜덤으로 1명의 몬스터에게 공격력의 200% 데미지를 입힌다. 해당 스킬은 회피 불가\n");
-        }
-
-        static void serverSkillDesc()
-        {
-            Console.WriteLine("전용 스킬\n");
-
-            Console.WriteLine("1. 그건 클라이언트 쪽 문제에요   소모 마나: 10");
-            Console.WriteLine("   1명의 몬스터에게 공격력의 150% ~ 200%의 데미지를 입힌다. 해당 스킬은 회피 가능\n");
-
-            Console.WriteLine("2. 로컬에서는 잘 되는데요?   소모 마나: 15");
-            Console.WriteLine("   랜덤으로 1명의 몬스터에게 200%의 데미지를 입힌다. 해당 스킬은 회피 불가\n");
-        }
-
-        static void plannerSkillDesc()
-        {
-            Console.WriteLine("전용 스킬\n");
-
-            Console.WriteLine("1. 기획서에는 분명히 그렇게 써 있어요   소모 마나: 10");
-            Console.WriteLine("   1명의 몬스터에게 150% ~ 200%의 데미지를 입힌다. 해당 스킬은 회피 가능\n");
-
-            Console.WriteLine("2. 이건 개발 쪽에서 좀 더 확인해야 할 것 같아요   소모 마나: 15");
-            Console.WriteLine("   랜덤으로 1명의 몬스터에게 200%의 데미지를 입힌다. 해당 스킬은 회피 불가\n");
         }
     }
 }
