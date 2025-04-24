@@ -78,6 +78,7 @@ namespace Team20_TextRPG
 
                 Console.WriteLine("[획득 아이템]");
                 Console.WriteLine($"{player.Inventory[player.Inventory.Count - 1].Name}");
+                Console.WriteLine($"{player.Inventory[player.Inventory.Count - 1].Description}");
                 Console.WriteLine("0. 다음");
 
                 TextRPG_EndScene.EndScene();

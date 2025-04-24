@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Team20_TextRPG.ItemSystem;
+using static Team20_TextRPG.TextRPG_CreateCharacter;
 
 // 내꺼
 namespace Team20_TextRPG
@@ -94,7 +95,14 @@ namespace Team20_TextRPG
             Console.WriteLine(ExtraAtk == 0 ? $"공격력 : {Atk}" : $"공격력 : {Atk + ExtraAtk} (+{ExtraAtk})");
             Console.WriteLine(ExtraDef == 0 ? $"방어력 : {Def}" : $"방어력 : {Def + ExtraDef} (+{ExtraDef})");
             Console.WriteLine($"체력 : {Hp} / 최대 체력: {MaxHp}");
-            Console.WriteLine($"Gold : {Gold} G");
+            Console.WriteLine($"Gold : {Gold} G\n");
+
+            Console.WriteLine("스킬\n");
+            for (int i = 0; i < Skills.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {Skills[i].Name}   소모 마나: {Skills[i].MPCost}");
+                Console.WriteLine($"   {Skills[i].Description}\n");
+            }
         }
         #endregion
 

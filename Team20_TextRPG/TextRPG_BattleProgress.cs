@@ -312,6 +312,7 @@ namespace Team20_TextRPG
 ");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("============================================================");
+            Console.WriteLine();
 
             Console.WriteLine($"{player.Name} 의 {skill.Name}!");
             Console.WriteLine($"MP {playerBeforeMp} -> {player.Mp}");
@@ -356,7 +357,19 @@ namespace Team20_TextRPG
             player.UseMana(skill);
 
             Console.Clear();
-            Console.WriteLine("Battle!!\n");
+            Console.OutputEncoding = Encoding.UTF8;
+
+            Console.WriteLine("============================================================");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(@"
+             ___  ___  ___  ___  _    ___ 
+            | . >| . ||_ _||_ _|| |  | __>
+            | . \|   | | |  | | | |_ | _> 
+            |___/|_|_| |_|  |_| |___||___>
+");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("============================================================");
+            Console.WriteLine();
 
             Console.WriteLine($"{player.Name} 의 {skill.Name}!");
             Console.WriteLine($"MP {playerBeforeMp} -> {player.Mp}");
@@ -370,6 +383,7 @@ namespace Team20_TextRPG
         }
         #endregion
 
+        // 사용 안함
         #region 다중 타겟 스킬
         void MultipleTargetSkill(TextRPG_Player player, TextRPG_Skill skill)
         {
@@ -488,6 +502,8 @@ namespace Team20_TextRPG
 ");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("============================================================");
+                Console.WriteLine();
+
                 Console.WriteLine($"Lv.{monster.Level} {monster.Name} 의 공격!");
                 //Console.WriteLine($"{player.Name} 을(를) 맞췄습니다. [데미지 : {EnemyDamage}]\n");
 

@@ -15,7 +15,7 @@ namespace Team20_TextRPG
         public int id;
         public string title;
         public List<StageMonster> monsters;
-        public List<StageReward> Rewards; // 현재 비어있음
+        public StageReward rewards;
     }
 
     [System.Serializable]
@@ -28,7 +28,8 @@ namespace Team20_TextRPG
     [System.Serializable]
     public class StageReward
     {
-        // 나중에 구조 추가
+        public string itemId;
+        public string itemName;
     }
 
     // Json 파일에서 내용 불러오기
@@ -38,7 +39,7 @@ namespace Team20_TextRPG
 
         public TextRPG_StageManager()
         {
-            stages = LoadStage("Data/Stage.json");
+            stages = LoadStage("C:\\Users\\USER\\Documents\\GitHub\\Group20_TextRPG\\Team20_TextRPG\\bin\\Debug\\net8.0\\Data\\Stage.json");
         }
 
         public static List<Stage> LoadStage(string path)
@@ -62,6 +63,8 @@ namespace Team20_TextRPG
             //    {
             //        Console.WriteLine($"Mon ID {mon.dataId}: {mon.name}");
             //    }
+                
+            //    Console.WriteLine($"Reward ID {stg.rewards.itemId}: {stg.rewards.itemName}");
             //}
 
             return LoadStages;

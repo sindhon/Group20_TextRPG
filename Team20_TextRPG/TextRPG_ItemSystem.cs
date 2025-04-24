@@ -58,7 +58,7 @@ namespace Team20_TextRPG
                 string priceTag = mode switch
                 {
                     DisplayMode.Store => Sold ? "판매완료" : $"{Price} G",
-                    DisplayMode.Sell => $"판매가: {(int)(Price * 0.85)} G",
+                    DisplayMode.Sell => $"판매가: {(int)(Price * 0.8)} G",
                     _ => ""
                 };
 

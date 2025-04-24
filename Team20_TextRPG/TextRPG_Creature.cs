@@ -90,6 +90,7 @@ namespace Team20_TextRPG
                 isDodged = true;
             }
 
+            // 방어력 비례 데미지 감소
             float reduction = Def / (Def + 100f);
             totalDamage = (int)(totalDamage * (1 - reduction));
 
