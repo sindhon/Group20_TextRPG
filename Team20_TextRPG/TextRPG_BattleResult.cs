@@ -27,10 +27,23 @@ namespace Team20_TextRPG
         public static void BattleResult(TextRPG_Player player, List<TextRPG_Monster> monsters, int beforeHp, int beforeLevel, int beforeExp)
         {
             Console.Clear();
-            Console.WriteLine("========== [전투 결과] ==========");
+            Console.OutputEncoding = Encoding.UTF8;
+
+            Console.WriteLine("=================================================================");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write(@"
+         ___  ___  ___  ___  _    ___   ___  ___  ___  _ _  _    ___ 
+        | . >| . ||_ _||_ _|| |  | __> | . \| __>/ __>| | || |  |_ _|
+        | . \|   | | |  | | | |_ | _>  |   /| _> \__ \| ' || |_  | | 
+        |___/|_|_| |_|  |_| |___||___> |_\_\|___><___/`___'|___| |_| 
+");
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("=================================================================");
+            //Console.WriteLine("========== [전투 결과] ==========");
 
             //  클리어 실패 처리
-            if(player.Hp <= 0)
+            if (player.Hp <= 0)
             {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("You Lose");
@@ -46,9 +59,9 @@ namespace Team20_TextRPG
             //  클리어 처리
             else if ( player.Hp > 0)
             {
-                //  임시 적용 → 수정이 많이 필요함
                 TextRPG_Manager.Instance.playerInstance.AddItem("sword001", 1);
 
+                player.CurrentStage++;
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Victory!!!");
                 Console.ForegroundColor = ConsoleColor.White;

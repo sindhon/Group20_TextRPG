@@ -8,6 +8,7 @@ using System.IO;
 using System.Threading;
 using Team20_TextRPG;
 using System.Numerics;
+using System.Text;
 
 namespace Team20_TextRPG
 {
@@ -31,23 +32,23 @@ namespace Team20_TextRPG
         bool isCanceled = false;
 
         #region 몬스터 스폰
-        public void SpawnMonsters()
+        public void SpawnMonsters(Stage stage)
         {
             Random random = new Random();
             int count = random.Next(1, 5);
 
             for (int i = 0; i < count; i++)
             {
-                TextRPG_Monster monster = TextRPG_MonsterSpawner.SpawnRandomMonster();
+                TextRPG_Monster monster = TextRPG_MonsterSpawner.SpawnRandomMonster(stage);
                 monsters.Add(monster);
             }
         }
         #endregion
 
         #region 전투 시작
-        public void StartBattle(TextRPG_Player player)
+        public void StartBattle(TextRPG_Player player, Stage stage)
         {
-            SpawnMonsters();
+            SpawnMonsters(stage);
 
             playerStartHP = player.Hp;
             playerStartLevel = player.Level;
@@ -164,7 +165,20 @@ namespace Team20_TextRPG
 
 
             Console.Clear();
-            Console.WriteLine("Battle!!\n");
+            //Console.WriteLine("Battle!!\n");
+            Console.OutputEncoding = Encoding.UTF8;
+
+            Console.WriteLine("============================================================");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(@"
+             ___  ___  ___  ___  _    ___ 
+            | . >| . ||_ _||_ _|| |  | __>
+            | . \|   | | |  | | | |_ | _> 
+            |___/|_|_| |_|  |_| |___||___>
+");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("=================================================================");
+            Console.WriteLine();
             Console.WriteLine($"{player.Name} 의 공격!");
             //Console.WriteLine($"Lv.{target.Level} {target.Name} 을(를) 맞췄습니다. [데미지 : {PlayerDamage}]\n");
 
@@ -238,7 +252,20 @@ namespace Team20_TextRPG
             player.UseMana(skill);
 
             Console.Clear();
-            Console.WriteLine("Battle!!\n");
+            //Console.WriteLine("Battle!!\n");
+            Console.OutputEncoding = Encoding.UTF8;
+
+            Console.WriteLine("============================================================");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(@"
+             ___  ___  ___  ___  _    ___ 
+            | . >| . ||_ _||_ _|| |  | __>
+            | . \|   | | |  | | | |_ | _> 
+            |___/|_|_| |_|  |_| |___||___>
+");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("============================================================");
+            Console.WriteLine();
 
             Console.WriteLine($"{player.Name} 의 {skill.Name}!");
             Console.WriteLine($"MP {playerBeforeMp} -> {player.Mp}");
@@ -271,7 +298,19 @@ namespace Team20_TextRPG
             player.UseMana(skill);
 
             Console.Clear();
-            Console.WriteLine("Battle!!\n");
+            //Console.WriteLine("Battle!!\n");
+            Console.OutputEncoding = Encoding.UTF8;
+
+            Console.WriteLine("============================================================");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(@"
+             ___  ___  ___  ___  _    ___ 
+            | . >| . ||_ _||_ _|| |  | __>
+            | . \|   | | |  | | | |_ | _> 
+            |___/|_|_| |_|  |_| |___||___>
+");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("============================================================");
 
             Console.WriteLine($"{player.Name} 의 {skill.Name}!");
             Console.WriteLine($"MP {playerBeforeMp} -> {player.Mp}");
@@ -435,7 +474,19 @@ namespace Team20_TextRPG
                 int EnemyDamage = player.OnDamaged(monster, monster.Atk);
 
                 Console.Clear();
-                Console.WriteLine("Battle!!\n");
+                //Console.WriteLine("Battle!!\n");
+                Console.OutputEncoding = Encoding.UTF8;
+
+                Console.WriteLine("============================================================");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(@"
+             ___  ___  ___  ___  _    ___ 
+            | . >| . ||_ _||_ _|| |  | __>
+            | . \|   | | |  | | | |_ | _> 
+            |___/|_|_| |_|  |_| |___||___>
+");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("============================================================");
                 Console.WriteLine($"Lv.{monster.Level} {monster.Name} 의 공격!");
                 //Console.WriteLine($"{player.Name} 을(를) 맞췄습니다. [데미지 : {EnemyDamage}]\n");
 
@@ -462,8 +513,22 @@ namespace Team20_TextRPG
         void DrawBattleUI(TextRPG_Player player)
         {
             Console.Clear();
-            Console.WriteLine("Battle!!\n");
+            Console.OutputEncoding = Encoding.UTF8;
 
+            Console.WriteLine("============================================================");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(@"
+             ___  ___  ___  ___  _    ___ 
+            | . >| . ||_ _||_ _|| |  | __>
+            | . \|   | | |  | | | |_ | _> 
+            |___/|_|_| |_|  |_| |___||___>
+");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("============================================================");
+
+            //Console.WriteLine("Battle!!\n");
+            Console.WriteLine("\n[적 정보]");
+            Console.WriteLine();
             for (int i = 0; i < monsters.Count; i++)
             {
                 var m = monsters[i];
@@ -472,13 +537,21 @@ namespace Team20_TextRPG
                 Console.WriteLine($"{i + 1} Lv.{m.Level} {m.Name}  {status}");
             }
 
+            Console.WriteLine();
             Console.ResetColor();
+            Console.WriteLine("============================================================");
+
             Console.WriteLine("\n[내정보]");
+            Console.WriteLine();
             Console.WriteLine($"Lv.{player.Level}  {player.Name} ({player.Job})");
+            Console.Write("HP: ");
             DisplayHPUIBar(player.Hp, player.MaxHp);
             //Console.WriteLine($"HP {player.Hp} / {player.MaxHp}");
+            Console.Write("MP: ");
             DisplayMPUIBar(player.Mp, player.MaxMp);
             //Console.WriteLine($"MP {player.Mp} / {player.MaxMp}");
+            Console.WriteLine();
+            Console.WriteLine("============================================================");
         }
         #endregion
 
@@ -522,8 +595,8 @@ namespace Team20_TextRPG
         public static void DisplayHPUIBar(int currentHealth, int maxHealth)
         {
             //  체력 표시용 UI 변수들
-            int currentHPUI = (int)(currentHealth * 0.1);
-            int maxHPUI = (int)(maxHealth * 0.1);
+            int currentHPUI = (currentHealth / 60);
+            int maxHPUI = (maxHealth / 60);
 
             for (int i = 0; i < maxHPUI; i++)
             {

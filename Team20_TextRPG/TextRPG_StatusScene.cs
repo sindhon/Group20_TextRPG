@@ -12,6 +12,19 @@ namespace Team20_TextRPG
         public void DisplayStatus(TextRPG_Player player)
         {
             Console.Clear();
+            Console.OutputEncoding = Encoding.UTF8;
+
+            Console.WriteLine("============================================================");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(@"
+         ___  ___  ___  ___  _  _    ___ 
+        | . \| . \| . || __>| || |  | __>
+        |  _/|   /| | || _> | || |_ | _> 
+        |_|  |_\_\`___'|_|  |_||___||___>
+");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("============================================================");
+            Console.WriteLine();
             Console.WriteLine("상태 보기");
             Console.WriteLine("캐릭터의 정보가 표시됩니다.");
             Console.WriteLine();

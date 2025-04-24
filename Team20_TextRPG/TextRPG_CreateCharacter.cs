@@ -35,7 +35,7 @@ namespace Team20_TextRPG
                 jobDescription = "클라이언트 개발자가 되고 싶은 취준생",
                 jobAtk = 18,
                 jobDef = 12,
-                jobmaxHP = 100,
+                jobmaxHP = 600,
                 jobmaxMP = 50,
                 jobSkill = "요건 기획이 너무 복잡해요"
             },
@@ -45,7 +45,7 @@ namespace Team20_TextRPG
                 jobDescription = "서버 개발자가 되고 싶은 취준생",
                 jobAtk = 12,
                 jobDef = 20,
-                jobmaxHP = 130,
+                jobmaxHP = 630,
                 jobmaxMP = 50,
                 jobSkill = "그건 클라이언트 쪽 문제에요"
             },
@@ -55,7 +55,7 @@ namespace Team20_TextRPG
                 jobDescription = "기획자가 되고 싶은 취준생",
                 jobAtk = 22,
                 jobDef = 8,
-                jobmaxHP = 9,
+                jobmaxHP = 590,
                 jobmaxMP = 50,
                 jobSkill = "기획서에는 분명히 그렇게 써 있어요"
             },
@@ -63,8 +63,10 @@ namespace Team20_TextRPG
 
         public static TextRPG_Player CreateCharacter()
         {
+          
+
             string name = SetName();
-            Job selectJob = ChooseJob(name, jobs);
+            Job selectJob = ChooseJob(jobs);
             return SetPlayer(name, selectJob);
         }
 
@@ -72,16 +74,32 @@ namespace Team20_TextRPG
         {
             string name;
             Console.Clear();
-            Console.WriteLine("스파르타 던전에 오신 여러분 환영합니다.");
+            Console.OutputEncoding = Encoding.UTF8;
 
-            while (true) {
+            Console.WriteLine("=================================================================");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(@"
+        _ _ _  ___  _    ___  ___  __ __  ___  _ 
+        | | | || __>| |  |  _>| . ||  \  \| __>| |
+        | | | || _> | |_ | <__| | ||     || _> |_/
+        |__/_/ |___>|___|`___/`___'|_|_|_||___><_>
+");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("=================================================================");
+
+            Console.WriteLine();
+            Console.WriteLine("스파르타 던전에 오신 여러분 환영합니다.");
+            Console.WriteLine();
+
+            while (true) 
+            {
                 Console.WriteLine("원하시는 이름을 설정해 주세요.");
                 name = Console.ReadLine();
 
                 Console.Clear();
                 Console.WriteLine($"입력하신 이름은 {name}입니다.");
                 Console.WriteLine();
-
+              
                 Console.WriteLine("1. 맞습니다.");
                 Console.WriteLine("2. 아닙니다.");
                 Console.WriteLine();
@@ -107,7 +125,7 @@ namespace Team20_TextRPG
 
         public static TextRPG_Player SetPlayer(string name, Job job)
         {
-            var player = new TextRPG_Player(1, name, job.jobName, job.jobAtk, job.jobDef, job.jobmaxHP, job.jobmaxHP, job.jobmaxMP, job.jobmaxMP, 1000);
+            var player = new TextRPG_Player(1, name, job.jobName, job.jobAtk, job.jobDef, job.jobmaxHP, job.jobmaxHP, job.jobmaxMP, job.jobmaxMP, 1000, 1);
 
             switch (job.jobName)
             {
@@ -140,7 +158,7 @@ namespace Team20_TextRPG
             return player;
         }
         
-        public static Job ChooseJob(string name, Job[] jobs)
+        public static Job ChooseJob(Job[] jobs)
         {
             while (true)
             {

@@ -12,10 +12,24 @@ namespace Team20_TextRPG
         public void DisplayQuestScene()
         {
             Console.Clear();
-            Console.WriteLine("Quest!!\n");
+            //Console.WriteLine("Quest!!\n");
+            Console.OutputEncoding = Encoding.UTF8;
+
+            Console.WriteLine("=================================================================");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine(@"
+             ___  _ _  ___  ___  ___ 
+            | . || | || __>/ __>|_ _|
+            | | || ' || _> \__ \ | | 
+            `___\`___'|___><___/ |_| 
+");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("=================================================================");
+
             TextRPG_Manager.Instance.QuestManager.DisplayQuests();
 
             Console.WriteLine("\n원하시는 퀘스트를 선택해 주세요.");
+            Console.WriteLine();
             int input = TextRPG_SceneManager.CheckInput(0, TextRPG_Manager.Instance.QuestManager.Quests.Count);
             SwitchQuestScene(input);
         }

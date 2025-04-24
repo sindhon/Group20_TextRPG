@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace Team20_TextRPG
 {
@@ -10,6 +11,20 @@ namespace Team20_TextRPG
             while (true)
             {
                 Console.Clear();
+                Console.OutputEncoding = Encoding.UTF8;
+
+                Console.WriteLine("=================================================================");
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.WriteLine(@"                                  
+             _  _ _  _ _  ___  _ _  ___  ___  ___  _ _ 
+            | || \ || | || __>| \ ||_ _|| . || . \| | |
+            | ||   || ' || _> |   | | | | | ||   /\   /
+            |_||_\_||__/ |___>|_\_| |_| `___'|_\_\ |_| 
+");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("=================================================================");
+                Console.WriteLine();
                 Console.WriteLine("인벤토리\n보유 중인 아이템을 관리할 수 있습니다.\n");
                 Console.WriteLine("[아이템 목록]");
                 player.DisplayInventory(ItemSystem.DisplayMode.Default, TextRPG_Player.InventoryDisplayMode.NoIndex);
