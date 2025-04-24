@@ -195,13 +195,16 @@ namespace Team20_TextRPG
             if (target.IsDead)
             {
                 Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {enemyBeforeHP} -> Dead");
-                if (target.Name == "미니언")
-                {
-                    //미니언 퀘스트 진행
-                    TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.KillMinion, 1);
-                }
-                //Kill Monster 퀘스트 진행
-                TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.KillMonster, 1);
+
+                //if (target.Name == "")
+                //{
+                    
+                //}
+
+                //취업 공부! 퀘스트 진행
+                TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.KillMonster1, 1);
+                //취업을 목표로~!! 퀘스트 진행
+                TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.KillMonster2, 1);
             }
             else
             {
@@ -469,13 +472,16 @@ namespace Team20_TextRPG
             if (target.IsDead)
             {
                 Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {enemyBeforeHP} -> Dead\n");
-                if (target.Name == "미니언")
-                {
-                    //미니언 퀘스트 진행
-                    TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.KillMinion, 1);
-                }
-                //Kill Monster 퀘스트 진행
-                TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.KillMonster, 1);
+
+                //if (target.Name == "")
+                //{
+                    
+                //}
+
+                //취업 공부! 퀘스트 진행
+                TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.KillMonster1, 1);
+                //취업을 목표로~!! 퀘스트 진행
+                TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.KillMonster2, 1);
             }
             else
                 Console.WriteLine($"Lv.{target.Level} {target.Name}\n HP {beforeHP} -> {target.Hp}\n");

@@ -163,7 +163,8 @@ namespace Team20_TextRPG
                     EquippedItemIds.Add(newWeapon.Id);
 
                 Console.WriteLine($"{newWeapon.Name}을(를) 장착했습니다.");
-                TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.EquipEquipment, 1);
+                if (newWeapon.Name == "간단한 포트폴리오")
+                    TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.EquipEquipment, 1);
             }
             else if (item is ItemSystem.Armor newArmor)
             {
@@ -195,7 +196,8 @@ namespace Team20_TextRPG
                     EquippedItemIds.Add(item.Id);
 
                 Console.WriteLine($"{item.Name}을(를) 장착했습니다.");
-                TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.EquipEquipment, 1);
+                if (newArmor.Name == "간단한 포트폴리오")
+                    TextRPG_Manager.Instance.QuestManager.UpdateQuestProgress(QuestId.EquipEquipment, 1);
             }
             else
             {
