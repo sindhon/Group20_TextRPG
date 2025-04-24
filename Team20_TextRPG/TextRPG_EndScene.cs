@@ -40,7 +40,7 @@ namespace Team20_TextRPG
             Console.WriteLine("팀 원: 박 진 우");
             Console.WriteLine("팀 원: 임 예 슬");
             Console.WriteLine("팀 원: 이 창 주");
-            Console.WriteLine("팀 원: 임 수 정");
+            Console.WriteLine("팀 원: 한 수 정");
             Console.WriteLine();
 
             Console.WriteLine("게임을 플레이해주셔서 감사합니다!");
