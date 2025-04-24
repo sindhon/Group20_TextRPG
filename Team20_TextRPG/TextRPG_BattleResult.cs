@@ -24,7 +24,7 @@ namespace Team20_TextRPG
     {
         public List<DungeonReward> dungeonReward = new List<DungeonReward>();
 
-        public static void BattleResult(TextRPG_Player player, List<TextRPG_Monster> monsters, int beforeHp, int beforeLevel, int beforeExp)
+        public static void BattleResult(TextRPG_Player player, List<TextRPG_Monster> monsters, int beforeHp, int beforeLevel, int beforeExp, Stage stage)
         {
             Console.Clear();
             Console.OutputEncoding = Encoding.UTF8;
@@ -59,7 +59,8 @@ namespace Team20_TextRPG
             //  클리어 처리
             else if ( player.Hp > 0)
             {
-                TextRPG_Manager.Instance.playerInstance.AddItem("sword001", 1);
+                
+                TextRPG_Manager.Instance.playerInstance.AddItem($"{stage.rewards.itemId}", 1);
 
                 player.CurrentStage++;
                 Console.ForegroundColor = ConsoleColor.Green;
@@ -76,6 +77,7 @@ namespace Team20_TextRPG
 
                 Console.WriteLine("[획득 아이템]");
                 Console.WriteLine($"{player.Inventory[player.Inventory.Count - 1].Name}");
+                Console.WriteLine($"{player.Inventory[player.Inventory.Count - 1].Description}");
                 Console.WriteLine("0. 다음");
             }
 
