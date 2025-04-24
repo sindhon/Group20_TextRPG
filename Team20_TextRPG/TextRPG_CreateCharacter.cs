@@ -144,33 +144,11 @@ namespace Team20_TextRPG
         public static TextRPG_Player SetPlayer(string name, Job job)
         {
             var player = new TextRPG_Player(1, name, job.jobName, job.jobAtk, job.jobDef, job.jobmaxHP, job.jobmaxHP, job.jobmaxMP, job.jobmaxMP, 1000, 1);
+            
+            // 전용 스킬 추가
             player.Skills.AddRange(job.jobSkill);
 
-            //switch (job.jobName)
-            //{
-            //    // 스킬 (이름, 설명, 최소 데미지, 최대 데미지, 마나 소모량, 스킬 종류, 회피 여부)
-            //    // 직업마다 스킬 추가
-            //    case "클라 개발자 지망생":
-            //        player.Skills.Add(new TextRPG_Skill("요건 기획이 너무 복잡해요", "1명의 몬스터에게 공격력의 150% ~ 200%의 데미지를 입힌다. 해당 스킬은 회피 가능", 
-            //                                            150, 200, 10, SkillType.SingleTarget, true));
-            //        player.Skills.Add(new TextRPG_Skill("서버에서 응답이 이상해요", "랜덤으로 1명의 몬스터에게 공격력의 200% 데미지를 입힌다. 해당 스킬은 회피 불가", 
-            //                                            200, 200, 15, SkillType.RandomTarget, false));
-            //        break;
-            //    case "서버 개발자 지망생":
-            //        player.Skills.Add(new TextRPG_Skill("그건 클라이언트 쪽 문제에요", "1명의 몬스터에게 공격력의 150% ~ 200%의 데미지를 입힌다. 해당 스킬은 회피 가능", 
-            //                                            150, 200, 10, SkillType.SingleTarget, true));
-            //        player.Skills.Add(new TextRPG_Skill("로컬에서는 잘 되는데요?", "랜덤으로 1명의 몬스터에게 200%의 데미지를 입힌다. 해당 스킬은 회피 불가",
-            //                                            200, 200, 15, SkillType.RandomTarget, false));
-            //        break;
-            //    case "기획 지망생":
-            //        player.Skills.Add(new TextRPG_Skill("기획서에는 분명히 그렇게 써 있어요", "1명의 몬스터에게 150% ~ 200%의 데미지를 입힌다. 해당 스킬은 회피 가능", 
-            //                                            150, 200, 10, SkillType.SingleTarget, true));
-            //        player.Skills.Add(new TextRPG_Skill("이건 개발 쪽에서 좀 더 확인해야 할 것 같아요", "랜덤으로 1명의 몬스터에게 200%의 데미지를 입힌다. 해당 스킬은 회피 불가", 
-            //                                            200, 200, 15, SkillType.RandomTarget, false));
-            //        break;
-            //}
-
-            // 공용 스킬
+            // 공용 스킬 추가
             player.Skills.Add(new TextRPG_Skill("어...?", "모든 몬스터에게 공격력의 60 ~ 80% 데미지를 입힌다. 해당 스킬은 회피 불가.", 
                                                 60, 80, 25, SkillType.AllTarget, false));
 
