@@ -165,7 +165,6 @@ namespace Team20_TextRPG
 
 
             Console.Clear();
-            //Console.WriteLine("Battle!!\n");
             Console.OutputEncoding = Encoding.UTF8;
 
             Console.WriteLine("==========================================================================");
@@ -564,6 +563,7 @@ namespace Team20_TextRPG
             {
                 var m = monsters[i];
                 string status = m.IsDead ? "Dead" : $"HP {m.Hp}";
+                DisplayHPUIBar(monsters[i].Hp, monsters[i].MaxHp);
                 Console.ForegroundColor = m.IsDead ? ConsoleColor.DarkGray : ConsoleColor.White;
                 Console.WriteLine($"{i + 1} Lv.{m.Level} {m.Name}  {status}");
             }
@@ -628,8 +628,8 @@ namespace Team20_TextRPG
         public static void DisplayHPUIBar(int currentHealth, int maxHealth)
         {
             //  체력 표시용 UI 변수들
-            int currentHPUI = (currentHealth / 60);
-            int maxHPUI = (maxHealth / 60);
+            int currentHPUI = (currentHealth / 10);
+            int maxHPUI = (maxHealth / 10);
 
             for (int i = 0; i < maxHPUI; i++)
             {
@@ -663,8 +663,8 @@ namespace Team20_TextRPG
         public static void DisplayMPUIBar(int currentMP, int maxMP)
         {
             //  체력 표시용 UI 변수들
-            int currentMPUI = (int)(currentMP * 0.1);
-            int maxMPUI = (int)(maxMP * 0.1);
+            int currentMPUI = (int)(currentMP);
+            int maxMPUI = (int)(maxMP);
 
             for (int i = 0; i < maxMPUI; i++)
             {
