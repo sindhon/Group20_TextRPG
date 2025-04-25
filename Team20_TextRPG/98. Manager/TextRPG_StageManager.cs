@@ -50,7 +50,6 @@ namespace Team20_TextRPG
                 return new List<Stage>();
             }
 
-            string json = File.ReadAllText(path);
             List<Stage> LoadStages = JsonConvert.DeserializeObject<List<Stage>>(File.ReadAllText(path));
 
             return LoadStages;
