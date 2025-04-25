@@ -44,7 +44,6 @@ namespace Team20_TextRPG
 
         public static List<Stage> LoadStage(string path)
         {
-            // Stage stage = new Stage();
             if (!File.Exists(path))
             {
                 Console.WriteLine("스테이지 파일을 찾을 수 없습니다.");
@@ -54,24 +53,7 @@ namespace Team20_TextRPG
             string json = File.ReadAllText(path);
             List<Stage> LoadStages = JsonConvert.DeserializeObject<List<Stage>>(File.ReadAllText(path));
 
-            // 파일 내용 확인
-            //foreach (Stage stg in LoadStages)
-            //{
-            //    Console.WriteLine($"Stage {stg.id}: {stg.title}");
-
-            //    foreach (StageMonster mon in stg.monsters)
-            //    {
-            //        Console.WriteLine($"Mon ID {mon.dataId}: {mon.name}");
-            //    }
-                
-            //    Console.WriteLine($"Reward ID {stg.rewards.itemId}: {stg.rewards.itemName}");
-            //}
-
             return LoadStages;
         }
     }
-
-
-    // 스테이지 별로 호출할 몬스터 매칭하기
-
 }
