@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading.Tasks.Dataflow;
+using System.Text.Json.Serialization;
 
 namespace Team20_TextRPG
 {
@@ -18,18 +16,42 @@ namespace Team20_TextRPG
 
     public partial class TextRPG_Skill
     {
-        public string Name { get; }
-        public string Description { get; }
-        public int MinPower { get; }        // 공격력 계수
-        public int MaxPower { get; }
-        public int MPCost { get; }       // 마나 소모량
-        public SkillType Type { get; }  // 스킬 종류
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
 
-        public bool canDodge { get; } // 회피 가능한지 확인 (true: 회피 가능 false: 회피 불가능)
+        [JsonPropertyName("description")]
+        public string Description { get; set; }
 
-        Random rand = new Random();
+        [JsonPropertyName("minPower")]
+        public int MinPower { get; set; }        // 공격력 계수
 
-        public TextRPG_Skill(string name, string description, int minPower,int maxPower, int mpCost, SkillType type, bool dodge)
+        [JsonPropertyName("maxPower")]
+        public int MaxPower { get; set; }
+
+        [JsonPropertyName("mpCost")]
+        public int MPCost { get; set; }       // 마나 소모량
+
+        [JsonPropertyName("type")]
+        public SkillType Type { get; set; }  // 스킬 종류
+
+        [JsonPropertyName("canDodge")]
+        public bool canDodge { get; set; } // 회피 가능한지 확인 (true: 회피 가능 false: 회피 불가능)
+
+        private Random rand = new Random();
+
+
+
+
+      
+        [JsonConstructor]
+        public TextRPG_Skill(
+            string name,
+            string description,
+            int minPower,
+            int maxPower,
+            int mpCost,
+            SkillType type,
+            bool canDodge)
         {
             Name = name;
             Description = description;
@@ -37,7 +59,7 @@ namespace Team20_TextRPG
             MaxPower = maxPower;
             MPCost = mpCost;
             Type = type;
-            canDodge = dodge;
+            this.canDodge = canDodge;
         }
 
         public int UseSkill(TextRPG_Monster target, TextRPG_Player player)
@@ -47,6 +69,5 @@ namespace Team20_TextRPG
             int resultDamage = target.OnDamaged(player, damage, canDodge);
             return resultDamage;
         }
-
     }
 }

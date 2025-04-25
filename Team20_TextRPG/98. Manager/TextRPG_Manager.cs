@@ -28,7 +28,7 @@ namespace Team20_TextRPG
 
             if (File.Exists("../../../Data/save.json"))
             {
-                Console.WriteLine("저장된 데이터를 발견했습니다.");
+                //Console.WriteLine("저장된 데이터를 발견했습니다.");
                 Console.WriteLine("1. 이어서 하기 (불러오기)");
                 Console.WriteLine("2. 새로 시작하기");
 

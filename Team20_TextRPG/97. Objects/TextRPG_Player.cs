@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using static Team20_TextRPG.ItemSystem;
@@ -18,13 +19,13 @@ namespace Team20_TextRPG
             WithIndex
         }
         #endregion
-
+        
         #region 공격력 방어력 변수
         public int ExtraAtk { get; private set; }
         public int ExtraDef { get; private set; }
         #endregion
 
-        public List<TextRPG_Skill> Skills { get; private set; }
+        public List<TextRPG_Skill> Skills { get;  set; }
 
         #region 인벤토리 및 장비 리스트
         public List<ItemSystem.Item> Inventory = new List<ItemSystem.Item>();
@@ -98,11 +99,14 @@ namespace Team20_TextRPG
             Console.WriteLine($"Gold : {Gold} G\n");
 
             Console.WriteLine("스킬\n");
+
+
             for (int i = 0; i < Skills.Count; i++)
             {
                 Console.WriteLine($"{i + 1}. {Skills[i].Name}   소모 마나: {Skills[i].MPCost}");
                 Console.WriteLine($"   {Skills[i].Description}\n");
             }
+
         }
         #endregion
 
@@ -253,7 +257,7 @@ namespace Team20_TextRPG
         }
 
         //Quest Clear 보상
-        public override void AddItem(string itemID, int quantity) 
+        public override void AddItem(string itemID, int quantity)
         {
             for (int i = 0; i < quantity; i++)
             {
@@ -328,6 +332,7 @@ namespace Team20_TextRPG
             MaxHp = maxHp;
             Gold = gold;
             Exp = exp;
+           
         }
         #endregion
 

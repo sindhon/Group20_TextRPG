@@ -11,7 +11,7 @@ namespace Team20_TextRPG
     {
         public int Level { get; protected set; }
         public string Name { get; protected set; }
-        public string Job { get; protected set; }
+        public string Job { get; set; }
         public int Atk { get; protected set; }
         public int Def { get; protected set; }
         public int Hp { get; protected set; }

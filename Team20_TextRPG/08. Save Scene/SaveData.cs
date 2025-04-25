@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 using Team20_TextRPG;
 
 namespace Team20_TextRPG
@@ -6,6 +7,7 @@ namespace Team20_TextRPG
     public class SaveData
     {
         public string Name { get; set; }
+
         public string Job { get; set; }
         public int Level { get; set; }
         public int Atk { get; set; }
@@ -38,6 +40,7 @@ namespace Team20_TextRPG
                 Mp = player.Mp,
                 Gold = player.Gold,
                 Exp = player.Exp,
+
                 Skills = player.Skills,
                 EquippedWeaponId = player.ReadEquippedWeapon?.ItemId,
                 EquippedArmorId = player.ReadEquippedArmor?.ItemId,
@@ -70,6 +73,17 @@ namespace Team20_TextRPG
         public void ApplyToPlayer(TextRPG_Player player)
         {
             player.SetBaseStats(Name, Level, Atk, Def, Hp, MaxHp, Gold, Exp);
+            //Job = this.Job;
+            player.Job = this.Job;
+            if (this.Skills != null)
+            {
+                player.Skills = this.Skills;
+            }
+
+            else
+            {
+                player.Skills = new List<TextRPG_Skill>();
+            }
 
             // 인벤토리
             player.Inventory.Clear();
