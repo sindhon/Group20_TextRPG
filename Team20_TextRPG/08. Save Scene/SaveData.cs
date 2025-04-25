@@ -17,6 +17,7 @@ namespace Team20_TextRPG
         public int Mp { get; set; }
         public int Gold { get; set; }
         public int Exp { get; set; }
+        public int CurrentStg { get; set; }
 
         public string EquippedWeaponId { get; set; }
         public string EquippedArmorId { get; set; }
@@ -40,6 +41,7 @@ namespace Team20_TextRPG
                 Mp = player.Mp,
                 Gold = player.Gold,
                 Exp = player.Exp,
+                CurrentStg = player.CurrentStage,
 
                 Skills = player.Skills,
                 EquippedWeaponId = player.ReadEquippedWeapon?.ItemId,
@@ -73,8 +75,9 @@ namespace Team20_TextRPG
         public void ApplyToPlayer(TextRPG_Player player)
         {
             player.SetBaseStats(Name, Level, Atk, Def, Hp, MaxHp, Gold, Exp);
-            //Job = this.Job;
             player.Job = this.Job;
+            player.CurrentStage = this.CurrentStg;
+
             if (this.Skills != null)
             {
                 player.Skills = this.Skills;

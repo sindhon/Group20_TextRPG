@@ -46,7 +46,6 @@ namespace Team20_TextRPG
             {
                 Console.WriteLine("알 수 없는 오류 발생: " + ex.Message);
             }
-            Console.ReadLine();
         }
     }
 }
