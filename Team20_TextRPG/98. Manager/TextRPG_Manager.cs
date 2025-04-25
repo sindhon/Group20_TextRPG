@@ -20,7 +20,7 @@ namespace Team20_TextRPG
 
         public void Init()
         {
-            ItemFactory.LoadItemsFromFolder("Data");
+            ItemFactory.LoadItemsFromFolder("../../../Data");
 
             StageManager = new TextRPG_StageManager();
 

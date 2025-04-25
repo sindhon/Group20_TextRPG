@@ -39,7 +39,7 @@ namespace Team20_TextRPG
 
         public TextRPG_StageManager()
         {
-            stages = LoadStage("Data/Stage.json");
+            stages = LoadStage("../../../Data/Stage.json");
         }
 
         public static List<Stage> LoadStage(string path)
