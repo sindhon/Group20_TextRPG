@@ -20,8 +20,7 @@ namespace Team20_TextRPG
         ||S ||||T ||||O ||||R ||||E ||
         ||__||||__||||__||||__||||__||
         |/__\||/__\||/__\||/__\||/__\|
-   
-                                         
+
 ");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("=================================================================");
@@ -69,7 +68,23 @@ namespace Team20_TextRPG
                 while (true)
                 {
                     Console.Clear();
+
+                    Console.OutputEncoding = Encoding.UTF8;
+
+                    Console.WriteLine("=================================================================");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(@"                                  
+       ____  ____  ____  ____  ____  ____  ____  ____ 
+      ||P ||||U ||||R ||||C ||||H ||||A ||||S ||||E ||
+      ||__||||__||||__||||__||||__||||__||||__||||__||
+      |/__\||/__\||/__\||/__\||/__\||/__\||/__\||/__\|
+
+");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("=================================================================");
+                    Console.WriteLine();
                     store.ShowItems(selectedType.Value);
+                    Console.WriteLine("=================================================================");
                     Console.Write("\n구매할 아이템 번호를 입력하세요 (0. 나가기): ");
                     string buyInput = Console.ReadLine();
                     if (buyInput == "0") break;
@@ -109,8 +124,23 @@ namespace Team20_TextRPG
             while (true)
             {
                 Console.Clear();
+                Console.OutputEncoding = Encoding.UTF8;
+
+                Console.WriteLine("=================================================================");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write(@"                                  
+        ____  ____  ____  ____ 
+       ||S ||||E ||||L ||||L ||
+       ||__||||__||||__||||__||
+       |/__\||/__\||/__\||/__\|
+
+");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("=================================================================");
                 Console.WriteLine("[판매 목록]");
+                Console.WriteLine();
                 player.DisplayInventory(ItemSystem.DisplayMode.Sell, TextRPG_Player.InventoryDisplayMode.WithIndex);
+                Console.WriteLine("=================================================================");
                 Console.WriteLine("\n0. 나가기");
                 Console.Write("\n판매할 아이템 번호를 입력하세요: ");
                 string input = Console.ReadLine();

@@ -62,14 +62,20 @@ namespace Team20_TextRPG
             Console.WriteLine();
 
             Console.WriteLine("1. 상태 보기");
-            Console.WriteLine($"2. 전투 시작 ({stage.title})");
-            Console.WriteLine("3. 퀘스트 확인");
-            Console.WriteLine("4. 인벤토리");
-            Console.WriteLine("5. 상점");
-            Console.WriteLine("6. 저장");
-            Console.WriteLine("0. 나가기");
             Console.WriteLine();
-
+            Console.WriteLine($"2. 전투 시작 ({stage.title})");
+            Console.WriteLine();
+            Console.WriteLine("3. 퀘스트 확인");
+            Console.WriteLine();
+            Console.WriteLine("4. 인벤토리");
+            Console.WriteLine();
+            Console.WriteLine("5. 상점");
+            Console.WriteLine();
+            Console.WriteLine("6. 저장");
+            Console.WriteLine();
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine("==========================================================================");
+            Console.WriteLine();
             Console.WriteLine("원하시는 행동을 입력해 주세요.");
             
             int input = TextRPG_SceneManager.CheckInput(0, 6);
