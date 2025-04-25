@@ -503,7 +503,7 @@ namespace Team20_TextRPG
 
                 int EnemyDamage = player.OnDamaged(monster, monster.Atk);
 
-                //Console.Clear();
+                Console.Clear();
                 //Console.WriteLine("Battle!!\n");
                 Console.OutputEncoding = Encoding.UTF8;
 

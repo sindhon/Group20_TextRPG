@@ -82,7 +82,7 @@ namespace Team20_TextRPG
             }
 
             
-            player.GetMana(10); // 전투 종료시 마나 10 회복
+            player.GetMana(50); // 전투 종료시 마나 10 회복
 
             int input = TextRPG_SceneManager.CheckInput(0, 0);
 

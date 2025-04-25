@@ -73,6 +73,15 @@ namespace Team20_TextRPG
             int max = damage + diff + 1;
             int totalDamage = rand.Next(min, max); // 최종 데이지
 
+            // 10% 확률로 회피
+            int dodgeChance = rand.Next(100);
+            if (candodge && dodgeChance < 10)
+            {
+                totalDamage = 0;
+                isDodged = true;
+                return 0;
+            }
+
             // 15% 확률로 크리티컬
             int critChance = rand.Next(100);
             if (critChance < 15)
@@ -80,14 +89,6 @@ namespace Team20_TextRPG
                 int critDamage = totalDamage * 16 / 10;
                 totalDamage = critDamage;
                 isCrit = true;
-            }
-
-            // 10% 확률로 회피
-            int dodgeChance = rand.Next(100);
-            if (candodge && dodgeChance < 10)
-            { 
-                totalDamage = 0;
-                isDodged = true;
             }
 
             // 방어력 비례 데미지 감소
