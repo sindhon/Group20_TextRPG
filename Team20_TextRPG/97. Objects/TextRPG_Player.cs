@@ -126,6 +126,7 @@ namespace Team20_TextRPG
                     : "";
 
                 Console.WriteLine($"{indexText}{equipTag}{Inventory[i].GetDisplayString(mode)}{stackTag}");
+                Console.WriteLine();
             }
         }
         #endregion

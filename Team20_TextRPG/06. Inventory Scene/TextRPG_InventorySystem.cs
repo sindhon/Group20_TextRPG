@@ -21,18 +21,23 @@ namespace Team20_TextRPG
             ||I ||||N ||||V ||||E ||||N ||||T ||||O ||||R ||||Y ||
             ||__||||__||||__||||__||||__||||__||||__||||__||||__||
             |/__\||/__\||/__\||/__\||/__\||/__\||/__\||/__\||/__\|
-
 ");
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("==========================================================================");
 
                 Console.WriteLine();
-                Console.WriteLine("인벤토리\n보유 중인 아이템을 관리할 수 있습니다.\n");
+                Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
+                Console.WriteLine("==========================================================================");
+                Console.WriteLine();
                 Console.WriteLine("[아이템 목록]");
+                Console.WriteLine();
                 player.DisplayInventory(ItemSystem.DisplayMode.Default, TextRPG_Player.InventoryDisplayMode.NoIndex);
+                Console.WriteLine("==========================================================================");
                 Console.WriteLine("\n1. 장착 관리");
+                Console.WriteLine();
                 Console.WriteLine("2. 아이템 사용");
+                Console.WriteLine();
                 Console.WriteLine("0. 나가기\n");
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
                 Console.Write(">> ");
@@ -63,7 +68,23 @@ namespace Team20_TextRPG
             while (true)
             {
                 Console.Clear();
+                Console.OutputEncoding = Encoding.UTF8;
+
+                Console.WriteLine("==========================================================================");
+
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.WriteLine(@"                                  
+             ____  ____  ____  ____  ____  ____  ____  ____  ____ 
+            ||I ||||N ||||V ||||E ||||N ||||T ||||O ||||R ||||Y ||
+            ||__||||__||||__||||__||||__||||__||||__||||__||||__||
+            |/__\||/__\||/__\||/__\||/__\||/__\||/__\||/__\||/__\|
+");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("==========================================================================");
+                Console.WriteLine();
                 player.DisplayInventory(ItemSystem.DisplayMode.Default, TextRPG_Player.InventoryDisplayMode.WithIndex);
+                Console.WriteLine("==========================================================================");
                 Console.WriteLine("\n0. 나가기\n");
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
                 Console.Write(">> ");
@@ -101,6 +122,21 @@ namespace Team20_TextRPG
             while (true)
             {
                 Console.Clear();
+                Console.OutputEncoding = Encoding.UTF8;
+
+                Console.WriteLine("==========================================================================");
+
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.WriteLine(@"                                  
+             ____  ____  ____  ____  ____  ____  ____  ____  ____ 
+            ||I ||||N ||||V ||||E ||||N ||||T ||||O ||||R ||||Y ||
+            ||__||||__||||__||||__||||__||||__||||__||||__||||__||
+            |/__\||/__\||/__\||/__\||/__\||/__\||/__\||/__\||/__\|
+");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("==========================================================================");
+                Console.WriteLine();
                 Console.WriteLine("사용할 아이템을 선택하세요 (포션만 사용 가능):\n");
                 player.DisplayInventory(ItemSystem.DisplayMode.Default, TextRPG_Player.InventoryDisplayMode.WithIndex);
                 Console.WriteLine("\n0. 나가기");

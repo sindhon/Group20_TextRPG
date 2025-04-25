@@ -34,6 +34,7 @@ namespace Team20_TextRPG
 				{
 					count++;
                     Console.WriteLine($"{count}. {Items[i].GetDisplayString(ItemSystem.DisplayMode.Store)}");
+					Console.WriteLine();
                 }
 			}
 
