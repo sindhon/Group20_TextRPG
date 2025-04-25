@@ -6,11 +6,13 @@ namespace Team20_TextRPG
     public class SaveData
     {
         public string Name { get; set; }
+        public string Job { get; set; }
         public int Level { get; set; }
         public int Atk { get; set; }
         public int Def { get; set; }
         public int Hp { get; set; }
         public int MaxHp { get; set; }
+        public int Mp { get; set; }
         public int Gold { get; set; }
         public int Exp { get; set; }
 
@@ -25,11 +27,13 @@ namespace Team20_TextRPG
             var data = new SaveData
             {
                 Name = player.Name,
+                Job = player.Job,
                 Level = player.Level,
                 Atk = player.Atk,
                 Def = player.Def,
                 Hp = player.Hp,
                 MaxHp = player.MaxHp,
+                Mp = player.Mp,
                 Gold = player.Gold,
                 Exp = player.Exp,
                 EquippedWeaponId = player.ReadEquippedWeapon?.ItemId,
