@@ -19,6 +19,8 @@ namespace Team20_TextRPG
         public string EquippedWeaponId { get; set; }
         public string EquippedArmorId { get; set; }
 
+        public List<TextRPG_Skill> Skills { get; set; }
+
         public List<InventoryItemData> Inventory { get; set; }
         public List<QuestSaveData> Quests { get; set; }
 
@@ -36,6 +38,7 @@ namespace Team20_TextRPG
                 Mp = player.Mp,
                 Gold = player.Gold,
                 Exp = player.Exp,
+                Skills = player.Skills,
                 EquippedWeaponId = player.ReadEquippedWeapon?.ItemId,
                 EquippedArmorId = player.ReadEquippedArmor?.ItemId,
                 Inventory = player.Inventory

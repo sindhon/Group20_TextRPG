@@ -112,7 +112,7 @@ namespace Team20_TextRPG
                     break;
                 case 6:
                     Console.Clear();
-                    TextRPG_SaveManager.Save(TextRPG_Manager.Instance.playerInstance, "save.json");
+                    TextRPG_SaveManager.Save(TextRPG_Manager.Instance.playerInstance, "../../../Data/save.json");
                     Console.WriteLine("게임이 저장되었습니다!");
                     Console.WriteLine("아무 키나 눌러 계속...");
                     Console.ReadKey();

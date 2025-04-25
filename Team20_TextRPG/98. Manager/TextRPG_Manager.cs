@@ -26,7 +26,7 @@ namespace Team20_TextRPG
 
             QuestManager = new TextRPG_QuestManager();
 
-            if (File.Exists("save.json"))
+            if (File.Exists("../../../Data/save.json"))
             {
                 Console.WriteLine("저장된 데이터를 발견했습니다.");
                 Console.WriteLine("1. 이어서 하기 (불러오기)");
@@ -42,7 +42,7 @@ namespace Team20_TextRPG
                 if(choice == 1)
                 {
                     playerInstance = new TextRPG_Player();
-                    TextRPG_SaveManager.Load(playerInstance, "save.json");
+                    TextRPG_SaveManager.Load(playerInstance, "../../../Data/save.json");
                     Console.WriteLine("저장 데이터를 불러왔습니다.");
                 }
 
