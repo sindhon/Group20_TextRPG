@@ -12,7 +12,6 @@ namespace Team20_TextRPG
         public void DisplayQuestScene()
         {
             Console.Clear();
-            //Console.WriteLine("Quest!!\n");
             Console.OutputEncoding = Encoding.UTF8;
 
             Console.WriteLine("==========================================================================");

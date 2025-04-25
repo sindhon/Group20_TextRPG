@@ -90,11 +90,10 @@ namespace Team20_TextRPG
         //퀘스트 리스트
         public List<QuestData> Quests { get; set; }
 
-       
         public TextRPG_QuestManager()
         {
             Quests = new List<QuestData>();
-            LoadQuests("Data/Quests.json");
+            LoadQuests("../../../Data/Quests.json");
         }
        
 
